@@ -31,9 +31,9 @@
 						<li class="has-dropdown">
 							<%= link_to current_user.name, session_path(current_session) %>
 							<ul class="dropdown">
-								<li><%= link_to 'Profile', current_user %></a></li>
-								<li><%= link_to 'Settings', edit_user_path(current_user) %></a></li>
-								<li><a href="#">Log Out</a></li>
+								<li><%= link_to 'Profile', current_user %></li>
+								<li><%= link_to 'Settings', edit_user_path(current_user) %></li>
+								<li><%= link_to 'Log Out', session_path(current_session), method: 'delete' %></li>
 							</ul>
 						</li>
 					<% else %>

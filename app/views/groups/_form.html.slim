@@ -1,18 +1,33 @@
-= form_for @group do |f|
-  - if @group.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      ul
-        - @group.errors.full_messages.each do |message|
-          li = message
+- if @group.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
+    ul
+      - @group.errors.full_messages.each do |message|
+        li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :start_at
-    = f.datetime_select :start_at
-  .field
-    = f.label :end_at
-    = f.datetime_select :end_at
-  .actions = f.submit
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :name
+  .small-6.columns
+    = form.text_field :name
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :start_at
+  .small-6.columns
+    = check_box_tag 'group[start_at]', nil, form.object.start_at.nil?, title: 'No Time Restriction'
+    | &nbsp; 
+    = form.datetime_select :start_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.start_at.nil?
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :end_at
+  .small-6.columns
+    = check_box_tag 'group[end_at]', nil, form.object.end_at.nil?, title: 'No Time Restriction'
+    | &nbsp; 
+    = form.datetime_select :end_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.end_at.nil?
+
+  .small-2.column &nbsp;

@@ -1,5 +1,10 @@
-h1 New group
+h1 New Group
 
-== render 'form'
+= form_for @group do |form|
+  == render form
+  .actions.row
+    .small-4.columns &nbsp;
+    .small-6.columns
+      = form.submit class: 'button primary'
+    .small-2.columns &nbsp;
 
-= link_to 'Back', groups_path

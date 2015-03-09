@@ -37,6 +37,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    reset_session
+    redirect_to new_session_path, notice: 'You have been logged out'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_session

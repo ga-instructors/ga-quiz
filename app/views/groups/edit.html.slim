@@ -1,8 +1,13 @@
-h1 Editing group
+.row
+  h1 Edit Group
 
-== render 'form'
-
-= link_to 'Show', @group
-'|
-= link_to 'Back', groups_path
+= form_for @group do |form|
+  == render form
+  .actions.row
+    .small-4.columns &nbsp;
+    .small-6.columns
+      = form.submit class: 'button primary'
+      | &nbsp;&nbsp;&nbsp;
+      = link_to 'Cancel', @group
+    .small-2.columns &nbsp;
 
