@@ -1,0 +1,24 @@
+= form_for @quizzes_quiz do |f|
+  - if @quizzes_quiz.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@quizzes_quiz.errors.count, "error")} prohibited this quizzes_quiz from being saved:"
+      ul
+        - @quizzes_quiz.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :group_id
+    = f.number_field :group_id
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :start_at
+    = f.datetime_select :start_at
+  .field
+    = f.label :end_at
+    = f.datetime_select :end_at
+  .field
+    = f.label :introduction
+    = f.text_area :introduction
+  .actions = f.submit

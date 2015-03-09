@@ -1,0 +1,22 @@
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :email
+  .small-6.columns
+    = form.text_field :email
+    - if form.object.errors[:user].any?
+      small.error
+        | Email&nbsp;
+        = form.object.errors[:user].to_sentence
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :password
+  .small-6.columns
+    = form.password_field :password
+    - if form.object.errors[:password].any?
+      small.error
+        | Password&nbsp;
+        = form.object.errors[:password].to_sentence
+  .small-2.column &nbsp;

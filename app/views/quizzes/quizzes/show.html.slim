@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Group:
+  = @quizzes_quiz.group_id
+p
+  strong Name:
+  = @quizzes_quiz.name
+p
+  strong Start at:
+  = @quizzes_quiz.start_at
+p
+  strong End at:
+  = @quizzes_quiz.end_at
+p
+  strong Introduction:
+  = @quizzes_quiz.introduction
+
+= link_to 'Edit', edit_quizzes_quiz_path(@quizzes_quiz)
+'|
+= link_to 'Back', quizzes_quizzes_path

@@ -1,0 +1,13 @@
+.row
+  p#notice = notice
+
+  h1 = @user.name
+  p.lead = @user.email
+
+  ul.memberships
+    - @user.memberships.each do |membership|
+      li
+        = link_to membership.group.name, membership.group
+        small
+          | &nbsp;&mdash;&nbsp;
+          = t membership.role

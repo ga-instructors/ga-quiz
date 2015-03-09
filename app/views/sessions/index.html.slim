@@ -1,0 +1,29 @@
+h1 Listing sessions
+
+table
+  thead
+    tr
+      th User
+      th User agent
+      th Ip address
+      th Latitude
+      th Longitude
+      th
+      th
+      th
+
+  tbody
+    - @sessions.each do |session|
+      tr
+        td = session.user
+        td = session.user_agent
+        td = session.ip_address
+        td = session.latitude
+        td = session.longitude
+        td = link_to 'Show', session
+        td = link_to 'Edit', edit_session_path(session)
+        td = link_to 'Destroy', session, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Session', new_session_path

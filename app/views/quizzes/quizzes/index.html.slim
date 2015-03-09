@@ -1,0 +1,29 @@
+h1 Listing quizzes_quizzes
+
+table
+  thead
+    tr
+      th Group
+      th Name
+      th Start at
+      th End at
+      th Introduction
+      th
+      th
+      th
+
+  tbody
+    - @quizzes_quizzes.each do |quizzes_quiz|
+      tr
+        td = quizzes_quiz.group_id
+        td = quizzes_quiz.name
+        td = quizzes_quiz.start_at
+        td = quizzes_quiz.end_at
+        td = quizzes_quiz.introduction
+        td = link_to 'Show', quizzes_quiz
+        td = link_to 'Edit', edit_quizzes_quiz_path(quizzes_quiz)
+        td = link_to 'Destroy', quizzes_quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Quiz', new_quizzes_quiz_path

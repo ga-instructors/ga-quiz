@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong User:
+  = @session.user
+p
+  strong User agent:
+  = @session.user_agent
+p
+  strong Ip address:
+  = @session.ip_address
+p
+  strong Latitude:
+  = @session.latitude
+p
+  strong Longitude:
+  = @session.longitude
+
+= link_to 'Edit', edit_session_path(@session)
+'|
+= link_to 'Back', sessions_path

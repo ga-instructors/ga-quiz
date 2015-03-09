@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title><%= content_for?(:title) ? yield(:title) : "General Assembly - Quizzes" %></title>
+
+		<%= stylesheet_link_tag    "application" %>
+		<%= javascript_include_tag "vendor/modernizr" %>
+		<%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+
+	<body>
+
+		<nav class="top-bar" data-topbar role="navigation">
+			<ul class="title-area">
+				<li class="name">
+					<h1><%= link_to 'General Assembly', root_path %></h1>
+				</li>
+				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+			</ul>
+
+			<section class="top-bar-section">
+				<!-- Right Nav Section -->
+				<ul class="right">
+					<li class="active"><a href="#">Right Button Active</a></li>
+					<% if logged_in? %>
+						<li class="has-dropdown">
+							<%= link_to current_user.name, session_path(current_session) %>
+							<ul class="dropdown">
+								<li><%= link_to 'Profile', current_user %></a></li>
+								<li><%= link_to 'Settings', edit_user_path(current_user) %></a></li>
+								<li><a href="#">Log Out</a></li>
+							</ul>
+						</li>
+					<% else %>
+						<li><%= link_to "Log In", new_session_path %></li>
+					<% end %>
+				</ul>
+
+				<!-- Left Nav Section -->
+				<ul class="left">
+					<li><a href="#">Left Nav Button</a></li>
+				</ul>
+			</section>
+		</nav>
+
+		<%= yield %>
+
+	</body>
+</html>

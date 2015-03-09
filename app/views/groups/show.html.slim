@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @group.name
+p
+  strong Start at:
+  = @group.start_at
+p
+  strong End at:
+  = @group.end_at
+
+= link_to 'Edit', edit_group_path(@group)
+'|
+= link_to 'Back', groups_path

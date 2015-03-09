@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require foundation_and_overrides
+ *= require_tree .
+ *= require_self
+ */
+
+@font-face{
+  font-family:'Circular';
+  font-weight:normal;
+  font-style:normal;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-d3d1d334e344755d945f7ee9224ebeb2.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-d3d1d334e344755d945f7ee9224ebeb2.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-47c9aea71e8ec99cd3c9ef04ac73c2d6.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-f775befac5d0e517113e4d11f72ff42a.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-b8a810ca3a90711cbcda837c20f8c9bc.svg#CircularBook') format('svg')}
+
+@font-face{
+  font-family:'Circular';
+  font-weight:normal;
+  font-style:italic;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-2c56097f6283cf07169c9cf3f9d7819b.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-2c56097f6283cf07169c9cf3f9d7819b.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-c0542b9e172b670c25c4dc244bbe9e1c.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-72afe5c88ce477a994902b23e2ca6488.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-1c9e2c27cfad5b757b622aed4a92a035.svg#CircularBookItalic') format('svg')}
+
+@font-face{
+  font-family:'Circular';
+  font-weight:800;
+  font-style:normal;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-c15f7adfc97878f7ac86df36abd4fbcb.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-c15f7adfc97878f7ac86df36abd4fbcb.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-dc20741d7c061b54dd17b34294bd9d65.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-b5138ccb1bb7568c6ae30ce17e8a3185.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-d016897a51f8d7a2c0e1689fc78582d7.svg#CircularBlack') format('svg')}
+
+@font-face{
+  font-family:'Circular';
+  font-weight:800;
+  font-style:italic;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e4f00e42f75548dfb772b0769af5640e.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e162dd337d79bd45d296427082466813.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-f3f52f78b0f14a4f0545ad2428be3839.svg#CircularBlackItalic') format('svg')}
+
+@font-face{
+  font-family:'Circular';
+  font-weight:bold;
+  font-style:normal;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1dabee85fc02921d9380020c06d94538.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-e8b9a16d326aac7d00129885376dbdd2.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-bee37037723a3559e781a6eed9196cbc.svg#CircularBold') format('svg')}
+@font-face{font-family:'Circular';
+  font-weight:bold;
+  font-style:italic;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-939596d7d2ba2c94e08f341e5b7ebebb.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-939596d7d2ba2c94e08f341e5b7ebebb.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-6c14e37c5e80d2618585b3e8f8b014ea.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-faaad3316535f620504b23630b302c20.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-c9a39ec0669c16e0754ceaa9ceda589c.svg#CircularBookItalic') format('svg')}
+@font-face{
+  font-family:'Circular';
+  font-weight:500;
+  font-style:normal;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-8857cb83f76f62ad7c5f62c5523a14ec.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-8857cb83f76f62ad7c5f62c5523a14ec.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-cc4a32494ee52f5e44d8ca93084014f0.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-11c64f610816e7ed2a6d74600c2a388e.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-1c073669fdb5ee23b9fec165684f2e9f.svg#CircularMedium') format('svg')}
+@font-face{
+  font-family:'Circular';
+  font-weight:500;
+  font-style:italic;
+  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-101661c136f0f881318120750f3e4abf.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-101661c136f0f881318120750f3e4abf.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-a8f80fff8a2f8afbb0085d597a833790.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-8a40d3e0bfeafc80948a9b05a704b8b7.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-d18ed26dccb8611fc439e90c18db4f0f.svg#CircularMediumItalic') format('svg')
+}
+
+#error_explanation h2 {
+  font-size: 14pt;
+}
+
+.button {
+  -webkit-box-shadow: 0 3px 0 0 #a2a2a2;
+  -moz-box-shadow: 0 3px 0 0 #a2a2a2;
+  box-shadow: 0 3px 0 0 #a2a2a2;
+  border-radius: 3px !important;
+}
+
+form label {
+  line-height: 40px;
+  text-align: center;
+}

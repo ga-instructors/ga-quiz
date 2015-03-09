@@ -1,0 +1,15 @@
+br
+.row
+  .small-2.columns &nbsp;
+  .small-8.columns.text-center
+    h4 Logging into GA Quizzes
+    hr
+  .small-2.columns &nbsp;
+
+= form_for @session do |form|
+  == render form
+  .actions.row
+    .small-4.columns &nbsp;
+    .small-6.columns
+      = form.submit 'Log In', class: 'button primary'
+    .small-2.columns &nbsp;
