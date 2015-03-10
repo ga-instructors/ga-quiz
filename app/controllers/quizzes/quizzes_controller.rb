@@ -14,7 +14,11 @@ class Quizzes::QuizzesController < ApplicationController
 
   # GET /quizzes/quizzes/new
   def new
-    @quizzes_quiz = Quizzes::Quiz.new
+    if params[:group_id]
+      @quizzes_quiz = Quizzes::Quiz.new(group_id: params[:group_id])
+    else
+      @quizzes_quiz = Quizzes::Quiz.new
+    end
   end
 
   # GET /quizzes/quizzes/1/edit

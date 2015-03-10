@@ -1,8 +1,12 @@
-h1 Editing quizzes_quiz
+h1 Edit Quiz
 
-== render 'form'
-
-= link_to 'Show', @quizzes_quiz
-'|
-= link_to 'Back', quizzes_quizzes_path
+= form_for @quizzes_quiz do |form|
+  == render form
+  .actions.row
+    .small-2.columns &nbsp;
+    .small-6.columns
+      = form.submit class: 'button primary'
+      | &nbsp;&nbsp;&nbsp;
+      = link_to 'Cancel', @quizzes_quiz
+    .small-1.columns &nbsp;
 

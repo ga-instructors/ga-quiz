@@ -77,6 +77,7 @@ src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circula
   -moz-box-shadow: 0 3px 0 0 #a2a2a2;
   box-shadow: 0 3px 0 0 #a2a2a2;
   border-radius: 3px !important;
+  margin-right: 4pt;
 }
 
 form label {
@@ -98,4 +99,22 @@ select[id$="_4i"] {
 }
 select[id$="_5i"] {
   width: 5em;
+}
+
+pre, textarea, code {
+  font-family: 'Lucida Pro', monospace;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+table.highlighttable {
+  width: 100%;
+  background-color: #FCFCFC;
+  td.linenos {
+    background-color: #DDDDDD;
+    padding: 0 0.5em;
+    width: 3em;
+    text-align: right;
+  }
 }

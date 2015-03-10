@@ -21,9 +21,9 @@ table
         td = quizzes_quiz.end_at
         td = quizzes_quiz.introduction
         td = link_to 'Show', quizzes_quiz
-        td = link_to 'Edit', edit_quizzes_quiz_path(quizzes_quiz)
+        td = link_to 'Edit', edit_quiz_path(quizzes_quiz)
         td = link_to 'Destroy', quizzes_quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Quiz', new_quizzes_quiz_path
+= link_to 'New Quiz', new_quiz_path

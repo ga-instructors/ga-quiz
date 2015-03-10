@@ -1,15 +1,12 @@
 p#notice = notice
 
-p
-  strong Name:
-  = @group.name
-p
-  strong Start at:
-  = @group.start_at
-p
-  strong End at:
-  = @group.end_at
+.row
+  h1 = @group.name
 
-= link_to 'Edit', edit_group_path(@group)
-'|
-= link_to 'Back', groups_path
+  - if @group.start_at? && @group.end_at?
+    p
+      From #{@group.start_at.to_date.to_s(:long)} &mdash; #{@group.end_at.to_date.to_s(:long)}
+
+  ul.button-group.actions
+    li = link_to 'Edit Group', edit_group_path(@group), class: 'button secondary'
+    li = link_to 'New Quiz', new_group_quiz_path(@group), class: 'button info'

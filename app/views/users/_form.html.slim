@@ -1,18 +1,35 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      ul
-        - @user.errors.full_messages.each do |message|
-          li = message
+- if @user.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+    ul
+      - @user.errors.full_messages.each do |message|
+        li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :password_digest
-    = f.text_field :password_digest
-  .actions = f.submit
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :name
+  .small-6.columns
+    = form.text_field :name
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :email
+  .small-6.columns
+    = form.text_field :email
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :password
+  .small-6.columns
+    = form.password_field :password
+  .small-2.column &nbsp;
+.field.row
+  .small-2.column &nbsp;
+  .small-2.columns
+    = form.label :password_confirmation, 'Retype Password'
+  .small-6.columns
+    = form.password_field :password_confirmation
+  .small-2.column &nbsp;

@@ -29,7 +29,7 @@
 					<li class="active"><a href="#">Right Button Active</a></li>
 					<% if logged_in? %>
 						<li class="has-dropdown">
-							<%= link_to current_user.name, session_path(current_session) %>
+							<%= link_to current_user.name, user_session_path(current_user, current_session) %>
 							<ul class="dropdown">
 								<li><%= link_to 'Profile', current_user %></li>
 								<li><%= link_to 'Settings', edit_user_path(current_user) %></li>

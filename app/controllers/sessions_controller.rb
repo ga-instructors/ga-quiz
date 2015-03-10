@@ -5,7 +5,12 @@ class SessionsController < ApplicationController
   # GET /sessions
   # GET /sessions.json
   def index
-    @sessions = Session.all
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @sessions = @user.sessions
+    else
+      @sessions = Session.all
+    end
   end
 
   # GET /sessions/1
@@ -15,7 +20,7 @@ class SessionsController < ApplicationController
 
   # GET /sessions/new
   def new
-    redirect_to current_session if logged_in?
+    redirect_to user_session_path(current_user, current_session) if logged_in?
     @session = Session.new
   end
 

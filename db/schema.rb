@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150309203150) do
 
   create_table "quizzes_quizzes", force: :cascade do |t|
     t.integer  "group_id"
+    t.integer  "ordinal"
     t.string   "name"
     t.datetime "start_at"
     t.datetime "end_at"

@@ -1,24 +1,53 @@
-= form_for @quizzes_quiz do |f|
-  - if @quizzes_quiz.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@quizzes_quiz.errors.count, "error")} prohibited this quizzes_quiz from being saved:"
-      ul
-        - @quizzes_quiz.errors.full_messages.each do |message|
-          li = message
+- if @quizzes_quiz.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@quizzes_quiz.errors.count, "error")} prohibited this quizzes_quiz from being saved:"
+    ul
+      - @quizzes_quiz.errors.full_messages.each do |message|
+        li = message
 
-  .field
-    = f.label :group_id
-    = f.number_field :group_id
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :start_at
-    = f.datetime_select :start_at
-  .field
-    = f.label :end_at
-    = f.datetime_select :end_at
-  .field
-    = f.label :introduction
-    = f.text_area :introduction
-  .actions = f.submit
+- unless params[:group_id]
+  .field.row
+    .small-1.column &nbsp;
+    .small-1.columns
+      = form.label :group_id
+    .small-9.columns
+      = form.select :group_id, Group.all.map { |group| [group.name, group.id] }
+    .small-1.column &nbsp;
+- else
+  = form.hidden_field :group_id
+.field.row
+  .small-1.column &nbsp;
+  .small-1.columns
+    = form.label :name
+  .small-7.columns
+    = form.text_field :name
+  .small-1.columns
+    = form.label :ordinal, 'Quiz #'
+  .small-1.columns
+    = form.number_field :ordinal
+  .small-1.column &nbsp;
+.field.row
+  .small-1.column &nbsp;
+  .small-1.columns
+    = form.label :start_at
+  .small-9.columns
+    = check_box_tag 'quizzes_quiz[start_at]', nil, form.object.start_at.nil?, title: 'No Time Restriction'
+    | &nbsp; 
+    = form.datetime_select :start_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.start_at.nil?
+  .small-1.column &nbsp;
+.field.row
+  .small-1.column &nbsp;
+  .small-1.columns
+    = form.label :end_at
+  .small-9.columns
+    = check_box_tag 'quizzes_quiz[end_at]', nil, form.object.end_at.nil?, title: 'No Time Restriction'
+    | &nbsp; 
+    = form.datetime_select :end_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.end_at.nil?
+  .small-1.column &nbsp;
+.field.row
+  hr
+  .small-2.columns
+    = form.label :introduction
+  .small-9.columns
+    = form.text_area :introduction, style: 'width:100%;height:200px'
+  .small-1.column &nbsp;

@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  if $('form.new_quizzes_quiz, form.edit_quizzes_quiz').length
+    $start_at_checkbox = $('input#quizzes_quiz_start_at[type=checkbox]')
+    $start_at_checkbox.on 'change', (event) ->
+      $('select[id^="quizzes_quiz_start_at"]').attr('disabled', this.checked ? 'disabled' : '')
+    $end_at_checkbox = $('input#quizzes_quiz_end_at[type=checkbox]')
+    $end_at_checkbox.on 'change', (event) ->
+      $('select[id^="quizzes_quiz_end_at"]').attr('disabled', this.checked ? 'disabled' : '')
+

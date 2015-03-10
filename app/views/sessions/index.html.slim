@@ -1,29 +1,19 @@
-h1 Listing sessions
+.row
+  h1 Login History
 
-table
-  thead
-    tr
-      th User
-      th User agent
-      th Ip address
-      th Latitude
-      th Longitude
-      th
-      th
-      th
-
-  tbody
-    - @sessions.each do |session|
+  table
+    thead
       tr
-        td = session.user
-        td = session.user_agent
-        td = session.ip_address
-        td = session.latitude
-        td = session.longitude
-        td = link_to 'Show', session
-        td = link_to 'Edit', edit_session_path(session)
-        td = link_to 'Destroy', session, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th User Agent
+        th IP address
+        th Time
+        th
 
-br
+    tbody
+      - @sessions.each do |session|
+        tr
+          td = session.user_agent
+          td = session.ip_address
+          td = session.created_at
+          td = link_to 'Details', session
 
-= link_to 'New Session', new_session_path

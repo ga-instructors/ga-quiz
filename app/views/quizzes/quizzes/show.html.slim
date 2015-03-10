@@ -1,21 +1,20 @@
 p#notice = notice
 
-p
-  strong Group:
-  = @quizzes_quiz.group_id
-p
-  strong Name:
-  = @quizzes_quiz.name
-p
-  strong Start at:
-  = @quizzes_quiz.start_at
-p
-  strong End at:
-  = @quizzes_quiz.end_at
-p
-  strong Introduction:
-  = @quizzes_quiz.introduction
+.row
+  .small-7.columns
+    h1 = @quizzes_quiz.name
+    - if @quizzes_quiz.start_at? && @quizzes_quiz.end_at?
+      p
+        From #{@quizzes_quiz.start_at.to_date.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_date.to_s(:long)}
+  .small-4.columns
+    strong Prepared for:&nbsp;
+    = render @quizzes_quiz.group
+  .small-1.columns
+    = link_to 'Edit', edit_quiz_path(@quizzes_quiz), class: 'button small secondary'
 
-= link_to 'Edit', edit_quizzes_quiz_path(@quizzes_quiz)
-'|
-= link_to 'Back', quizzes_quizzes_path
+hr
+.row
+  = @quizzes_quiz.introduction
+hr
+.actions.row.text-center
+  = link_to 'Start Quiz', edit_quiz_path(@quizzes_quiz), class: 'button large primary'
