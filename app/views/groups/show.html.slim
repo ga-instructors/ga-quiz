@@ -1,12 +1,33 @@
 p#notice = notice
 
 .row
-  h1 = @group.name
+  .small-6.columns
+    h1 = @group.name
 
-  - if @group.start_at? && @group.end_at?
-    p
-      From #{@group.start_at.to_date.to_s(:long)} &mdash; #{@group.end_at.to_date.to_s(:long)}
+    - if @group.start_at? && @group.end_at?
+      p
+        From #{@group.start_at.to_date.to_s(:long)} &mdash; #{@group.end_at.to_date.to_s(:long)}
+  .small-6.columns
+    br
+    ul.button-group.actions.text-right
+      li = link_to 'Regroup', regroup_group_path(@group), class: 'button small info'
+      li = link_to 'New Quiz', new_group_quiz_path(@group), class: 'button small info'
+      li = link_to 'Edit Group', edit_group_path(@group), class: 'button small secondary'
+hr
+.row
+  .small-6.columns
+    h3 Quizzes
+    ul
+      - @group.quizzes.each do |quiz|
+        li = link_to quiz.to_s, quiz
 
-  ul.button-group.actions
-    li = link_to 'Edit Group', edit_group_path(@group), class: 'button secondary'
-    li = link_to 'New Quiz', new_group_quiz_path(@group), class: 'button info'
+  .small-6.columns
+    h3 Instructors
+    ul
+      - @group.instructors.each do |instructor|
+        li = link_to instructor.name, instructor
+
+    h3 Students
+    ul
+      - @group.students.each do |student|
+        li = link_to student.name, student

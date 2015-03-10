@@ -1,0 +1,2 @@
+module Quizzes::AnswersHelper
+end

@@ -1,0 +1,33 @@
+br
+.row
+  .small-4.columns
+    = link_to "Pair", regroup_group_path(groups: @students.count / 2), class: 'button small', title: "Pairs of two"
+    | &nbsp;
+    = link_to "Standup", regroup_group_path(instructors: true), class: 'button small', title: "Grouped by Instructor"
+  .small-4.columns
+    = form_tag regroup_group_path, method: 'GET' do
+      .row
+        .small-6.columns.text-right
+          = label_tag :groups, "Groups:"
+        .small-6.columns
+          = number_field_tag :groups, params[:groups], required: true
+  .small-4.columns.text-right
+    = link_to "Download Markdown", "javascript:$('.regroup').each(function(i,e){$(e).find('.student').shuffle()});", class: 'button small', title: "Shuffles students within their group"
+    = link_to "Shuffle", "javascript:$('.regroup').each(function(i,e){$(e).find('.student').shuffle()});", class: 'button small', title: "Shuffles students within their group"
+hr
+.row
+  - @regroups.each_with_index do |group, index|
+    .small-6.columns
+      - if params[:instructors]
+        h3 #{group.shift.name}'s Group
+      - else
+        h3 GROUP #{index+1}
+      ul.regroup
+        - group.each do |student|
+          - if student
+            li.student = student.name
+      hr
+    - if index % 2 == 1
+      erb:
+        </div><div class="row">
+.row

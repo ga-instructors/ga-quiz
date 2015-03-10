@@ -1,10 +1,27 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :regroup, :edit, :update, :destroy]
 
   # GET /groups
   # GET /groups.json
   def index
     @groups = Group.all
+  end
+
+  def regroup
+    @students = @group.students.sort_by { |student| (student.answers.average(:grade) || 0) + (rand-0.5)/10 }
+    if @students.empty?
+      @regroups = []
+    else
+      if params[:instructors]
+        @leads = @group.instructors.shuffle
+        @splits = @students.in_groups_of(@leads.count, false)
+      else
+        params[:groups] ||= 4
+        @splits = @students.in_groups_of(params[:groups].to_i, false)
+        @leads = @splits.shift
+      end
+      @regroups = @leads ? @leads.zip(*@splits) : []
+    end
   end
 
   # GET /groups/1

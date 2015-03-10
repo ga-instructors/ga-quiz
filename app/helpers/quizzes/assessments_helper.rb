@@ -1,0 +1,2 @@
+module Quizzes::AssessmentsHelper
+end

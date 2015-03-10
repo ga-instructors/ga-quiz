@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Quiz:
+  = @quizzes_question.quiz
+p
+  strong Ordinal:
+  = @quizzes_question.ordinal
+p
+  strong Question:
+  = @quizzes_question.question
+p
+  strong Open ended:
+  = @quizzes_question.open_ended
+p
+  strong Answer:
+  = @quizzes_question.answer
+p
+  strong Answer option:
+  = @quizzes_question.answer_option_id
+p
+  strong Answer template:
+  = @quizzes_question.answer_template
+
+= link_to 'Edit', edit_quizzes_question_path(@quizzes_question)
+'|
+= link_to 'Back', quizzes_questions_path

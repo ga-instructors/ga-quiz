@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require shuffle.jquery
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks

@@ -1,4 +1,5 @@
 require './lib/markdown_pygments'
+require './lib/roman_numerals'
 
 class Quizzes::Quiz < ActiveRecord::Base
   belongs_to :group
@@ -8,6 +9,10 @@ class Quizzes::Quiz < ActiveRecord::Base
 
   def ordinal
     self[:ordinal] ||= group ? (group.quizzes.maximum(:ordinal) || 0) + 1 : nil
+  end
+
+  def to_s
+    "#{RomanNumeral.from_integer(ordinal)}: #{name}"
   end
 
   def introduction

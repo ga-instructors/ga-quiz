@@ -2,7 +2,7 @@ p#notice = notice
 
 .row
   .small-7.columns
-    h1 = @quizzes_quiz.name
+    h1 = @quizzes_quiz.to_s
     - if @quizzes_quiz.start_at? && @quizzes_quiz.end_at?
       p
         From #{@quizzes_quiz.start_at.to_date.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_date.to_s(:long)}
@@ -14,7 +14,8 @@ p#notice = notice
 
 hr
 .row
-  = @quizzes_quiz.introduction
+  .small-12.columns
+    = @quizzes_quiz.introduction
 hr
 .actions.row.text-center
   = link_to 'Start Quiz', edit_quiz_path(@quizzes_quiz), class: 'button large primary'

@@ -1,0 +1,27 @@
+h1 Listing quizzes_assessments
+
+table
+  thead
+    tr
+      th Quiz
+      th User
+      th Student comment
+      th Finished at
+      th
+      th
+      th
+
+  tbody
+    - @quizzes_assessments.each do |quizzes_assessment|
+      tr
+        td = quizzes_assessment.quiz
+        td = quizzes_assessment.user
+        td = quizzes_assessment.student_comment
+        td = quizzes_assessment.finished_at
+        td = link_to 'Show', quizzes_assessment
+        td = link_to 'Edit', edit_quizzes_assessment_path(quizzes_assessment)
+        td = link_to 'Destroy', quizzes_assessment, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Assessment', new_quizzes_assessment_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309203150) do
+ActiveRecord::Schema.define(version: 20150310022422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,48 @@ ActiveRecord::Schema.define(version: 20150309203150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "quizzes_answers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "assessment_id"
+    t.integer  "question_id"
+    t.integer  "question_option_id"
+    t.text     "answer"
+    t.float    "grade"
+    t.text     "reviewer_comment"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "quizzes_answers", ["assessment_id"], name: "index_quizzes_answers_on_assessment_id", using: :btree
+  add_index "quizzes_answers", ["question_id"], name: "index_quizzes_answers_on_question_id", using: :btree
+  add_index "quizzes_answers", ["user_id"], name: "index_quizzes_answers_on_user_id", using: :btree
+
+  create_table "quizzes_assessments", force: :cascade do |t|
+    t.integer  "quiz_id"
+    t.integer  "user_id"
+    t.text     "student_comment"
+    t.datetime "finished_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "quizzes_assessments", ["quiz_id"], name: "index_quizzes_assessments_on_quiz_id", using: :btree
+  add_index "quizzes_assessments", ["user_id"], name: "index_quizzes_assessments_on_user_id", using: :btree
+
+  create_table "quizzes_questions", force: :cascade do |t|
+    t.integer  "quiz_id"
+    t.integer  "ordinal"
+    t.text     "question"
+    t.boolean  "open_ended"
+    t.text     "answer"
+    t.integer  "answer_option_id"
+    t.text     "answer_template"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "quizzes_questions", ["quiz_id"], name: "index_quizzes_questions_on_quiz_id", using: :btree
 
   create_table "quizzes_quizzes", force: :cascade do |t|
     t.integer  "group_id"
@@ -68,5 +110,11 @@ ActiveRecord::Schema.define(version: 20150309203150) do
 
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
+  add_foreign_key "quizzes_answers", "quizzes_assessments", column: "assessment_id"
+  add_foreign_key "quizzes_answers", "quizzes_questions", column: "question_id"
+  add_foreign_key "quizzes_answers", "users"
+  add_foreign_key "quizzes_assessments", "quizzes_quizzes", column: "quiz_id"
+  add_foreign_key "quizzes_assessments", "users"
+  add_foreign_key "quizzes_questions", "quizzes_quizzes", column: "quiz_id"
   add_foreign_key "sessions", "users"
 end
