@@ -1,29 +1,25 @@
-h1 Listing quizzes_quizzes
+.row
+  .right style="margin: 1em 0 0 0;"
+    = link_to 'New Quiz', new_quiz_path, class: 'button secondary small'
+  h1 Quizzes
 
-table
-  thead
-    tr
-      th Group
-      th Name
-      th Start at
-      th End at
-      th Introduction
-      th
-      th
-      th
-
-  tbody
-    - @quizzes_quizzes.each do |quizzes_quiz|
+  table width="100%"
+    thead
       tr
-        td = quizzes_quiz.group_id
-        td = quizzes_quiz.name
-        td = quizzes_quiz.start_at
-        td = quizzes_quiz.end_at
-        td = quizzes_quiz.introduction
-        td = link_to 'Show', quizzes_quiz
-        td = link_to 'Edit', edit_quiz_path(quizzes_quiz)
-        td = link_to 'Destroy', quizzes_quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Group
+        th Name
+        th Start at
+        th End at
+        th
+        th
 
-br
+    tbody
+      - @quizzes_quizzes.each do |quiz|
+        tr
+          td = link_to quiz.group.name, quiz.group
+          td = link_to quiz.to_s, quiz
+          td = quiz.start_at.to_s(:long)
+          td = quiz.end_at.to_s(:long)
+          td = link_to 'Edit', edit_quiz_path(quiz)
+          td = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Quiz', new_quiz_path

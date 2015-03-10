@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150310022422) do
   create_table "quizzes_questions", force: :cascade do |t|
     t.integer  "quiz_id"
     t.integer  "ordinal"
+    t.string   "topic"
     t.text     "question"
     t.boolean  "open_ended"
     t.text     "answer"
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20150310022422) do
   end
 
   add_index "quizzes_questions", ["quiz_id"], name: "index_quizzes_questions_on_quiz_id", using: :btree
+  add_index "quizzes_questions", ["topic"], name: "index_quizzes_questions_on_topic", using: :btree
 
   create_table "quizzes_quizzes", force: :cascade do |t|
     t.integer  "group_id"

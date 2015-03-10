@@ -3,6 +3,7 @@ class CreateQuizzesQuestions < ActiveRecord::Migration
     create_table :quizzes_questions do |t|
       t.references :quiz, index: true
       t.integer :ordinal
+      t.string :topic, index: true
       t.text :question
       t.boolean :open_ended
       t.text :answer

@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @assessment = @user.answers.joins(:question).select('quizzes_questions.topic, quizzes_answers.grade').group('quizzes_questions.topic')
+    @experience = @assessment.sum('quizzes_answers.grade')
+    @performance = @assessment.average('quizzes_answers.grade')
   end
 
   # GET /users/new

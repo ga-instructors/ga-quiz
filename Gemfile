@@ -39,6 +39,10 @@ gem 'pygments.rb'
 gem 'slim-rails'
 gem 'foundation-rails'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-chartjs'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -51,5 +55,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'database_cleaner'
 end
 

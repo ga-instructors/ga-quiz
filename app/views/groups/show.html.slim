@@ -16,18 +16,28 @@ p#notice = notice
 hr
 .row
   .small-6.columns
-    h3 Quizzes
-    ul
-      - @group.quizzes.each do |quiz|
-        li = link_to quiz.to_s, quiz
+    - if @group.instructors.any?
+      h3 Instructors
+      ul.no-bullet
+        - @group.instructors.each do |instructor|
+          li = link_to render(instructor), instructor
+
+    - if @group.quizzes.any?
+      h3 Quizzes
+      ul
+        - @group.quizzes.each do |quiz|
+          li = link_to quiz.to_s, group_quiz_path(@group, quiz)
 
   .small-6.columns
-    h3 Instructors
-    ul
-      - @group.instructors.each do |instructor|
-        li = link_to instructor.name, instructor
 
-    h3 Students
-    ul
-      - @group.students.each do |student|
-        li = link_to student.name, student
+    - if @group.students.any?
+      h3 Students
+      ul.no-bullet style="-webkit-column-count: 2"
+        - @group.students.each do |student|
+          li = link_to render(student), student
+    
+    - if @group.members.any?
+      h3 Members
+      ul.no-bullet
+        - @group.members.each do |member|
+          li = link_to render(member), member
