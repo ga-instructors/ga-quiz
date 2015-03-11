@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :groups do
     resources :quizzes, module: :quizzes
     get :regroup, on: :member
+    resources :users
   end
   root to: 'sessions#new'
 end
