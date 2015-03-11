@@ -1,4 +1,5 @@
 class Quizzes::QuizzesController < ApplicationController
+  before_action :set_group
   before_action :set_quizzes_quiz, only: [:show, :edit, :update, :destroy]
 
   # GET /quizzes/quizzes
@@ -66,9 +67,15 @@ class Quizzes::QuizzesController < ApplicationController
   end
 
   private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_group
+      @group = Group.find(params[:group_id]) if params[:group_id]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_quizzes_quiz
-      @quizzes_quiz = Quizzes::Quiz.find(params[:id])
+      @quizzes_quiz = @group ? @group.quizzes.find(params[:id]) : Quizzes::Quiz.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

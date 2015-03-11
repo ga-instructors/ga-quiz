@@ -14,50 +14,53 @@
 
 	<body>
 
-		<nav class="top-bar" data-topbar role="navigation">
-			<ul class="title-area">
-				<li class="name">
-					<h1><%= link_to image_tag('ga-lockup.png', alt: 'General Assembly', style: 'max-height: 60%'), root_path %></h1>
-				</li>
-				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-			</ul>
+		<% cache [current_session, :nav, @group] do %>
+			<nav class="top-bar" data-topbar role="navigation">
+				<ul class="title-area">
+					<li class="name">
+						<h1><%= link_to image_tag('ga-lockup.png', alt: 'General Assembly', style: 'max-height: 60%'), root_path %></h1>
+					</li>
+					<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+					<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+				</ul>
 
-			<section class="top-bar-section">
-				<!-- Right Nav Section -->
-				<ul class="right">
-					<% if logged_in? %>
-						<% if current_user.groups.count > 1 %>
-							<li class="active has-dropdown">
-							<%= link_to current_user.groups.last.name, current_user.groups.last %>
+				<section class="top-bar-section">
+					<!-- Right Nav Section -->
+					<ul class="right">
+						<% if logged_in? %>
+							<% if current_user.groups.count > 1 %>
+								<li class="active has-dropdown">
+									<% active_group = (@group || current_user.groups.last) %>
+									<%= link_to active_group.name, active_group %>
+									<ul class="dropdown">
+										<% current_user.groups.reject { |group| group == active_group }.each do |group| %>
+											<li><%= link_to group.name, group %></li>
+										<% end %>
+									</ul>
+								</li>
+							<% else %>
+								<li class="active"><%= link_to current_user.groups.first.name, current_user.groups.first %></li>
+							<% end %>
+							<li class="has-dropdown">
+								<%= link_to current_user.name, user_session_path(current_user, current_session) %>
 								<ul class="dropdown">
-									<% current_user.groups.each do |group| %>
-										<li><%= link_to group.name, group %></li>
-									<% end %>
+									<li><%= link_to 'Profile', current_user %></li>
+									<li><%= link_to 'Settings', edit_user_path(current_user) %></li>
+									<li><%= link_to 'Log Out', session_path(current_session), method: 'delete' %></li>
 								</ul>
 							</li>
 						<% else %>
-							<li class="active"><%= link_to current_user.groups.first.name, current_user.groups.first %></li>
+							<li><%= link_to "Log In", new_session_path %></li>
 						<% end %>
-						<li class="has-dropdown">
-							<%= link_to current_user.name, user_session_path(current_user, current_session) %>
-							<ul class="dropdown">
-								<li><%= link_to 'Profile', current_user %></li>
-								<li><%= link_to 'Settings', edit_user_path(current_user) %></li>
-								<li><%= link_to 'Log Out', session_path(current_session), method: 'delete' %></li>
-							</ul>
-						</li>
-					<% else %>
-						<li><%= link_to "Log In", new_session_path %></li>
-					<% end %>
-				</ul>
+					</ul>
 
-				<!-- Left Nav Section -->
-				<ul class="left">
-					<li><a href="#">Left Nav Button</a></li>
-				</ul>
-			</section>
-		</nav>
+					<!-- Left Nav Section -->
+					<ul class="left">
+						<li><a href="#">Left Nav Button</a></li>
+					</ul>
+				</section>
+			</nav>
+		<% end %>
 
 		<%= yield %>
 

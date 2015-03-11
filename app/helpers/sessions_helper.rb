@@ -1,7 +1,7 @@
 module SessionsHelper
 
   def current_session
-    @current_session = Session.find_by_id(session[:id])
+    @current_session ||= Session.find_by_id(session[:id])
   end
 
   def current_user

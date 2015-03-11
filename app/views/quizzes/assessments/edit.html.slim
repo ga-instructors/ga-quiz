@@ -1,8 +1,24 @@
-h1 Editing quizzes_assessment
+.row
+  h1.small-12.columns
+    = @assessment.quiz.to_s
 
-== render 'form'
+= form_for @assessment do |form|
+  - if @assessment.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@assessment.errors.count, "error")} prohibited this quizzes_assessment from being saved:"
+      ul
+        - @assessment.errors.full_messages.each do |message|
+          li = message
 
-= link_to 'Show', @quizzes_assessment
-'|
-= link_to 'Back', quizzes_assessments_path
+  - @assessment.questions.each do |question, answer|
+    .field = render question
+    = form.fields_for(answer) do |fields|
+      .field = render fields, question: question
+
+  .field.row
+    .small-12.columns
+      = form.label :student_comment, 'Do you have any questions or concerns about this quiz for the instructor?'
+      = form.text_area :student_comment
+  .actions.row.text-center
+    = form.submit 'Finish Assessment', class: 'button primary'
 

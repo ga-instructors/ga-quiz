@@ -24,11 +24,11 @@ class Quizzes::AssessmentsController < ApplicationController
   # POST /quizzes/assessments
   # POST /quizzes/assessments.json
   def create
-    @quizzes_assessment = Quizzes::Assessment.new(quizzes_assessment_params)
+    @quizzes_assessment = current_user.assessments.new(quizzes_assessment_params)
 
     respond_to do |format|
       if @quizzes_assessment.save
-        format.html { redirect_to @quizzes_assessment, notice: 'Assessment was successfully created.' }
+        format.html { redirect_to edit_quizzes_assessment_path(@quizzes_assessment), notice: 'Assessment was successfully created.' }
         format.json { render :show, status: :created, location: @quizzes_assessment }
       else
         format.html { render :new }
@@ -64,11 +64,11 @@ class Quizzes::AssessmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quizzes_assessment
-      @quizzes_assessment = Quizzes::Assessment.find(params[:id])
+      @assessment = @quizzes_assessment = Quizzes::Assessment.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quizzes_assessment_params
-      params.require(:quizzes_assessment).permit(:quiz_id, :user_id, :student_comment, :finished_at)
+      params.require(:quizzes_assessment).permit(:quiz_id, :student_comment)
     end
 end

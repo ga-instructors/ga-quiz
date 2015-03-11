@@ -3,6 +3,8 @@ require './lib/roman_numerals'
 
 class Quizzes::Quiz < ActiveRecord::Base
   belongs_to :group
+  has_many :assessments
+  has_many :questions
 
   after_initialize :ordinal
   validates :group, presence: true

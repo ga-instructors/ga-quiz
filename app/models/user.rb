@@ -5,5 +5,6 @@ class User < ActiveRecord::Base
   has_many :groups, through: :memberships
   has_many :sessions
   has_many :answers, class_name: 'Quizzes::Answer'
+  has_many :assessments, class_name: 'Quizzes::Assessment'
 
 end
