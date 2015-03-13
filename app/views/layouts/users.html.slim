@@ -1,0 +1,22 @@
+- content_for :instructions do
+  li data-id="user_info" data-text="Next" data-prev-text="Back"
+    h4 User Info
+    p Here is the profile information for this user, including all their associations.
+
+- content_for :sublayout do
+  p#notice = notice
+
+  .row
+    .medium-4.columns#user_info
+      = image_tag gravatar_url(@user.email, size: 256, default: 'retro')
+      h1 = @user.name
+      p.lead = @user.email
+
+      - if content_for?(:user_navigation)
+        ul#user_navigation.no-bullet
+          = yield :user_navigation
+
+    .medium-8.columns
+      = yield
+
+= render template: 'layouts/application'

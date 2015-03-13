@@ -62,7 +62,7 @@
 			</nav>
 		<% end %>
 
-		<%= yield %>
+		<%= content_for(:sublayout) ? yield(:sublayout) : yield %>
 
 		<ol class="joyride-list" data-joyride>
 			<li data-id="" data-button="Start" data-options="prev_button: false">
@@ -74,6 +74,11 @@
 				<p>This menu allows you to view your profile, your groups, and change your settings.</p>
 			</li>
 			<%= yield :instructions %>
+			<li data-id="" data-button="Start" data-options="prev_button: false">
+				<h4>Instructions</h4>
+				<br />
+				<p>That's all for now.  Thank you for using GA-QUIZ!</p>
+			</li>
 		</ol>
 
 	</body>

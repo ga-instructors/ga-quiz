@@ -1,3 +1,14 @@
+- content_for :instructions do
+  li data-id="instructor-list" data-button="Next" data-prev-text="Back" data-options="tip_location: 'right'"
+    h4 Instructors
+    p Here you can see the designated instructors for this group
+  li data-id="quizzes-list" data-button="Next" data-prev-text="Back" data-options="tip_location: 'right'"
+    h4 Quizzes
+    p This is the quizzes that have been prepared for this group
+  li data-id="student-list" data-button="Next" data-prev-text="Back" data-options="tip_location: 'left'"
+    h4 Students
+    p Students in this group can take quizzes that have been prepared for them, and see their progress through-out the course.
+
 p#notice = notice
 
 .row
@@ -17,24 +28,27 @@ hr
 .row
   .small-6.columns
     - if @group.instructors.any?
-      h3 Instructors
-      ul.no-bullet
-        - @group.instructors.each do |instructor|
-          li = link_to render(instructor), group_user_path(@group, instructor)
+      div#instructor-list
+        h3 Instructors
+        ul.no-bullet
+          - @group.instructors.each do |instructor|
+            li = link_to render(instructor), group_user_path(@group, instructor)
 
     - if @group.quizzes.any?
-      h3 Quizzes
-      ul
-        - @group.quizzes.each do |quiz|
-          li = link_to quiz.to_s, group_quiz_path(@group, quiz)
+      div#quizzes-list
+        h3 Quizzes
+        ul
+          - @group.quizzes.each do |quiz|
+            li = link_to quiz.to_s, group_quiz_path(@group, quiz)
 
   .small-6.columns
 
     - if @group.students.any?
-      h3 Students
-      ul.no-bullet style="-webkit-column-count: 2"
-        - @group.students.each do |student|
-          li = link_to render(student), group_user_path(@group, student)
+      div#student-list
+        h3 Students
+        ul.no-bullet style="-webkit-column-count: 2"
+          - @group.students.each do |student|
+            li = link_to render(student), group_user_path(@group, student)
     
     - if @group.members.any?
       h3 Members

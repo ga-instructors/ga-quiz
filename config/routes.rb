@@ -1,29 +1,27 @@
 Rails.application.routes.draw do
-  namespace :quizzes do
-    resources :answers
-  end
-
-  namespace :quizzes do
-    resources :questions
-  end
-
-  namespace :quizzes do
-    resources :assessments
-  end
 
   resources :quizzes, module: :quizzes
   resources :quizzes, module: :quizzes, as: 'quizzes_quiz'
   get '/quizzes', to: 'quizzes/quiz#index', as: 'quizzes_quizzes'
+  namespace :quizzes do
+    resources :answers
+    resources :questions
+    resources :assessments
+  end
 
   resources :sessions
-  resources :group_members
-  resources :users do
+
+  resources :users, except: [:new, :create] do
     resources :sessions
   end
+
   resources :groups do
     resources :quizzes, module: :quizzes
     get :regroup, on: :member
-    resources :users
+    resources :users, except: [:new, :create]
   end
+  resources :group_members
+
   root to: 'sessions#new'
+  match '*all', :to => 'application#not_found', via: :all
 end

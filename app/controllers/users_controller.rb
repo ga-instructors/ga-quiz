@@ -1,6 +1,29 @@
 class UsersController < ApplicationController
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
   before_action :set_group
+  def set_group
+    @group = Group.find(params[:group_id]) if params[:group_id]
+  end
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  def set_user
+    if @group
+      @user = @group.users.find(params[:id])
+      @group_member = @group.group_members.where(user: @user).first
+    else
+      @user = User.find(params[:id])
+    end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :email, :password_digest)
+  end
+
+  public
 
   # GET /users
   # GET /users.json
@@ -15,32 +38,12 @@ class UsersController < ApplicationController
       @assessment = @user.answers.joins(:question).select('quizzes_questions.topic, quizzes_answers.grade').group('quizzes_questions.topic')
       @performance = Hash[@assessment.average('quizzes_answers.grade').sort_by{|k,v|v.to_f}]
       @completed_assessments = @user.assessments.finished
+      render "show-#{@group_member.role}"
     end
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
   end
 
   # GET /users/1/edit
   def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /users/1
@@ -67,23 +70,4 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:group_id]) if params[:group_id]
-    end
-
-    def set_user
-      if @group
-        @user = @group.users.find(params[:id])
-        @group_member = @group.group_members.where(user: @user)
-      else
-        @user = User.find(params[:id])
-      end
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :email, :password_digest)
-    end
 end

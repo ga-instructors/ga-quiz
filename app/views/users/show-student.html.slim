@@ -1,0 +1,61 @@
+- content_for :instructions do
+  li data-id="user_topical-chart" data-button="Next" data-prev-text="Back" data-options="tip_location: 'left'"
+    h4 Topical Chart
+    p This chart displays the assessment results by topic and ordered from weakest to highest.
+  li data-id="user_completed-assessments" data-button="Next" data-prev-text="Back" data-options="tip_location: 'left'"
+    h4 Completed Assessments
+    p For all of the completed an assessments, you can see the graded scores here.
+
+- content_for :user_navigation do
+  li = link_to "Topical Chart", "#user_topical-chart"
+  li = link_to "Completed Assessments", "#user_completed-assessments"
+
+- if @performance
+  div#user_topical-chart
+    javascript:
+      jQuery(function() {
+        var data = {
+          labels: #{raw @performance.keys.to_json},
+          datasets: [
+            {
+              label: "Performance",
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: #{raw @performance.values.map(&:to_f).to_json},
+            }
+          ]
+        };
+        Chart.defaults.global.responsive = true;
+        var ctx = document.getElementById("topical_spider_graph").getContext("2d");
+        var chart = new Chart(ctx).Radar(data, {
+          animation: false,
+          scaleOverride: true, scaleStartValue: 0, scaleStepWidth: 0.25, scaleSteps: 4
+        });
+        $('#topical_spider_graph_legend').replaceWith($(chart.generateLegend()));
+      });
+    h3 Topical Chart
+    div style="position: relative; background-color: #FAFAFA; border-radius: 0.25em;"
+      canvas id="topical_spider_graph" style="padding: 20px 30px 20px 20px;" height="200"
+      div#topical_spider_graph_legend
+  br
+
+- if @completed_assessments
+  div#user_completed-assessments
+    h3 Completed Assessments
+    table.assessments width="100%"
+      thead
+        tr
+          th Quiz
+          th width=1 Score
+      - @completed_assessments.each do |assessment|
+        tr
+          td.name = link_to assessment.quiz.to_s, assessment
+          - if average_grade = assessment.answers.average(:grade)
+            td.average = number_to_percentage average_grade * 100, precision: 0
+
+- 12.times do
+  br

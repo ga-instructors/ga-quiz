@@ -1,12 +1,41 @@
-.row
-  h1 Settings
+h1 Settings
 
 = form_for @user do |form|
-  == render form
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .field.row
+    .small-3.columns
+      = form.label :name
+    .small-8.columns
+      = form.text_field :name
+    .small-1.column &nbsp;
+  .field.row
+    .small-3.columns
+      = form.label :email
+    .small-8.columns
+      = form.text_field :email
+    .small-1.column &nbsp;
+  .field.row
+    .small-3.columns
+      = form.label :password
+    .small-8.columns
+      = form.password_field :password
+    .small-1.column &nbsp;
+  .field.row
+    .small-3.columns
+      = form.label :password_confirmation, 'Retype Password'
+    .small-8.columns
+      = form.password_field :password_confirmation
+    .small-1.column &nbsp;
   .actions.row
-    .small-4.columns &nbsp;
-    .small-6.columns
+    .small-3.columns &nbsp;
+    .small-8.columns
       = form.submit 'Save Changes', class: 'button primary'
       | &nbsp;&nbsp;&nbsp;
       = link_to 'Cancel', @user
-    .small-2.columns &nbsp;
+    .small-1.columns &nbsp;
