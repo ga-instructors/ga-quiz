@@ -4,8 +4,7 @@ p#notice = notice
   .small-7.columns
     h1 = @quizzes_quiz.to_s
     - if @quizzes_quiz.start_at? && @quizzes_quiz.end_at?
-      p
-        From #{@quizzes_quiz.start_at.to_date.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_date.to_s(:long)}
+      p #{@quizzes_quiz.start_at.to_date.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_date.to_s(:long)}
   .small-4.columns
     strong Prepared for:&nbsp;
     = render @quizzes_quiz.group
@@ -20,4 +19,4 @@ hr
 = form_for @quizzes_quiz.assessments.new do |form|
   = form.hidden_field :quiz_id
   .actions.row.text-center
-    = form.submit 'Start Quiz', class: 'button large primary'
+    = form.submit 'Start Quiz', class: 'button large primary radius'

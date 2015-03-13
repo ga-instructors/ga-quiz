@@ -1,17 +1,40 @@
 p#notice = notice
 
 .row
-
   p.right
     = render @quizzes_assessment.user
+  p.right style="margin: 0 2em;"
+    strong Finished:&nbsp;
+    br
+    = @quizzes_assessment.finished_at.to_s(:long)
+
   h1 = @quizzes_assessment.quiz
 
   - if @quizzes_assessment.student_comment?
-    p
-      strong Student comment:&nbsp;
+    blockquote.panel.radius
       = @quizzes_assessment.student_comment
-  p
-    strong Finished at:&nbsp;
-    = @quizzes_assessment.finished_at.to_s(:long)
 
-  = link_to 'Resume Assessment', edit_quizzes_assessment_path(@quizzes_assessment), class: 'button secondary small'
+- @assessment.questions.each do |question, answer|
+  hr
+  .row.question
+    .medium-12.columns
+      = render question
+  .row.answer
+    hr
+    .medium-6.columns
+      .answer style="overflow: auto"
+        h4 Answer:
+        .panel
+          = answer.answer
+    .medium-6.columns
+      .results style="overflow: auto"
+        h4 Result:
+        .progress-radial class="progress-#{(answer.grade*100).to_i}" style="position: absolute; top: 0px; right: -20px;"
+          .overlay = number_to_percentage answer.grade*100, precision: 0
+        .panel.callout
+          .right style="width: 80px; height: 50px;"
+          = answer.reviewer_comment
+
+
+  - unless @assessment.finished_at?
+    = link_to 'Resume Assessment', edit_quizzes_assessment_path(@quizzes_assessment), class: 'button secondary small'

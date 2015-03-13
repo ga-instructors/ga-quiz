@@ -14,8 +14,19 @@
 //= require jquery.turbolinks
 //= require shuffle.jquery
 //= require jquery_ujs
+//= require chartjs
 //= require foundation
 //= require turbolinks
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function () {
+  $(document).foundation();
+  $('#start-instructions').on('click', function () {
+    $(document).foundation('joyride', 'start', {
+      expose: true,
+      modal: true,
+      riding: true,
+      expose_add_class: 'expose-instructions'
+    });
+  });
+});

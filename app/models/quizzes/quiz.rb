@@ -9,6 +9,8 @@ class Quizzes::Quiz < ActiveRecord::Base
   after_initialize :ordinal
   validates :group, presence: true
 
+  default_scope -> { order(:ordinal) }
+
   def ordinal
     self[:ordinal] ||= group ? (group.quizzes.maximum(:ordinal) || 0) + 1 : nil
   end

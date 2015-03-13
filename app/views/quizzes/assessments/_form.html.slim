@@ -5,4 +5,9 @@
 - else
   .row
     .small-12.columns
-    | TODO: Multiple Choice
+      ul.no-bullet
+        - question.options.each do |option|
+          li
+            = form.radio_button :question_option_id, option.id
+            | &nbsp;
+            = form.label :question_option_id, option.label, value: option.id

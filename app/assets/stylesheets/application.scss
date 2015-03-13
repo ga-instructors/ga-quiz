@@ -15,57 +15,86 @@
  *= require_self
  */
 
-@font-face{
+@font-face {
   font-family:'Circular';
-  font-weight:normal;
-  font-style:normal;
+  font-weight: normal;
+  font-style: normal;
   src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-d3d1d334e344755d945f7ee9224ebeb2.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-d3d1d334e344755d945f7ee9224ebeb2.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-47c9aea71e8ec99cd3c9ef04ac73c2d6.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-f775befac5d0e517113e4d11f72ff42a.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-book-b8a810ca3a90711cbcda837c20f8c9bc.svg#CircularBook') format('svg')}
 
-@font-face{
-  font-family:'Circular';
-  font-weight:normal;
-  font-style:italic;
+@font-face {
+  font-family: 'Circular';
+  font-weight: normal;
+  font-style: italic;
   src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-2c56097f6283cf07169c9cf3f9d7819b.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-2c56097f6283cf07169c9cf3f9d7819b.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-c0542b9e172b670c25c4dc244bbe9e1c.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-72afe5c88ce477a994902b23e2ca6488.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bookitalic-1c9e2c27cfad5b757b622aed4a92a035.svg#CircularBookItalic') format('svg')}
 
-@font-face{
-  font-family:'Circular';
-  font-weight:800;
-  font-style:normal;
+@font-face {
+  font-family: 'Circular';
+  font-weight :800;
+  font-style: normal;
   src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-c15f7adfc97878f7ac86df36abd4fbcb.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-c15f7adfc97878f7ac86df36abd4fbcb.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-dc20741d7c061b54dd17b34294bd9d65.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-b5138ccb1bb7568c6ae30ce17e8a3185.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-black-d016897a51f8d7a2c0e1689fc78582d7.svg#CircularBlack') format('svg')}
 
-@font-face{
-  font-family:'Circular';
-  font-weight:800;
-  font-style:italic;
-  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot');
-src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e4f00e42f75548dfb772b0769af5640e.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e162dd337d79bd45d296427082466813.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-f3f52f78b0f14a4f0545ad2428be3839.svg#CircularBlackItalic') format('svg')}
+@font-face {
+  font-family: 'Circular';
+  font-weight: 800;
+  font-style: italic;
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot');
+src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-c0764eb638facefbe8e0ef5b326fc3ef.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e4f00e42f75548dfb772b0769af5640e.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-e162dd337d79bd45d296427082466813.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-blackitalic-f3f52f78b0f14a4f0545ad2428be3839.svg#CircularBlackItalic') format('svg')}
 
-@font-face{
-  font-family:'Circular';
-  font-weight:bold;
-  font-style:normal;
-  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot');
-src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1dabee85fc02921d9380020c06d94538.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-e8b9a16d326aac7d00129885376dbdd2.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-bee37037723a3559e781a6eed9196cbc.svg#CircularBold') format('svg')}
-@font-face{font-family:'Circular';
-  font-weight:bold;
-  font-style:italic;
-  src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-939596d7d2ba2c94e08f341e5b7ebebb.eot');
+@font-face {
+  font-family: 'Circular';
+  font-weight: bold;
+  font-style: normal;
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot');
+src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1cde9bc4a9baed96e652024c5945d464.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-1dabee85fc02921d9380020c06d94538.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-e8b9a16d326aac7d00129885376dbdd2.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bold-bee37037723a3559e781a6eed9196cbc.svg#CircularBold') format('svg')
+}
+
+@font-face {
+  font-family: 'Circular';
+  font-weight: bold;
+  font-style: italic;
+  src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-939596d7d2ba2c94e08f341e5b7ebebb.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-939596d7d2ba2c94e08f341e5b7ebebb.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-6c14e37c5e80d2618585b3e8f8b014ea.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-faaad3316535f620504b23630b302c20.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-bolditalic-c9a39ec0669c16e0754ceaa9ceda589c.svg#CircularBookItalic') format('svg')}
-@font-face{
+
+@font-face {
   font-family:'Circular';
   font-weight:500;
   font-style:normal;
   src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-8857cb83f76f62ad7c5f62c5523a14ec.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-8857cb83f76f62ad7c5f62c5523a14ec.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-cc4a32494ee52f5e44d8ca93084014f0.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-11c64f610816e7ed2a6d74600c2a388e.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-medium-1c073669fdb5ee23b9fec165684f2e9f.svg#CircularMedium') format('svg')}
-@font-face{
+
+@font-face {
   font-family:'Circular';
   font-weight:500;
   font-style:italic;
   src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-101661c136f0f881318120750f3e4abf.eot');
 src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-101661c136f0f881318120750f3e4abf.eot?#iefix') format('embedded-opentype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-a8f80fff8a2f8afbb0085d597a833790.woff') format('woff'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-8a40d3e0bfeafc80948a9b05a704b8b7.ttf') format('truetype'),url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circular/lineto-circular-mediumitalic-d18ed26dccb8611fc439e90c18db4f0f.svg#CircularMediumItalic') format('svg')
+}
+
+@font-face {
+    font-family: 'PF DIN Compressed Pro';
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-bold-webfont-bb37d4622878dc82b3531449b7d5db61.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-bold-webfont-bb37d4622878dc82b3531449b7d5db61.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-bold-webfont-003075fc75ce677555e2e3aa7aafceff.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-bold-webfont-395327bf3931a40543c8a0b189052d7d.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-bold-webfont-6b4bd439b1e7613d4dbd0b20da456e41.svg#pf_din_text_comp_probold') format('svg');
+    font-weight: bold;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'PF DIN Compressed Pro';
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-7eda059b8f7d391782575e96f799e0a2.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-7eda059b8f7d391782575e96f799e0a2.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-00ca36936ec2b9afa681c644ab61cc9e.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-a747a36d45cda14ff9386743859c301a.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-medium-webfont-29ff8ce83a2aebaece55cca1a63f788c.svg#pf_din_text_comp_promedium') format('svg');
+    font-weight: 600;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'PF DIN Compressed Pro';
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-light-webfont-61b76db5729b81724fdc2df6cbbae9dc.eot');
+    src: url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-light-webfont-61b76db5729b81724fdc2df6cbbae9dc.eot?#iefix') format('embedded-opentype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-light-webfont-bcb2fa46dd807c28b7fb78e6848124b0.woff') format('woff'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-light-webfont-9d2d59b512e9351ea2eb90e226e9c5cc.ttf') format('truetype'), url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/pfdin/pfdintextcomppro-light-webfont-2f7c35369b265d4ddb3c306b14789db9.svg#PFDinTextCompProLight') format('svg');
+    font-weight: 300;
+    font-style: normal
 }
 
 #error_explanation h2 {
@@ -76,7 +105,6 @@ src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circula
   -webkit-box-shadow: 0 3px 0 0 #a2a2a2;
   -moz-box-shadow: 0 3px 0 0 #a2a2a2;
   box-shadow: 0 3px 0 0 #a2a2a2;
-  border-radius: 3px !important;
   margin-right: 4pt;
 }
 
@@ -120,4 +148,22 @@ table.highlighttable {
 textarea {
   width: 100%;
   height: 100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PF DIN Compressed Pro';
+  font-weight: 600;
+}
+
+h1.prominent {
+  font-size: 6em;
+}
+
+h3 {
+  font-family: 'PF DIN Compressed Pro';
+  font-weight: 300;
+}
+
+nav * {
+  height: 100%;
 }

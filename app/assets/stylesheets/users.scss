@@ -1,3 +1,13 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.radar-legend {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  list-style-type: none;
+  span {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -10%;
+    margin-right: 0.25em;
+  }
+}

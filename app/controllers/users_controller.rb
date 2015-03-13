@@ -11,9 +11,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @assessment = @user.answers.joins(:question).select('quizzes_questions.topic, quizzes_answers.grade').group('quizzes_questions.topic')
-    @experience = @assessment.sum('quizzes_answers.grade')
-    @performance = @assessment.average('quizzes_answers.grade')
+    if @group
+      @assessment = @user.answers.joins(:question).select('quizzes_questions.topic, quizzes_answers.grade').group('quizzes_questions.topic')
+      @performance = Hash[@assessment.average('quizzes_answers.grade').sort_by{|k,v|v.to_f}]
+      @completed_assessments = @user.assessments.finished
+    end
   end
 
   # GET /users/new
@@ -72,7 +74,12 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:id])
+      if @group
+        @user = @group.users.find(params[:id])
+        @group_member = @group.group_members.where(user: @user)
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

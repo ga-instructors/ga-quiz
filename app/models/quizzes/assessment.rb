@@ -5,12 +5,18 @@ class Quizzes::Assessment < ActiveRecord::Base
   has_many :answers
   accepts_nested_attributes_for :answers
 
-  validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
+  default_scope -> { joins(:quiz).order('quizzes_quizzes.ordinal') }
+  scope :finished, -> { where('quizzes_assessments.finished_at IS NOT NULL') }
 
-  # Don't let students make changes to a finished assessment
+  validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
   validate do
-    errors.add(:base, 'Cannot update a completed assessment') unless finished_at.nil? || new_record?
+    if Time.now < quiz.start_at
+      errors.add(:quiz, 'is not available yet')
+    elsif Time.now > quiz.end_at
+      errors.add(:quiz, 'is no longer available')
+    end
   end
+  validates :user, presence: true
 
   scope :completed,  -> { where('finished_at IS NOT NULL') }
   scope :incomplete, -> { where('finished_at IS NULL') }

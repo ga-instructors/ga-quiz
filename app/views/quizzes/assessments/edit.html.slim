@@ -1,3 +1,5 @@
+p#notice = notice
+
 .row
   h1.small-12.columns
     = @assessment.quiz.to_s
@@ -11,9 +13,10 @@
           li = message
 
   - @assessment.questions.each do |question, answer|
-    .field = render question
+    .question = render question
     = form.fields_for(answer) do |fields|
-      .field = render fields, question: question
+      .answer.field = render fields, question: question
+    hr
 
   .field.row
     .small-12.columns

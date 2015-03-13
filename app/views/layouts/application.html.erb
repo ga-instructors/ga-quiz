@@ -26,7 +26,7 @@
 
 				<section class="top-bar-section">
 					<!-- Right Nav Section -->
-					<ul class="right">
+					<ul class="right" id="auth-section" class="expose-instructions">
 						<% if logged_in? %>
 							<% if current_user.groups.count > 1 %>
 								<li class="active has-dropdown">
@@ -56,13 +56,25 @@
 
 					<!-- Left Nav Section -->
 					<ul class="left">
-						<li><a href="#">Left Nav Button</a></li>
+						<li><a href="#" id="start-instructions">Instructions</a></li>
 					</ul>
 				</section>
 			</nav>
 		<% end %>
 
 		<%= yield %>
+
+		<ol class="joyride-list" data-joyride>
+			<li data-id="" data-button="Start" data-options="prev_button: false">
+				<h4>Instructions</h4>
+				<br />
+				<p>This guide has been created to assist you with the features of this application.</p>
+			</li>
+			<li data-id="auth-section" data-text="Next" data-options="tip_location: bottom; prev_button: false">
+				<p>This menu allows you to view your profile, your groups, and change your settings.</p>
+			</li>
+			<%= yield :instructions %>
+		</ol>
 
 	</body>
 </html>
