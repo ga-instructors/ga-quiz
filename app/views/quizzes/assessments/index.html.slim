@@ -1,27 +1,31 @@
-h1 Listing quizzes_assessments
+p#notice = notice
+.row#assessments_index
+  h1 #{@quiz} Assessment
 
-table
-  thead
-    tr
-      th Quiz
-      th User
-      th Student comment
-      th Finished at
-      th
-      th
-      th
+  .table-container
+    table width="100%"
+      thead
+        tr
+          th.user User
+          th.average ⟨⟩
+          - @quiz.questions.each do |question|
+            th.grade style="width: 50px;"
+              | Q#{question.ordinal}
 
-  tbody
-    - @quizzes_assessments.each do |quizzes_assessment|
-      tr
-        td = quizzes_assessment.quiz
-        td = quizzes_assessment.user
-        td = quizzes_assessment.student_comment
-        td = quizzes_assessment.finished_at
-        td = link_to 'Show', quizzes_assessment
-        td = link_to 'Edit', edit_quizzes_assessment_path(quizzes_assessment)
-        td = link_to 'Destroy', quizzes_assessment, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Assessment', new_quizzes_assessment_path
+      tbody
+        - @assessments.each do |assessment|
+          tr
+            td.user
+              = link_to assessment.user, assessment
+            - average = assessment.answers.average(:grade)
+            - if average.nil?
+              td.average.missing &mdash;
+            - else
+              td.average class="average-#{(average*10).to_i}"
+                = number_to_percentage average * 100, precision: 0
+            - assessment.answers.each do |answer|
+              - if answer.grade.nil?
+                td.grade.missing &mdash;
+              - else
+                td.grade class="grade-#{(answer.grade * 10).to_i}"
+                  = number_to_percentage answer.grade * 100, precision: 0

@@ -1,3 +1,14 @@
-// Place all the styles related to the quizzes/assessments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#assessments_index {
+  .table-container { overflow: auto; width: 100%; }
+  th.user { width: 20em; }
+  .average, .grade { text-align: center; width: 75px; }
+  @for $i from 0 through 10 {
+    .grade-#{$i} {
+      background-color: mix(lighten(#F52C33, 30), #FFFFFF, 100-$i*10);
+    }
+    .average-#{$i} {
+      background-color: mix(#F52C33, #666666, 100-$i*10);
+      color: white;
+    }
+  }
+}

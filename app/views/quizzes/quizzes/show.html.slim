@@ -1,16 +1,17 @@
 p#notice = notice
 
 .row
-  .small-7.columns
+  .medium-7.columns
     h1 = @quizzes_quiz.to_s
     - if @quizzes_quiz.start_at? && @quizzes_quiz.end_at?
-      p #{@quizzes_quiz.start_at.to_date.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_date.to_s(:long)}
-  .small-4.columns
-    strong Prepared for:&nbsp;
-    = render @quizzes_quiz.group
-  .small-1.columns
-    = link_to 'Edit', edit_quiz_path(@quizzes_quiz), class: 'button small secondary'
-
+      p #{@quizzes_quiz.start_at.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_s(:long)}
+  .medium-5.columns.text-right
+    ul.button-group
+      li = link_to 'Grading', quiz_assessments_path(@quizzes_quiz), class: 'button small primary'
+      li = link_to 'Edit Quiz', edit_group_quiz_path(@quizzes_quiz.group, @quizzes_quiz), class: 'button small secondary'
+    .group
+      strong Prepared for:&nbsp;
+      = render @quizzes_quiz.group
 hr
 .row
   .small-12.columns

@@ -1,40 +1,78 @@
+- content_for :instructions do
+  li data-id="student-comment" data-button="Next" data-prev-text="Back" data-options="tip_location: 'bottom'"
+    h4 Student Comment
+    p Students are prompted to provide contextual feedback on the quiz.  This is displayed here.
+  li data-class="answer" data-button="Next" data-prev-text="Back" data-options="tip_location: 'bottom'" style="width: 400px;"
+    h4 Answer
+    p
+      | Your answer is displayed here.  Note that answers use Markdown to enable you to provide 
+      | formatting to <b>**bold**</b>, <em>*emphasize*</em> and <u>_underline_</u>.
+    p
+      | Most importantly, it allows you to create <code>code blocks</code> by surrounding text in
+      | back-ticks (<code>`</code>: same key as tilda: ~).
+    p
+      | When you want syntax-highlighting; type three `back-ticks` in a row followed by the language
+      | such as: <code>```javascript</code> or <code>```ruby</code>.  To end the code-block, type
+      | three more back-ticks without the language: <code>```</code>
+  li data-class="results" data-button="Next" data-prev-text="Back" data-options="tip_location: 'bottom'" style="width: 400px;"
+    h4 Result
+    p The results of your answer and reviewer feedback is displayed here.
+
 p#notice = notice
 
 .row
-  p.right
-    = render @quizzes_assessment.user
-  p.right style="margin: 0 2em;"
-    strong Finished:&nbsp;
-    br
-    = @quizzes_assessment.finished_at.to_s(:long)
+  .small-1.column.text-center
+    - if @assessment.answers.maximum(:grade).nil?
+      div style="border: dotted #eee 3px; border-radius: 100%; height: 120px; width: 120px; line-height: 130px; vertical-align: center;"
+        span style="color: #ccc; display: inline-block; line-height: 1em;" GRADE<br />PENDING
+    - else
+      .progress-radial class="progress-#{(@assessment.answers.average(:grade) * 10).to_i}0" style="margin: 20px 20px 20px 0;"
+        .overlay = number_to_percentage @assessment.answers.average(:grade) * 100, precision: 0
+  .small-7.columns
+    h1 style="margin: 20px 20px 20px 0; line-height: 100px; height: 100px; vertical-align: center;"
+      span style="display: inline-block; line-height: 1.1em; margin-left: 40px; text-indent: -40px;" = @assessment.quiz
 
-  h1 = @quizzes_assessment.quiz
-
-  - if @quizzes_assessment.student_comment?
-    blockquote.panel.radius
-      = @quizzes_assessment.student_comment
+  .small-3.column
+    p
+      = link_to @assessment.user
+        = render @assessment.user
+    p
+      strong Finished:&nbsp;
+      br
+      = @assessment.finished_at.to_s(:long)
+- if @assessment.student_comment?
+  .row
+    .small-12.columns
+      blockquote.panel.radius#student-comment
+        = @assessment.student_comment
+        em &nbsp;&nbsp;&nbsp;&mdash;&nbsp;#{@assessment.user.name}
 
 - @assessment.questions.each do |question, answer|
   hr
   .row.question
     .medium-12.columns
       = render question
-  .row.answer
+  .row
     hr
     .medium-6.columns
       .answer style="overflow: auto"
         h4 Answer:
-        .panel
-          = answer.answer
+        - if question.open_ended?
+          .panel
+            = answer.answer
+        - else
+          .panel
+            = answer.question_option.try(:label) || "<i>No Answer</i>".html_safe
     .medium-6.columns
-      .results style="overflow: auto"
-        h4 Result:
-        .progress-radial class="progress-#{(answer.grade*100).to_i}" style="position: absolute; top: 0px; right: -20px;"
-          .overlay = number_to_percentage answer.grade*100, precision: 0
-        .panel.callout
-          .right style="width: 80px; height: 50px;"
-          = answer.reviewer_comment
+      - unless answer.grade.nil?
+        .results style="overflow: auto"
+          h4 Result:
+          .progress-radial class="progress-#{(answer.grade*100).to_i}" style="position: absolute; top: 0px; right: -20px;"
+            .overlay = number_to_percentage answer.grade*100, precision: 0
+          .panel.callout
+            .right style="width: 80px; height: 50px;"
+            = answer.reviewer_comment
 
 
   - unless @assessment.finished_at?
-    = link_to 'Resume Assessment', edit_quizzes_assessment_path(@quizzes_assessment), class: 'button secondary small'
+    = link_to 'Resume Assessment', edit_quizzes_assessment_path(@assessment), class: 'button secondary small'

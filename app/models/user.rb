@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :answers, class_name: 'Quizzes::Answer'
   has_many :assessments, class_name: 'Quizzes::Assessment'
 
+  def to_s
+    name
+  end
+
 end

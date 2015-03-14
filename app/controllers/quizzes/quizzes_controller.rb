@@ -33,7 +33,7 @@ class Quizzes::QuizzesController < ApplicationController
 
     respond_to do |format|
       if @quizzes_quiz.save
-        format.html { redirect_to @quizzes_quiz, notice: 'Quiz was successfully created.' }
+        format.html { redirect_to group_quiz_path(@quizzes_quiz.group, @quizzes_quiz), notice: 'Quiz was successfully created.' }
         format.json { render :show, status: :created, location: @quizzes_quiz }
       else
         format.html { render :new }

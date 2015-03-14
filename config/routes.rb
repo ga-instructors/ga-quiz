@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :quizzes, module: :quizzes
   resources :quizzes, module: :quizzes, as: 'quizzes_quiz'
+  resources :quizzes, module: :quizzes do
+    resources :assessments
+  end
   get '/quizzes', to: 'quizzes/quiz#index', as: 'quizzes_quizzes'
   namespace :quizzes do
     resources :answers

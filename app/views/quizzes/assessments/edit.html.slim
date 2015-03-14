@@ -4,7 +4,7 @@ p#notice = notice
   h1.small-12.columns
     = @assessment.quiz.to_s
 
-= form_for @assessment do |form|
+= form_for @assessment, remote: true do |form|
   - if @assessment.errors.any?
     #error_explanation
       h2 = "#{pluralize(@assessment.errors.count, "error")} prohibited this quizzes_assessment from being saved:"
@@ -14,7 +14,7 @@ p#notice = notice
 
   - @assessment.questions.each do |question, answer|
     .question = render question
-    = form.fields_for(answer) do |fields|
+    = form.fields_for :answers, answer do |fields|
       .answer.field = render fields, question: question
     hr
 
