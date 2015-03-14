@@ -1,12 +1,12 @@
 require 'standard_deviation'
 
 class Quizzes::AssessmentsController < ApplicationController
-  before_action :set_quiz
   before_action :set_quizzes_assessment, only: [:show, :edit, :update, :destroy]
 
   # GET /quizzes/assessments
   # GET /quizzes/assessments.json
   def index
+    @quiz = Quizzes::Quiz.find(params[:quiz_id])
     @quizzes_assessments = @quiz.assessments
     @averages = @quiz.assessments.completed.inject({}) { |averages, assessment| averages[assessment] = assessment.answers.average(:grade); averages }
     @deviation = @averages.values.compact.standard_deviation
@@ -78,13 +78,19 @@ class Quizzes::AssessmentsController < ApplicationController
 
   private
     def set_quiz
-      @quiz = Quizzes::Quiz.find(params[:quiz_id]) if params[:quiz_id]
-      @group = @quiz.group
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_quizzes_assessment
-      @assessment = @quizzes_assessment = @quiz ? @quiz.assessments.find(params[:id]) : Quizzes::Assessment.find(params[:id])
+      if params[:quiz_id]
+        @quiz = Quizzes::Quiz.find(params[:quiz_id]) if params[:quiz_id]
+        @group = @quiz.group
+        @assessment = @quiz.assessments.find(params[:id])
+      else
+        @assessment = Quizzes::Assessment.find(params[:id])
+        @quiz = @assessment.quiz
+        @group = @quiz.group
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

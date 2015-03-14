@@ -1,27 +1,16 @@
 p#notice = notice
+.row
+  ul.button-group.right
+    li = link_to 'Back', quiz_assessments_path(@quiz), class: 'secondary button small'
+    li = link_to 'Edit Question', edit_quizzes_question_path(@quizzes_question), class: 'primary button small'
+  h1
+    = @quizzes_question.quiz
+    small &nbsp;&mdash;&nbsp;Q#{@quizzes_question.ordinal}: #{@quizzes_question.topic}
 
-p
-  strong Quiz:
-  = @quizzes_question.quiz
-p
-  strong Ordinal:
-  = @quizzes_question.ordinal
-p
-  strong Question:
   = @quizzes_question.question
-p
-  strong Open ended:
-  = @quizzes_question.open_ended
-p
-  strong Answer:
-  = @quizzes_question.answer
-p
-  strong Answer option:
-  = @quizzes_question.answer_option_id
-p
-  strong Answer template:
-  = @quizzes_question.answer_template
 
-= link_to 'Edit', edit_quizzes_question_path(@quizzes_question)
-'|
-= link_to 'Back', quizzes_questions_path
+  - if @quizzes_question.open_ended?
+    = @quizzes_question.answer
+  - else
+    = @quizzes_question.answer_option.label
+

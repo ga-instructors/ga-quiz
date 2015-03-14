@@ -64,6 +64,8 @@ class Quizzes::QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quizzes_question
+      @quiz = Quizzes::Quiz.find(params[:quiz_id])
+      @group = @quiz.group
       @quizzes_question = Quizzes::Question.find(params[:id])
     end
 

@@ -10,7 +10,8 @@ p#notice = notice
           th.average ⟨⟩
           - @quiz.questions.each do |question|
             th.grade style="width: 50px;"
-              | Q#{question.ordinal}
+              = link_to "Q#{question.ordinal}", quiz_question_path(@quiz, question)
+          td.standard-deviation σ
 
       tbody
         - @assessments.each do |assessment|
@@ -29,3 +30,4 @@ p#notice = notice
               - else
                 td.grade class="grade-#{(answer.grade * 10).to_i}"
                   = number_to_percentage answer.grade * 100, precision: 0
+            td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"
