@@ -1,33 +1,61 @@
 p#notice = notice
+
+- if @ungraded_answers.any?
+  .row
+    .large-8.medium-7.columns
+      details.question
+        summary
+          strong Question #{@ungraded_answer.question.ordinal}: #{@ungraded_answer.question.topic}
+        = render @ungraded_answer.question
+      .panel = render(@ungraded_answer)
+      strong Answer Key:
+      .panel = @ungraded_answer.question.answer
+    .large-4.medium-5.columns
+      strong Feedback:
+      .alert-box.secondary
+        .right = link_to 'Skip', quiz_assessments_path(@quiz)
+        | #{@ungraded_answers.count} Answers left to grade.
+      = form_for @ungraded_answer, turboboost: true do |form|
+        .row
+          .small-12.columns = form.text_area :reviewer_comment, style: 'height: 200px;'
+        .row
+          .small-8.columns
+            = form.range_field :grade, min: 0, max: 1, step: 0.25, onchange: "$('#quizzes_answer_grade_label').val(''+this.value*100+'%');", style: 'width: 100%; margin: 1em 0;'
+          .small-4.columns
+            = form.submit (@ungraded_answer.grade? ? @ungraded_answer.grade * 100 : '50')+'%', id: 'quizzes_answer_grade_label', class: 'button small', style: 'width: 100%;'
+  hr
+
 .row#assessments_index
-  h1 #{@quiz} Assessment
+  .small-12.columns
+    h1 #{@quiz} Assessment
 
-  .table-container
-    table width="100%"
-      thead
-        tr
-          th.user User
-          th.average ⟨⟩
-          - @quiz.questions.each do |question|
-            th.grade style="width: 50px;"
-              = link_to "Q#{question.ordinal}", quiz_question_path(@quiz, question)
-          td.standard-deviation σ
-
-      tbody
-        - @assessments.each do |assessment|
+    .table-container
+      table width="100%"
+        thead
           tr
-            td.user
-              = link_to assessment.user, assessment
-            - average = assessment.answers.average(:grade)
-            - if average.nil?
-              td.average.missing &mdash;
-            - else
-              td.average class="average-#{(average*10).to_i}"
-                = number_to_percentage average * 100, precision: 0
-            - assessment.answers.each do |answer|
-              - if answer.grade.nil?
-                td.grade.missing &mdash;
-              - else
-                td.grade class="grade-#{(answer.grade * 10).to_i}"
-                  = number_to_percentage answer.grade * 100, precision: 0
-            td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"
+            th.user User
+            th.average ⟨⟩
+            - @quiz.questions.each do |question|
+              th.grade style="width: 50px;"
+                = link_to "Q#{question.ordinal}", quiz_question_path(@quiz, question)
+            td.standard-deviation σ
+
+        tbody
+          - @assessments.each do |assessment|
+            tr
+              - cache [assessment, 'grading'] do
+                td.user
+                  = link_to assessment.user, assessment
+                - average = assessment.answers.average(:grade)
+                - if average.nil?
+                  td.average.missing &mdash;
+                - else
+                  td.average class="average-#{(average*10).to_i}"
+                    = number_to_percentage average * 100, precision: 0
+                - assessment.answers.each do |answer|
+                  - if answer.grade.nil?
+                    td.grade.missing &mdash;
+                  - else
+                    td.grade class="grade-#{(answer.grade * 10).to_i}"
+                      = number_to_percentage answer.grade * 100, precision: 0
+              td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"

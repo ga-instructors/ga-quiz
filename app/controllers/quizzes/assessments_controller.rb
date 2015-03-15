@@ -7,11 +7,17 @@ class Quizzes::AssessmentsController < ApplicationController
   # GET /quizzes/assessments.json
   def index
     @quiz = Quizzes::Quiz.find(params[:quiz_id])
-    @quizzes_assessments = @quiz.assessments
-    @averages = @quiz.assessments.completed.inject({}) { |averages, assessment| averages[assessment] = assessment.answers.average(:grade); averages }
+    @quizzes_assessments = @quiz.assessments.finished
+    @averages = @quiz.assessments.completed.inject({}) do |averages, assessment|
+      averages[assessment] = assessment.answers.average(:grade); averages 
+    end
     @deviation = @averages.values.compact.standard_deviation
     @class_average = @averages.values.compact.count > 0 ? (@averages.values.compact.sum / @averages.values.compact.count) : 0
     @assessments = @quizzes_assessments.sort_by { |assessment| @averages[assessment] || 0 }
+    @ungraded_answers = @quiz.answers.joins(:assessment).where(quizzes_answers: { grade: nil }).where('"quizzes_assessments"."finished_at" IS NOT NULL')
+    if @ungraded_answer = @ungraded_answers.order(:updated_at => :asc).first
+      @ungraded_answer.touch(:updated_at)
+    end
   end
 
   # GET /quizzes/assessments/1
@@ -91,6 +97,7 @@ class Quizzes::AssessmentsController < ApplicationController
         @quiz = @assessment.quiz
         @group = @quiz.group
       end
+      @quizzes_assessment = @assessment
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

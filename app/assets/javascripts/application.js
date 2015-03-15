@@ -17,6 +17,7 @@
 //= require chartjs
 //= require foundation
 //= require turbolinks
+//= require turboboost
 //= require_tree .
 
 $(function () {

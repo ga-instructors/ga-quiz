@@ -1,0 +1,4 @@
+- if answer.question.open_ended?
+  = answer.answer
+- else
+  = answer.question_option.try(:label) || "<i>No Answer</i>".html_safe

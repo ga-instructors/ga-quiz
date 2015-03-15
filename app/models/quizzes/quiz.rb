@@ -5,6 +5,7 @@ class Quizzes::Quiz < ActiveRecord::Base
   belongs_to :group
   has_many :assessments
   has_many :questions
+  has_many :answers, through: :assessments
 
   after_initialize :ordinal
   validates :group, presence: true

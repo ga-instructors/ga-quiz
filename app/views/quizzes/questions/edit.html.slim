@@ -1,8 +1,19 @@
-h1 Editing quizzes_question
+p#notice = notice
+.row
+  .small-12.columns
+    .right = link_to 'New Question', new_quizzes_question_path, class: 'button secondary'
+    h1
+      = @quiz
+      small &nbsp; &mdash;&nbsp;Edit Question Details
 
-== render 'form'
+= form_for @quizzes_question do |form|
+  == render form
+  .actions.row
+    .small-2.columns &nbsp;
+    .small-8.columns
+      = form.submit class: 'button'
+    .small-2.columns &nbsp;
 
 = link_to 'Show', @quizzes_question
 '|
 = link_to 'Back', quizzes_questions_path
-

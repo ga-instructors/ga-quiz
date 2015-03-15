@@ -1,8 +1,17 @@
 class Quizzes::Answer < ActiveRecord::Base
   belongs_to :user
-  belongs_to :assessment
+  belongs_to :assessment, touch: true
   belongs_to :question
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
+
+  before_save :auto_grade
+  private def auto_grade
+    if question.open_ended?
+      self.grade = 0 if self[:answer].blank?
+    elsif question_option.present?
+      self.grade = question_option.grade
+    end
+  end
 
   # Markdown settings for @quiz.answer
   def answer
@@ -26,16 +35,6 @@ class Quizzes::Answer < ActiveRecord::Base
         tables: true,
         no_intra_emphasis: true
       }).render(self[:reviewer_comment]).html_safe
-    elsif answer.present? || question_option.present?
-      if grade == 1
-        ["Fantastic!", "Good work!", "Great job!", "Well done!", "Correct"].sample
-      elsif grade <= 75 && grade >= 25
-        ["Not quite."].sample
-      else
-        "Incorrect"
-      end
-    else
-      "<i>Reviewer did not leave a comment</i>".html_safe
     end
   end
 

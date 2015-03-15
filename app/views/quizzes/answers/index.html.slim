@@ -1,0 +1,23 @@
+h1 Listing quizzes_answers
+
+table
+  thead
+    tr
+      th Grade
+      th Reviewer comment
+      th
+      th
+      th
+
+  tbody
+    - @quizzes_answers.each do |quizzes_answer|
+      tr
+        td = quizzes_answer.grade
+        td = quizzes_answer.reviewer_comment
+        td = link_to 'Show', quizzes_answer
+        td = link_to 'Edit', edit_quizzes_answer_path(quizzes_answer)
+        td = link_to 'Destroy', quizzes_answer, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Answer', new_quizzes_answer_path

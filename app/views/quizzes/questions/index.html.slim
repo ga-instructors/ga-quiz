@@ -1,33 +1,23 @@
-h1 Listing quizzes_questions
+p#notice = notice
+.row
+  .small-12.columns
+    .right = link_to 'New Question', new_quizzes_question_path, class: 'button'
+    h1
+      = @quiz
+      small &nbsp; &mdash;&nbsp;Question Details
 
-table
-  thead
-    tr
-      th Quiz
-      th Ordinal
-      th Question
-      th Open ended
-      th Answer
-      th Answer option
-      th Answer template
-      th
-      th
-      th
+.row
+  .small-1.column  Ordinal
+  .small-2.columns Topic
+  .small-6.columns Question
 
-  tbody
-    - @quizzes_questions.each do |quizzes_question|
-      tr
-        td = quizzes_question.quiz
-        td = quizzes_question.ordinal
-        td = quizzes_question.question
-        td = quizzes_question.open_ended
-        td = quizzes_question.answer
-        td = quizzes_question.answer_option_id
-        td = quizzes_question.answer_template
-        td = link_to 'Show', quizzes_question
-        td = link_to 'Edit', edit_quizzes_question_path(quizzes_question)
-        td = link_to 'Destroy', quizzes_question, data: {:confirm => 'Are you sure?'}, :method => :delete
+- @quizzes_questions.each do |question|
+  .row.question class=(question.open_ended ? 'open-ended' : 'multiple-choice')
+    .small-1.column  = question.ordinal
+    .small-3.columns = link_to question.topic, quiz_question_path(@quiz, question)
+    .small-7.columns
+      = question.question
+      .text-right
+        = link_to 'Remove', quiz_question_path(@quiz, question), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'button small warning'
+        = link_to 'Edit Question', edit_quiz_question_path(@quiz, question), class: 'button small'
 
-br
-
-= link_to 'New Question', new_quizzes_question_path

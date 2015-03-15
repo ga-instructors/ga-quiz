@@ -1,6 +1,8 @@
 class Quizzes::Question < ActiveRecord::Base
-  belongs_to :quiz
   default_scope -> { order(:ordinal) }
+
+  belongs_to :quiz
+  has_many :answers
 
   validates :quiz, presence: true
 
@@ -26,5 +28,29 @@ class Quizzes::Question < ActiveRecord::Base
     reject_if: proc { |attributes| attributes['label'].blank? }
 
   # --\ Multiple Choice /--
+  
+  def answer_text
+    if open_ended?
+      if self[:answer].present?
+        self[:answer]
+      elsif answer = answers.where(:grade => 1).first
+        answer.answer + "*— #{answer.user.name}*"
+      end
+    elsif answer_option.present? then answer_option.label
+    else options.where(grade: 1).pluck(:label).map { |label| '"'+label+'"' }.to_sentence
+    end
+  end
+
+  def answer
+    if answer_text
+      Redcarpet::Markdown.new(MarkdownPygments, {
+        fenced_code_blocks: true,
+        tables: true,
+        no_intra_emphasis: true
+      }).render(answer_text).html_safe
+    else
+      "<i>Unknown</i>".html_safe
+    end
+  end
 
 end

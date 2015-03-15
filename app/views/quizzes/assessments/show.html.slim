@@ -22,7 +22,7 @@ p#notice = notice
 
 .row
   .small-1.column.text-center
-    - if @assessment.answers.maximum(:grade).nil?
+    - if @assessment.answers.where(grade: nil).any?
       div style="border: dotted #eee 3px; border-radius: 100%; height: 120px; width: 120px; line-height: 130px; vertical-align: center;"
         span style="color: #ccc; display: inline-block; line-height: 1em;" GRADE<br />PENDING
     - else
@@ -57,12 +57,7 @@ p#notice = notice
     .medium-6.columns
       .answer style="overflow: auto"
         h4 Answer:
-        - if question.open_ended?
-          .panel
-            = answer.answer
-        - else
-          .panel
-            = answer.question_option.try(:label) || "<i>No Answer</i>".html_safe
+        .panel = render answer
     .medium-6.columns
       - unless answer.grade.nil?
         .results style="overflow: auto"

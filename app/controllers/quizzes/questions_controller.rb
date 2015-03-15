@@ -4,7 +4,12 @@ class Quizzes::QuestionsController < ApplicationController
   # GET /quizzes/questions
   # GET /quizzes/questions.json
   def index
-    @quizzes_questions = Quizzes::Question.all
+    if params[:quiz_id]
+      @quiz = Quizzes::Quiz.find(params[:quiz_id])
+      @quizzes_questions = @quiz.questions
+    else
+      @quizzes_questions = Quizzes::Question.all
+    end
   end
 
   # GET /quizzes/questions/1
@@ -15,10 +20,12 @@ class Quizzes::QuestionsController < ApplicationController
   # GET /quizzes/questions/new
   def new
     @quizzes_question = Quizzes::Question.new
+    @quizzes_question.options.build
   end
 
   # GET /quizzes/questions/1/edit
   def edit
+    @quizzes_question.options.build
   end
 
   # POST /quizzes/questions

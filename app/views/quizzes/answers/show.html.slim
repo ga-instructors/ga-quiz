@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Grade:
+  = @quizzes_answer.grade
+p
+  strong Reviewer comment:
+  = @quizzes_answer.reviewer_comment
+
+= link_to 'Edit', edit_quizzes_answer_path(@quizzes_answer)
+'|
+= link_to 'Back', quizzes_answers_path

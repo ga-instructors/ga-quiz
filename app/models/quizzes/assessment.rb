@@ -5,7 +5,6 @@ class Quizzes::Assessment < ActiveRecord::Base
   has_many :answers
   accepts_nested_attributes_for :answers
 
-  default_scope -> { joins(:quiz).order('quizzes_quizzes.ordinal') }
   scope :finished, -> { where('quizzes_assessments.finished_at IS NOT NULL') }
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :quizzes do
+    resources :answers
+  end
+
   resources :quizzes, module: :quizzes, as: 'quizzes_quiz'
   resources :quizzes, module: :quizzes do
     resources :assessments
