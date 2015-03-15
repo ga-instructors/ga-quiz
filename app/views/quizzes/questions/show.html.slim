@@ -2,7 +2,7 @@ p#notice = notice
 .row
   ul.button-group.right
     li = link_to 'Back', quiz_assessments_path(@quiz), class: 'secondary button small'
-    li = link_to 'Edit Question', edit_quizzes_question_path(@quizzes_question), class: 'primary button small'
+    li = link_to 'Edit Question', edit_quiz_question_path(@quiz, @quizzes_question), class: 'primary button small'
   h1
     = @quizzes_question.quiz
     small &nbsp;&mdash;&nbsp;Q#{@quizzes_question.ordinal}: #{@quizzes_question.topic}

@@ -1,21 +1,21 @@
 p#notice = notice
 .row
   .small-12.columns
-    .right = link_to 'New Question', new_quizzes_question_path, class: 'button'
+    .right = link_to 'New Question', new_quizzes_question_path, class: 'button small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;Question Details
 
 .row
-  .small-1.column  Ordinal
-  .small-2.columns Topic
-  .small-6.columns Question
+  strong.small-1.column  Ordinal
+  strong.small-2.columns Topic
+  strong.small-6.columns Question
 
 - @quizzes_questions.each do |question|
   .row.question class=(question.open_ended ? 'open-ended' : 'multiple-choice')
-    .small-1.column  = question.ordinal
-    .small-3.columns = link_to question.topic, quiz_question_path(@quiz, question)
-    .small-7.columns
+    .small-1.column Q#{question.ordinal}
+    .small-2.columns = link_to question.topic, quiz_question_path(@quiz, question)
+    .small-9.columns
       = question.question
       .text-right
         = link_to 'Remove', quiz_question_path(@quiz, question), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'button small warning'

@@ -107,6 +107,10 @@ src:url('//ga-core-production-herokuapp-com.global.ssl.fastly.net/assets/circula
   box-shadow: 0 3px 0 0 #a2a2a2;
   margin-right: 4pt;
 }
+.button-group .button:not(:last-child) {
+  margin-right: 0px;
+  border-right: solid #d2d2d2 1px;
+}
 
 form label {
   line-height: 40px;
