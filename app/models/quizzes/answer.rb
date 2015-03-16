@@ -5,7 +5,7 @@ class Quizzes::Answer < ActiveRecord::Base
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
 
   before_save :auto_grade
-  private def auto_grade
+  def auto_grade
     if question.open_ended?
       self.grade = 0 if self[:answer].blank?
     elsif question_option.present?

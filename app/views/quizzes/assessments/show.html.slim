@@ -55,9 +55,9 @@ p#notice = notice
   .row
     hr
     .medium-6.columns
-      .answer style="overflow: auto"
+      .answer
         h4 Answer:
-        .panel = render answer
+        .panel style="overflow: auto" = render answer
     .medium-6.columns
       - unless answer.grade.nil?
         .results style="overflow: auto"
