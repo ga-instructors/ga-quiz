@@ -1,7 +1,7 @@
 p#notice = notice
 .row
   .small-12.columns
-    .right = link_to 'New Question', new_quizzes_question_path, class: 'button small'
+    .right = link_to 'New Question', new_quiz_question_path(@quiz), class: 'button small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;Question Details
