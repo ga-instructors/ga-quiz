@@ -1,25 +1,23 @@
-h1 Listing groups
+p#notice = notice
+.row
+  .right = link_to 'New Group', new_group_path, class: 'button small secondary'
+  h1 All Groups
 
-table
-  thead
-    tr
-      th Name
-      th Start at
-      th End at
-      th
-      th
-      th
-
-  tbody
-    - @groups.each do |group|
+.row
+  table width="100%"
+    thead
       tr
-        td = group.name
-        td = group.start_at
-        td = group.end_at
-        td = link_to 'Show', group
-        td = link_to 'Edit', edit_group_path(group)
-        td = link_to 'Destroy', group, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Name
+        th Start at
+        th End at
+        th
+        th
 
-br
-
-= link_to 'New Group', new_group_path
+    tbody
+      - @groups.each do |group|
+        tr
+          td = link_to group.name, group
+          td = group.start_at
+          td = group.end_at
+          td = link_to 'Edit', edit_group_path(group)
+          td = link_to 'Destroy', group, data: {:confirm => 'Are you sure?'}, :method => :delete

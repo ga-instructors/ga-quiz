@@ -6,28 +6,32 @@
         li = message
 
 .field.row
-  .small-2.column &nbsp;
   .small-2.columns
     = form.label :name
-  .small-6.columns
+  .small-9.columns.end
     = form.text_field :name
-  .small-2.column &nbsp;
 .field.row
-  .small-2.column &nbsp;
   .small-2.columns
-    = form.label :start_at
-  .small-6.columns
+    = form.label :start_at do
+      | Active&nbsp;From
+  .small-4.columns
     = check_box_tag 'group[start_at]', nil, form.object.start_at.nil?, title: 'No Time Restriction'
     | &nbsp; 
-    = form.datetime_select :start_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.start_at.nil?
-  .small-2.column &nbsp;
-.field.row
-  .small-2.column &nbsp;
-  .small-2.columns
-    = form.label :end_at
-  .small-6.columns
+    = form.date_select :start_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.start_at.nil?
+  .small-1.columns
+    = form.label :end_at, 'to'
+  .small-4.columns.end
     = check_box_tag 'group[end_at]', nil, form.object.end_at.nil?, title: 'No Time Restriction'
     | &nbsp; 
-    = form.datetime_select :end_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.end_at.nil?
-
-  .small-2.column &nbsp;
+    = form.date_select :end_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.end_at.nil?
+  hr
+- @group.group_members.group_by(&:role).each do |role, members|
+  .row
+    details
+      summary Drop #{t(role.pluralize)}
+      = form.fields_for :group_members, members do |fields|
+        .small-3.columns
+          = fields.check_box :_destroy
+          = fields.label :_destroy do
+            = render(fields.object.user)
+  hr
