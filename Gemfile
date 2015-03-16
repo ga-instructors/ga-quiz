@@ -57,5 +57,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'database_cleaner'
+  gem 'pry-rails'
 end
 
