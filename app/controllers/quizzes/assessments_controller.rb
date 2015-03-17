@@ -3,6 +3,18 @@ require 'standard_deviation'
 class Quizzes::AssessmentsController < ApplicationController
   before_action :set_quizzes_assessment, only: [:show, :edit, :update, :destroy]
 
+  before_action only: %i[index destroy] do
+    forbidden unless \
+      group_role?(@group, :member, :owner, :instructor) ||
+      group_role?(Group.administrators, :member, :owner)
+  end
+
+  before_action only: :show do
+    forbidden unless \
+      current_user = @assessment.user ||
+      group_role?(@group, :member, :owner, :instructor)
+  end
+
   # GET /quizzes/assessments
   # GET /quizzes/assessments.json
   def index
@@ -83,13 +95,10 @@ class Quizzes::AssessmentsController < ApplicationController
   end
 
   private
-    def set_quiz
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_quizzes_assessment
       if params[:quiz_id]
-        @quiz = Quizzes::Quiz.find(params[:quiz_id]) if params[:quiz_id]
+        @quiz = Quizzes::Quiz.find(params[:quiz_id])
         @group = @quiz.group
         @assessment = @quiz.assessments.find(params[:id])
       else

@@ -20,6 +20,28 @@ require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
 
+  describe 'permissions' do
+    it 'allows students to see the group' do
+      group, user = create(:group), create(:user)
+      user.memberships << group.group_members.new(role: 'student')
+      session_id = user.sessions.create!(password: 'password').id
+
+      get :show, { id: group.id }, id: session_id
+      expect(response).to render_template("groups/show")
+    end
+
+    it 'students in other classes cannot see the group' do
+      group1, group2, user = create(:group), create(:group), create(:user)
+      user.memberships << group1.group_members.new(role: 'student')
+      session_id = user.sessions.create!(password: 'password').id
+
+      get :show, { id: group2.id }, id: session_id
+      expect(response).to render_template("forbidden")
+    end
+  end
+
+  # -----------
+
   # This should return the minimal set of attributes required to create a valid
   # Group. As you add validations to Group, be sure to
   # adjust the attributes here as well.

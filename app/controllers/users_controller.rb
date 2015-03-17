@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     if @group
+      return forbidden unless current_user == @user || group_role?(@group, :instructor, :owner, :member)
       @assessment = @user.answers.joins(:question).select('quizzes_questions.topic, quizzes_answers.grade').group('quizzes_questions.topic')
       @performance = Hash[@assessment.average('quizzes_answers.grade').sort_by{|k,v|v.to_f}]
       @completed_assessments = @user.assessments.finished

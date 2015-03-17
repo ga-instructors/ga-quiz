@@ -1,6 +1,12 @@
 class GroupMembersController < ApplicationController
   before_action :set_group_member, only: [:show, :edit, :update, :destroy]
 
+  before_action do
+    forbidden unless \
+      group_role?(@group, :member, :owner, :instructor) ||
+      group_role?(Group.administrators, :member, :owner)
+  end
+
   # GET /group_members
   # GET /group_members.json
   def index

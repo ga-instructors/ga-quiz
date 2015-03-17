@@ -1,6 +1,12 @@
 class Quizzes::AnswersController < ApplicationController
   before_action :set_quizzes_answer, only: [:show, :edit, :update, :destroy]
 
+  before_action do
+    forbidden unless \
+      group_role?(Group.instructors, :member, :owner, :instructor) ||
+      group_role?(Group.administrators, :member, :owner)
+  end
+
   # GET /quizzes/answers
   # GET /quizzes/answers.json
   def index
