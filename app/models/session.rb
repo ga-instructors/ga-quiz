@@ -7,6 +7,10 @@ class Session < ActiveRecord::Base
     self.ip_address = request.remote_ip
   end
 
+  def previous
+    Session.where('sessions.created_at < ?', created_at).order(:created_at).first
+  end
+
   validate do
     if self.user = User.find_by_email(email)
       unless user.authenticate(password)

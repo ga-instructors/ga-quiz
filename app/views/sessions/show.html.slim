@@ -1,4 +1,17 @@
 p#notice = notice
-
+br
+br
+br
 .row
-  h1 = "Hello #{@session.user.name.split(' ').first}!"
+  .small-7.columns
+    h1 = "Hello #{@session.user.name.split(' ').first}!"
+    p It has been #{time_ago_in_words @session.previous.created_at} since you last logged in.
+  .small-5.columns
+    - if current_user.quizzes.active.any?
+      .row.text-center
+        h3 Here is the Quiz!
+        - current_user.quizzes.active.limit(3).each do |quiz|
+          = link_to quiz, quiz_path(quiz), class: 'button large primary radius'
+.row
+  .small-12.columns
+    hr
