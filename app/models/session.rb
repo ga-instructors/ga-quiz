@@ -8,7 +8,7 @@ class Session < ActiveRecord::Base
   end
 
   def previous
-    Session.where('sessions.created_at < ?', created_at).order(:created_at).first
+    Session.where('sessions.created_at < ?', created_at).order(:created_at => :desc).first
   end
 
   validate do
