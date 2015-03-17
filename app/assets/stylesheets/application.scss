@@ -256,5 +256,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
 }
 
-details summary { margin-top: 0.5em; cursor: pointer; }
-details[open] summary { margin-bottom: 0.5em; }
+details summary {
+  margin-top: 0.5em;
+  cursor: pointer;
+}

@@ -4,10 +4,11 @@ class GroupMember < ActiveRecord::Base
   default_scope -> { order(:role => :desc) }
 
   # For sending invitations
-  attr_accessor :email
+  attr_accessor :name, :email
 
   before_create do
-    if @email && self.user = User.find_by(email: @email)
+    if user
+    elsif @email && self.user = User.find_by(email: @email)
     else fail 'TODO: Send Email Invite'
     end
   end

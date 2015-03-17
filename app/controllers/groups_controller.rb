@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    @group.group_members.build(user: current_user, role: 'admin')
+    @group.group_members.build(user: current_user, role: 'owner')
 
     respond_to do |format|
       if @group.save

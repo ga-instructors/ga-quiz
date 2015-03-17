@@ -1,11 +1,26 @@
 p#notice = notice
 = form_for @group do |form|
   == render form
-  = link_to 'Invite Users', new_group_member_path(@group), class: 'button' if @group.persisted?
+  - @group.group_members.group_by(&:role).each do |role, members|
+    .row
+      .small-2.columns &nbsp;
+      details.small-9.columns.end
+        summary Drop #{t(role.pluralize)}
+        .row.panel
+          = form.fields_for :group_members, members, class: 'small-10 columns' do |fields|
+            .small-4.columns
+              = fields.check_box :_destroy
+              = fields.label :_destroy, draggable: true do
+                = render(fields.object.user)
+      .small-2.columns &nbsp;
+    .row
+      .small-12.columns
+          hr
   .actions.row
     .small-4.columns &nbsp;
     .small-6.columns
-      = form.submit class: 'button primary'
+      = link_to 'Invite Users', new_group_member_path(@group), class: 'button secondary' if @group.persisted?
+      = form.submit class: 'button'
       | &nbsp;&nbsp;&nbsp;
       = link_to 'Cancel', @group
     .small-2.columns &nbsp;

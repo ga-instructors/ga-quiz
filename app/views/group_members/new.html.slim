@@ -1,6 +1,6 @@
 p#notice = notice
 .row
-  h1 Invite to #{@group.name}
+  h1 Add to #{@group.name}
 
 = form_for @group_member do |form|
   - if @group_member.errors.any?
@@ -13,14 +13,15 @@ p#notice = notice
   .field.row
     .small-2.columns
       = form.label :email
-    .small-10.columns
-      = form.text_field :email
-  .field.row
-    .small-2.columns
+    .small-5.columns
+      = form.email_field :email
+    .small-1.columns
       = form.label :role
-    .small-10.columns
+    .small-4.columns
       = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
 
   .actions.row
-    = form.submit 'Add to Group', class: 'button primary'
-    = link_to 'Cancel', edit_group_path(@group)
+    .small-2.columns &nbsp;
+    .small-10.columns
+      = form.submit 'Add to Group', class: 'button primary'
+      = link_to 'Cancel', edit_group_path(@group)

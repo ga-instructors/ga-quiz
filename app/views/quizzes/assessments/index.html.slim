@@ -7,7 +7,8 @@ p#notice = notice
         summary
           strong Question #{@ungraded_answer.question.ordinal}: #{@ungraded_answer.question.topic}
         = render @ungraded_answer.question
-      .panel = render(@ungraded_answer)
+      = content_tag_for :div, @ungraded_answer, class: 'panel' do
+        = render @ungraded_answer
       strong Answer Key:
       .panel = @ungraded_answer.question.answer
     .large-4.medium-5.columns
@@ -52,7 +53,7 @@ p#notice = notice
                 - else
                   td.average class="average-#{(average*10).to_i}"
                     = number_to_percentage average * 100, precision: 0
-                - assessment.answers.each do |answer|
+                - assessment.answers.joins(:question).reorder('quizzes_questions.ordinal').each do |answer|
                   - if answer.grade.nil?
                     td.grade.missing &mdash;
                   - else
