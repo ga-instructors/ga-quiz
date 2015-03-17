@@ -24,14 +24,15 @@
     = check_box_tag 'group[end_at]', nil, form.object.end_at.nil?, title: 'No Time Restriction'
     | &nbsp; 
     = form.date_select :end_at, date_separator: '', time_separator: '', datetime_separator: ' at ', disabled: form.object.end_at.nil?
-  hr
+.row
 - @group.group_members.group_by(&:role).each do |role, members|
-  .row
-    details
-      summary Drop #{t(role.pluralize)}
+  details.row
+    summary.small-2.columns Drop #{t(role.pluralize)}
+    .panel.small-10.columns
       = form.fields_for :group_members, members do |fields|
-        .small-3.columns
+        .small-4.columns
           = fields.check_box :_destroy
           = fields.label :_destroy do
             = render(fields.object.user)
-  hr
+    .small-12.columns
+      hr

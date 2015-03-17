@@ -30,7 +30,7 @@
 						<% if logged_in? %>
 							<% if current_user.groups.count > 1 %>
 								<li class="active has-dropdown">
-									<% active_group = (@group || current_user.groups.last) %>
+									<% active_group = (@group && @group.persisted? ? @group : current_user.groups.last) %>
 									<%= link_to active_group.name, active_group %>
 									<ul class="dropdown">
 										<% current_user.groups.reject { |group| group == active_group }.each do |group| %>

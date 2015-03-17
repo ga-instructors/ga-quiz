@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :quizzes, module: :quizzes
     get :regroup, on: :member
     resources :users, except: [:new, :create]
+    resources :group_members, as: :member
   end
   resources :group_members
 

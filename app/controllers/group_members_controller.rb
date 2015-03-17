@@ -4,16 +4,24 @@ class GroupMembersController < ApplicationController
   # GET /group_members
   # GET /group_members.json
   def index
-    @group_members = GroupMember.all
+    respond_to do |format|
+      format.html { redirect_to group_path(@group) }
+      format.json
+    end
   end
 
   # GET /group_members/1
   # GET /group_members/1.json
   def show
+    respond_to do |format|
+      format.html { redirect_to group_user_path(@group, @group.user) }
+      format.json
+    end
   end
 
   # GET /group_members/new
   def new
+    @group = Group.find(params[:group_id])
     @group_member = GroupMember.new
   end
 
@@ -64,7 +72,13 @@ class GroupMembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group_member
-      @group_member = GroupMember.find(params[:id])
+      if params[:group_id]
+        @group = Group.find(params[:group_id])
+        @group_member = @group.group_members.find(params[:id])
+      else
+        @group_member = GroupMember.find(params[:id])
+        @group = @group_member.group
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

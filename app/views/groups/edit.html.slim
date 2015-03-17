@@ -1,6 +1,7 @@
 p#notice = notice
 = form_for @group do |form|
   == render form
+  = link_to 'Invite Users', new_group_member_path(@group), class: 'button' if @group.persisted?
   .actions.row
     .small-4.columns &nbsp;
     .small-6.columns

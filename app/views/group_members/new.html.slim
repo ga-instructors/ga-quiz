@@ -1,5 +1,26 @@
-h1 New group_member
+p#notice = notice
+.row
+  h1 Invite to #{@group.name}
 
-== render 'form'
+= form_for @group_member do |form|
+  - if @group_member.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@group_member.errors.count, "error")} prohibited this group_member from being saved:"
+      ul
+        - @group_member.errors.full_messages.each do |message|
+          li = message
 
-= link_to 'Back', group_members_path
+  .field.row
+    .small-2.columns
+      = form.label :email
+    .small-10.columns
+      = form.text_field :email
+  .field.row
+    .small-2.columns
+      = form.label :role
+    .small-10.columns
+      = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
+
+  .actions.row
+    = form.submit 'Add to Group', class: 'button primary'
+    = link_to 'Cancel', edit_group_path(@group)
