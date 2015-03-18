@@ -1,6 +1,7 @@
 class Quizzes::QuizzesController < ApplicationController
   before_action :set_group
   before_action :set_quizzes_quiz, only: [:show, :edit, :update, :destroy]
+  helper_method :group_role? #TODO: Replace me with Pundit
 
   before_action except: :show do
     forbidden unless \

@@ -1,6 +1,7 @@
 require 'standard_deviation'
 
 class Quizzes::AssessmentsController < ApplicationController
+  before_action :set_quiz
   before_action :set_quizzes_assessment, only: [:show, :edit, :update, :destroy]
 
   before_action only: %i[index destroy] do
@@ -95,22 +96,28 @@ class Quizzes::AssessmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_quizzes_assessment
-      if params[:quiz_id]
-        @quiz = Quizzes::Quiz.find(params[:quiz_id])
-        @group = @quiz.group
-        @assessment = @quiz.assessments.find(params[:id])
-      else
-        @assessment = Quizzes::Assessment.find(params[:id])
-        @quiz = @assessment.quiz
-        @group = @quiz.group
-      end
-      @quizzes_assessment = @assessment
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quizzes_assessment_params
-      params.require(:quizzes_assessment).permit(:quiz_id, :student_comment, answers_attributes: [:id, :answer, :question_option_id])
+  def set_quiz
+    if params[:quiz_id]
+      @quiz = Quizzes::Quiz.find(params[:quiz_id])
+      @group = @quiz.group
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_quizzes_assessment
+    if @quiz
+      @assessment = @quiz.assessments.find(params[:id])
+    else
+      @assessment = Quizzes::Assessment.find(params[:id])
+      @quiz = @assessment.quiz
+      @group = @quiz.group
+    end
+    @quizzes_assessment = @assessment
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def quizzes_assessment_params
+    params.require(:quizzes_assessment).permit(:quiz_id, :student_comment, answers_attributes: [:id, :answer, :question_option_id])
+  end
 end
