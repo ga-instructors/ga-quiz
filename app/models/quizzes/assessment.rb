@@ -2,7 +2,7 @@ class Quizzes::Assessment < ActiveRecord::Base
   belongs_to :quiz
   belongs_to :user
 
-  has_many :answers
+  has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers
 
   scope :finished, -> { where('quizzes_assessments.finished_at IS NOT NULL') }

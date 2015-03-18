@@ -4,7 +4,7 @@ class Quizzes::Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
 
-  before_save :auto_grade
+  before_save :auto_grade, if: -> { assessment.finished_at? }
   def auto_grade
     if question.open_ended?
       self.grade = 0 if self[:answer].blank?
