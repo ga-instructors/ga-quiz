@@ -10,6 +10,6 @@
 
   - if @quizzes_question.open_ended?
     = @quizzes_question.answer
-  - else
+  - elsif @quizzes_question.answer_option
     = @quizzes_question.answer_option.label
 
