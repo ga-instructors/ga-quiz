@@ -82,7 +82,9 @@ class Quizzes::QuizzesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:group_id]) if params[:group_id]
+      if params[:group_id] || params[:quizzes_quiz].try(:[], :group_id)
+        @group = Group.find(params[:group_id] || params[:quizzes_quiz][:group_id])
+      end
     end
 
     # Use callbacks to share common setup or constraints between actions.

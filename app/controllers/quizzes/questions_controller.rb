@@ -1,4 +1,5 @@
 class Quizzes::QuestionsController < ApplicationController
+  before_action :set_quiz
   before_action :set_quizzes_question, only: [:show, :edit, :update, :destroy]
 
   before_action do
@@ -76,21 +77,21 @@ class Quizzes::QuestionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_quizzes_question
-      if params[:quiz_id]
-        @quiz = Quizzes::Quiz.find(params[:quiz_id])
-        @group = @quiz.group
-        @quizzes_question = Quizzes::Question.find(params[:id])
-      else
-        @quizzes_question = @question = Quizzes::Question.find(params[:id])
-        @quiz = @question.quiz
-        @group = @quiz.group
-      end
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quizzes_question_params
-      params.require(:quizzes_question).permit(:quiz_id, :topic, :ordinal, :question, :open_ended, :answer, :answer_option_id, :answer_template)
-    end
+  def set_quiz
+    @quiz = Quizzes::Quiz.find(params[:quiz_id])
+    @group = @quiz.group
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_quizzes_question
+    @quizzes_question = @question = Quizzes::Question.find(params[:id])
+    @quiz = @question.quiz
+    @group = @quiz.group
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def quizzes_question_params
+    params.require(:quizzes_question).permit(:quiz_id, :topic, :ordinal, :question, :open_ended, :answer, :answer_option_id, :answer_template)
+  end
 end
