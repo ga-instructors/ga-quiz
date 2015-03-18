@@ -26,8 +26,8 @@ p#notice = notice
       div style="border: dotted #eee 3px; border-radius: 100%; height: 120px; width: 120px; line-height: 130px; vertical-align: center;"
         span style="color: #ccc; display: inline-block; line-height: 1em;" GRADE<br />PENDING
     - else
-      .progress-radial class="progress-#{(@assessment.answers.average(:grade) * 10).to_i}0" style="margin: 20px 20px 20px 0;"
-        .overlay = number_to_percentage @assessment.answers.average(:grade) * 100, precision: 0
+      .progress-radial class="progress-#{((@assessment.answers.average(:grade)||0) * 10).to_i}0" style="margin: 20px 20px 20px 0;"
+        .overlay = number_to_percentage (@assessment.answers.average(:grade)||0) * 100, precision: 0
   .small-7.columns
     h1 style="margin: 20px 20px 20px 0; line-height: 100px; height: 100px; vertical-align: center;"
       span style="display: inline-block; line-height: 1.1em; margin-left: 40px; text-indent: -40px;" = @assessment.quiz
