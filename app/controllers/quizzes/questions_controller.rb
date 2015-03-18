@@ -42,7 +42,7 @@ class Quizzes::QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to quiz_question_path(@question.quiz, @question), notice: 'Question was successfully created.' }
+        format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class Quizzes::QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @quizzes_question.update(quizzes_question_params)
-        format.html { redirect_to @quizzes_question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @quizzes_question }
       else
         format.html { render :edit }
