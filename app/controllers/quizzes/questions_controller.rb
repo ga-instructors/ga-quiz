@@ -79,13 +79,15 @@ class Quizzes::QuestionsController < ApplicationController
   private
 
   def set_quiz
-    @quiz = Quizzes::Quiz.find(params[:quiz_id])
-    @group = @quiz.group
+    if params[:quiz_id]
+      @quiz = Quizzes::Quiz.find(params[:quiz_id])
+      @group = @quiz.group
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_quizzes_question
-    @quizzes_question = @question = Quizzes::Question.find(params[:id])
+    @quizzes_question = @question = (@quiz ? @quiz.questions : Quizzes::Question).find(params[:id])
     @quiz = @question.quiz
     @group = @quiz.group
   end
