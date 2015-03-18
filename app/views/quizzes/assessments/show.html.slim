@@ -18,8 +18,6 @@
     h4 Result
     p The results of your answer and reviewer feedback is displayed here.
 
-p#notice = notice
-
 .row
   .small-1.column.text-center
     - if @assessment.answers.where(grade: nil).any?

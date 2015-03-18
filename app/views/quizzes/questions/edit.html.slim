@@ -1,7 +1,8 @@
-p#notice = notice
 .row
   .small-12.columns
-    .right = link_to 'New Question', new_quizzes_question_path, class: 'button secondary small'
+    .right
+      = link_to 'Finished', group_quiz_path(@quiz.group, @quiz), class: 'button small'
+      = link_to 'New Question', new_quiz_question_path(@quiz), class: 'button secondary small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;Edit Question Details

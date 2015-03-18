@@ -1,4 +1,3 @@
-p#notice = notice
 = form_for @group do |form|
   == render form
   - @group.group_members.group_by(&:role).each do |role, members|

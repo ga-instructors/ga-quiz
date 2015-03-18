@@ -64,6 +64,12 @@
 			</nav>
 		<% end %>
 
+		<div class="row" style="margin-top: 1em">
+			<% if display_notice = notice %>
+				<div class="alert-box small-12 columns" data-alert ><%= display_notice %></div>
+			<% end %>
+		</div>
+
 		<%= content_for(:sublayout) ? yield(:sublayout) : yield %>
 
 		<ol class="joyride-list" data-joyride>

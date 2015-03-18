@@ -4,8 +4,6 @@
     p Here is the profile information for this user, including all their associations.
 
 - content_for :sublayout do
-  p#notice = notice
-
   .row
     .medium-4.columns#user_info
       = image_tag gravatar_url(@user.email, size: 256, default: 'retro')
