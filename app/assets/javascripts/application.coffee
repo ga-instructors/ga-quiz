@@ -15,17 +15,19 @@
 #= require shuffle.jquery
 #= require jquery_ujs
 #= require chartjs
-#= require foundation/foundation
+#= require foundation
 #= require turbolinks
 #= require turboboost
 #= require_self
 #= require_tree .
 
-jQuery -> $(document).foundation()
-$('#start-instructions').on 'click', ->
-  $(document).foundation('joyride', 'start', {
-    expose: true,
-    modal: true,
-    riding: true,
-    expose_add_class: 'expose-instructions'
-  })
+
+jQuery ->
+  $(document).foundation()
+  $('#start-instructions').on 'click', ->
+    $(document).foundation('joyride', 'start', {
+      expose: true,
+      modal: true,
+      riding: true,
+      expose_add_class: 'expose-instructions'
+    })
