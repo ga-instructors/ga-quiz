@@ -9,9 +9,9 @@ class Quizzes::Assessment < ActiveRecord::Base
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
   validate do
-    if Time.now < quiz.start_at
+    if quiz.start_at? && Time.now < quiz.start_at
       errors.add(:quiz, 'is not available yet')
-    elsif Time.now > quiz.end_at
+    elsif quiz.end_at? && Time.now > quiz.end_at
       errors.add(:quiz, 'is no longer available')
     end
   end

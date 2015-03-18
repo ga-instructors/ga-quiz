@@ -78,12 +78,12 @@ ActiveRecord::Schema.define(version: 20150311175336) do
     t.integer  "ordinal"
     t.string   "topic"
     t.text     "question"
-    t.boolean  "open_ended"
+    t.boolean  "open_ended",       default: true
     t.text     "answer"
     t.integer  "answer_option_id"
     t.text     "answer_template"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "quizzes_questions", ["quiz_id"], name: "index_quizzes_questions_on_quiz_id", using: :btree

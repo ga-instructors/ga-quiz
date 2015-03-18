@@ -6,6 +6,11 @@ class Quizzes::Question < ActiveRecord::Base
 
   validates :quiz, presence: true
 
+  after_initialize :ordinal
+  def ordinal
+    self[:ordinal] ||= quiz ? (quiz.questions.maximum(:ordinal) || 0) + 1 : nil
+  end
+
   # Markdown settings for @quiz.question
   def question
     Redcarpet::Markdown.new(MarkdownPygments, {

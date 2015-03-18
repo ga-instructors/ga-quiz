@@ -25,7 +25,8 @@ class Quizzes::QuestionsController < ApplicationController
 
   # GET /quizzes/questions/new
   def new
-    @quizzes_question = Quizzes::Question.new
+    @quiz = Quizzes::Quiz.find(params[:quiz_id])
+    @quizzes_question = @quiz.questions.new
     @quizzes_question.options.build
   end
 
@@ -37,7 +38,8 @@ class Quizzes::QuestionsController < ApplicationController
   # POST /quizzes/questions
   # POST /quizzes/questions.json
   def create
-    @quizzes_question = Quizzes::Question.new(quizzes_question_params)
+    @quiz = Quizzes::Quiz.find(params[:quiz_id])
+    @quizzes_question = @quiz.questions.new(quizzes_question_params)
 
     respond_to do |format|
       if @quizzes_question.save

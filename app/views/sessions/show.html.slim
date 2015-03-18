@@ -5,7 +5,10 @@ br
 .row
   .small-7.columns
     h1 = "Hello #{@session.user.name.split(' ').first}!"
-    p It has been #{time_ago_in_words @session.previous.created_at} since you last logged in.
+    - if @session.previous
+      p It has been #{time_ago_in_words @session.previous.created_at} since you last logged in.
+    - else
+      p Nice to finally meet you!
   .small-5.columns
     - if current_user.quizzes.active.any?
       .row.text-center

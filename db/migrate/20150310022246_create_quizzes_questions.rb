@@ -5,7 +5,7 @@ class CreateQuizzesQuestions < ActiveRecord::Migration
       t.integer :ordinal
       t.string :topic, index: true
       t.text :question
-      t.boolean :open_ended
+      t.boolean :open_ended, default: true
       t.text :answer
       t.integer :answer_option_id
       t.text :answer_template
