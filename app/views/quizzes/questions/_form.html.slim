@@ -5,6 +5,7 @@
       - @quizzes_question.errors.full_messages.each do |message|
         li = message
 
+= form.hidden_field :quiz_id
 .field.row
   .small-2.columns
     = form.label :topic
