@@ -38,7 +38,7 @@ class Quizzes::QuestionsController < ApplicationController
   # POST /quizzes/questions
   # POST /quizzes/questions.json
   def create
-    @question = @quiz.questions.new(quizzes_question_params)
+    @question = Quizzes::Question.new(quizzes_question_params)
 
     respond_to do |format|
       if @question.save
