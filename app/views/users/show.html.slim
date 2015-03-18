@@ -1,7 +1,7 @@
 ul.memberships
   - @user.memberships.each do |membership|
     li
-      = link_to membership.group.name, group_path(membership.group)
+      = link_to membership.group.name, group_user_path(membership.group, membership.user)
       small
         | &nbsp;&mdash;&nbsp;
         = t membership.role

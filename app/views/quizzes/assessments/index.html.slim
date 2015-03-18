@@ -57,4 +57,7 @@
                   - else
                     td.grade class="grade-#{(answer.grade * 10).to_i}"
                       = number_to_percentage answer.grade * 100, precision: 0
-              td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"
+              - if @deviation.nan?
+                td.standard-deviation
+              - else
+                td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"
