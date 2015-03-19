@@ -18,6 +18,7 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 			ga('create', 'UA-60990509-1', 'auto');
+			$(document).on('page:change', function() { ga('send', 'pageview'); })
 			ga('send', 'pageview');
 		</script>
 	</head>
