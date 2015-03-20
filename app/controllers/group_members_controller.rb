@@ -28,7 +28,7 @@ class GroupMembersController < ApplicationController
   # GET /group_members/new
   def new
     @group = Group.find(params[:group_id])
-    @group_member = GroupMember.new
+    @group_member = @group.group_members.new
   end
 
   # GET /group_members/1/edit
@@ -39,10 +39,11 @@ class GroupMembersController < ApplicationController
   # POST /group_members.json
   def create
     @group_member = GroupMember.new(group_member_params)
+    @group = @group_member.group
 
     respond_to do |format|
       if @group_member.save
-        format.html { redirect_to @group_member, notice: 'Group member was successfully created.' }
+        format.html { redirect_to new_group_member_path(@group), notice: 'Group member was successfully created.' }
         format.json { render :show, status: :created, location: @group_member }
       else
         format.html { render :new }
@@ -54,9 +55,11 @@ class GroupMembersController < ApplicationController
   # PATCH/PUT /group_members/1
   # PATCH/PUT /group_members/1.json
   def update
+    @group = @group_member.group
+
     respond_to do |format|
       if @group_member.update(group_member_params)
-        format.html { redirect_to @group_member, notice: 'Group member was successfully updated.' }
+        format.html { redirect_to new_group_member_path(@group), notice: 'Group member was successfully updated.' }
         format.json { render :show, status: :ok, location: @group_member }
       else
         format.html { render :edit }
@@ -89,6 +92,6 @@ class GroupMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_member_params
-      params.require(:group_member).permit(:name, :email, :role)
+      params.require(:group_member).permit(:group_id, :name, :email, :role)
     end
 end

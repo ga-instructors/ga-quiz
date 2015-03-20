@@ -2,6 +2,7 @@
   h1 Add to #{@group.name}
 
 = form_for @group_member do |form|
+  = form.hidden_field :group_id
   - if @group_member.errors.any?
     #error_explanation
       h2 = "#{pluralize(@group_member.errors.count, "error")} prohibited this group_member from being saved:"

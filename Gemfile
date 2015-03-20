@@ -41,6 +41,7 @@ gem 'pygments.rb'
 gem 'slim-rails'
 gem 'foundation-rails'
 gem 'database_cleaner'
+gem 'sendgrid-ruby'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'

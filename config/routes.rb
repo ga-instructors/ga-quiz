@@ -1,3 +1,4 @@
+Rails.application.routes.default_url_options[:host] = "ga-quiz.herokuapp.com"
 Rails.application.routes.draw do
 
   namespace :quizzes do

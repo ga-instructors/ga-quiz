@@ -30,5 +30,11 @@ module GaQuiz
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.sendgrid_client = SendGrid::Client.new do |c|
+      c.api_user = secrets.sendgrid['username']
+      c.api_key = secrets.sendgrid['password']
+    end
+
   end
 end

@@ -3,13 +3,29 @@ class GroupMember < ActiveRecord::Base
   belongs_to :group
   default_scope -> { order(:role => :desc) }
 
+  validates :group, presence: true
+  validates :user, presence: true
+
   # For sending invitations
   attr_accessor :name, :email
 
-  before_create do
+  before_validation on: :create do
     if user
-    elsif @email && self.user = User.find_by(email: @email)
-    else fail 'TODO: Send Email Invite'
+    else
+      temporary_password = SecureRandom.hex(8)
+      unless self.user = User.find_by(email: @email)
+        self.user = User.create!(
+          name: name, email: email,
+          password: temporary_password, password_confirmation: temporary_password
+        )
+      end
+      GroupMembersMailer.invitation(self, temporary_password).deliver!
     end
+  end
+
+  private
+  
+  def sendgrid
+    Rails.application.config.sendgrid_client
   end
 end
