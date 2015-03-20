@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   resources :group_members
 
   root to: 'sessions#new'
-  match '*all', :to => 'application#not_found', via: :all
+  match '*all', :to => 'application#not_found', via: :all, constraints: { all: /(?!rails)/ }
 end

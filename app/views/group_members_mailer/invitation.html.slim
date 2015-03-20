@@ -1,7 +1,30 @@
-h1 Invitation to Join #{@group.name}
+table.row
+  tr
+    td.wrapper.last
+      table.twelve.columns
+        tr
+          td
+            h1 #{@group.name}
+            p.lead You have been invited to join this group.
+          td.expander
 
-blockquote
-  .email Email: #{@user.email}
-  .password Password: #{@temporary_password}
+table.row.callout
+  tr
+    td.wrapper.last
+      table.twelve.columns
+        tr
+          td.panel
+            .email
+              strong Email:&nbsp;
+              code = @user.email
+            .password
+              strong Password:&nbsp;
+              code = @temporary_password
+        tr
+          td
+            br
+            table.button style="width: 100px"
+              tr
+                td = link_to "Log In!", root_url
+          td class="expander"
 
-= link_to root_url, root_url
