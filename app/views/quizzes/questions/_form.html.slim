@@ -58,7 +58,7 @@
         .right = form.label :answer_option_id, value: fields.object.id do
           = form.radio_button :answer_option_id, fields.object.id
       .small-7.columns
-        = fields.text_field :label, class: :option_label
+        = fields.text_field :label, class: :option_label, placeholder: 'New Option'
       .small-2.columns
         = fields.range_field :grade, min: 0, max: 1, step: 0.25
       .small-1.column &nbsp;
