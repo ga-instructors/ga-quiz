@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 
   has_many :quizzes, through: :groups
 
+  validate :name, presence: true
+  validate :email, presence: true
+
   def to_s
     name
   end

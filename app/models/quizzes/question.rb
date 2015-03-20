@@ -39,7 +39,7 @@ class Quizzes::Question < ActiveRecord::Base
       if self[:answer].present?
         self[:answer]
       elsif answer = answers.where(:grade => 1).first
-        answer.answer + "*— #{answer.user.name}*"
+        answer.answer + "*— #{answer.assessment.user.name}*"
       end
     elsif answer_option.present? then answer_option.label
     else options.where(grade: 1).pluck(:label).map { |label| '"'+label+'"' }.to_sentence

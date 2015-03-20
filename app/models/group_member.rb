@@ -15,11 +15,11 @@ class GroupMember < ActiveRecord::Base
       temporary_password = SecureRandom.hex(8)
       unless self.user = User.find_by(email: @email)
         self.user = User.create!(
-          name: name, email: email,
+          name: @name, email: @email,
           password: temporary_password, password_confirmation: temporary_password
         )
+        GroupMembersMailer.invitation(self, temporary_password).deliver!
       end
-      GroupMembersMailer.invitation(self, temporary_password).deliver!
     end
   end
 
