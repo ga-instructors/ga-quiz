@@ -78,8 +78,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   ActionMailer::Base.smtp_settings = {
-    :user_name => secrets.sendgrid[:username],
-    :password => secrets.sendgrid[:password],
+    :user_name => secrets.sendgrid['username'],
+    :password => secrets.sendgrid['password'],
     :domain => 'ga-quiz.herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
