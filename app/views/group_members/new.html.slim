@@ -13,12 +13,17 @@
   .field.row
     .small-2.columns
       = form.label :email
-    .small-5.columns
+    .small-6.columns
       = form.email_field :email
     .small-1.columns
       = form.label :role
-    .small-4.columns
+    .small-3.columns
       = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
+  .field.row
+    .small-2.columns
+      = form.label :name
+    .small-6.columns.end
+      = form.email_field :name
 
   .actions.row
     .small-2.columns &nbsp;

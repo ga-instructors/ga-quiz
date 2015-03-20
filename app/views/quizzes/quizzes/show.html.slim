@@ -5,8 +5,8 @@
       p #{@quizzes_quiz.start_at.to_s(:long)} &mdash; #{@quizzes_quiz.end_at.to_s(:long)}
   .medium-5.columns.text-right
     ul.button-group
-      li = link_to 'Grading', quiz_assessments_path(@quizzes_quiz), class: 'button small primary'
       - if group_role?(@group, :member, :owner, :instructor) || group_role?(Group.administrators, :member, :owner)
+        li = link_to 'Grading', quiz_assessments_path(@quizzes_quiz), class: 'button small primary'
         li = link_to 'Edit Quiz', edit_group_quiz_path(@quizzes_quiz.group, @quizzes_quiz), class: 'button small secondary'
     .group
       strong Prepared for:&nbsp;
