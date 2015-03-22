@@ -12,7 +12,7 @@ br
       .row.text-center
         h3 Here is the Quiz!
         - current_user.quizzes.active.limit(3).each do |quiz|
-          = link_to quiz, quiz_path(quiz), class: 'button large primary radius'
+          = link_to quiz, group_quiz_path(quiz.group, quiz), class: 'button large primary radius'
 .row
   .small-12.columns
     hr
