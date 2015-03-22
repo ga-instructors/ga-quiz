@@ -19,6 +19,13 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe Quizzes::QuizzesController, type: :controller do
+  before(:suite) { require 'db/seeds.rb' }
+
+  before :all do
+    @group, @user = create(:group), create(:user)
+    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @session = @user.sessions.create!(password: @user.password)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Quizzes::Quiz. As you add validations to Quizzes::Quiz, be sure to
@@ -34,7 +41,7 @@ RSpec.describe Quizzes::QuizzesController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # Quizzes::QuizzesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { id: @session.id } }
 
   describe "GET #index" do
     it "assigns all quizzes_quizzes as @quizzes_quizzes" do

@@ -19,29 +19,13 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe GroupsController, type: :controller do
+  before(:suite) { require 'db/seeds.rb' }
 
-  describe 'permissions' do
-    it 'allows students to see the group' do
-      group, user = create(:group), create(:user)
-      user.memberships << group.group_members.new(role: 'student')
-      session_id = user.sessions.create!(password: user.password).id
-      binding.pry
-
-      get :show, { id: group.id }, id: session_id
-      expect(response).to render_template("groups/show")
-    end
-
-    it 'students in other classes cannot see the group' do
-      group1, group2, user = create(:group), create(:group), create(:user)
-      user.memberships << group1.group_members.new(role: 'student')
-      session_id = user.sessions.create!(password: 'password').id
-
-      get :show, { id: group2.id }, id: session_id
-      expect(response).to render_template("forbidden")
-    end
+  before :all do
+    @group, @user = create(:group), create(:user)
+    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @session = @user.sessions.create!(password: @user.password)
   end
-
-  # -----------
 
   # This should return the minimal set of attributes required to create a valid
   # Group. As you add validations to Group, be sure to
@@ -57,7 +41,22 @@ RSpec.describe GroupsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # GroupsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { id: @session.id } }
+
+  describe 'permissions' do
+    it 'allows students to see the group' do
+      get :show, { id: @group.id }, valid_session
+      expect(response).to render_template("groups/show")
+    end
+
+    it 'students in other classes cannot see the group' do
+      other_group = create(:group)
+      get :show, { id: other_group.id }, valid_session
+      expect(response).to render_template("forbidden")
+    end
+  end
+
+  # -----------
 
   describe "GET #index" do
     it "assigns all groups as @groups" do
@@ -76,7 +75,12 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe "GET #new" do
+    it "forbids students from creating groups" do
+      get :new, {}, valid_session
+      expect(response).to render_template("forbidden")
+    end
     it "assigns a new group as @group" do
+      @membership = @user.memberships << Group.administrators.group_members.new(role: 'member')
       get :new, {}, valid_session
       expect(assigns(:group)).to be_a_new(Group)
     end

@@ -61,6 +61,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'factory_girl_rails', require: false
+  gem 'poltergeist'
 end
 
 group :production do
