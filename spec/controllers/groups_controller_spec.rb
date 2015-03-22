@@ -24,7 +24,8 @@ RSpec.describe GroupsController, type: :controller do
     it 'allows students to see the group' do
       group, user = create(:group), create(:user)
       user.memberships << group.group_members.new(role: 'student')
-      session_id = user.sessions.create!(password: 'password').id
+      session_id = user.sessions.create!(password: user.password).id
+      binding.pry
 
       get :show, { id: group.id }, id: session_id
       expect(response).to render_template("groups/show")

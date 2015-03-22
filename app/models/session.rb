@@ -12,7 +12,7 @@ class Session < ActiveRecord::Base
   end
 
   validate do
-    if self.user = User.find_by_email(email)
+    if self.user ||= User.find_by_email(email)
       unless user.authenticate(password)
         errors.add(:password, 'is invalid')
       end

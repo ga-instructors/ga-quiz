@@ -20,11 +20,15 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
 
+  before do
+    @user = create(:user)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Session. As you add validations to Session, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    { email: 'test-email@email.com', password: 'test-password' }
+    { email: @user.email, password: @user.password }
   end
 
   let(:invalid_attributes) do
@@ -34,12 +38,12 @@ RSpec.describe SessionsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # SessionsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { }
 
   describe "GET #index" do
     it "assigns all sessions as @sessions" do
       session = Session.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}, { id: session.id } 
       expect(assigns(:sessions)).to eq([session])
     end
   end
@@ -47,7 +51,7 @@ RSpec.describe SessionsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested session as @session" do
       session = Session.create! valid_attributes
-      get :show, {:id => session.to_param}, valid_session
+      get :show, {:id => session.to_param}, { id: session.id }
       expect(assigns(:session)).to eq(session)
     end
   end
@@ -56,14 +60,6 @@ RSpec.describe SessionsController, type: :controller do
     it "assigns a new session as @session" do
       get :new, {}, valid_session
       expect(assigns(:session)).to be_a_new(Session)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested session as @session" do
-      session = Session.create! valid_attributes
-      get :edit, {:id => session.to_param}, valid_session
-      expect(assigns(:session)).to eq(session)
     end
   end
 
@@ -97,62 +93,6 @@ RSpec.describe SessionsController, type: :controller do
         post :create, {:session => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested session" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => new_attributes}, valid_session
-        session.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested session as @session" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => valid_attributes}, valid_session
-        expect(assigns(:session)).to eq(session)
-      end
-
-      it "redirects to the session" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => valid_attributes}, valid_session
-        expect(response).to redirect_to(session)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the session as @session" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => invalid_attributes}, valid_session
-        expect(assigns(:session)).to eq(session)
-      end
-
-      it "re-renders the 'edit' template" do
-        session = Session.create! valid_attributes
-        put :update, {:id => session.to_param, :session => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested session" do
-      session = Session.create! valid_attributes
-      expect {
-        delete :destroy, {:id => session.to_param}, valid_session
-      }.to change(Session, :count).by(-1)
-    end
-
-    it "redirects to the sessions list" do
-      session = Session.create! valid_attributes
-      delete :destroy, {:id => session.to_param}, valid_session
-      expect(response).to redirect_to(sessions_url)
     end
   end
 
