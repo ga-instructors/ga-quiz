@@ -13,7 +13,8 @@ class Quizzes::AssessmentsController < ApplicationController
   before_action only: :show do
     forbidden unless \
       current_user == @assessment.user ||
-      group_role?(@group, :member, :owner, :instructor)
+      group_role?(@group, :member, :owner, :instructor) ||
+      group_role?(Group.administrators, :member, :owner)
   end
 
   # GET /quizzes/assessments
