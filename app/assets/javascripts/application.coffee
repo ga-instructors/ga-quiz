@@ -14,7 +14,8 @@
 #= require jquery.turbolinks
 #= require shuffle.jquery
 #= require jquery_ujs
-#= require chartjs
+#= require Chart
+#= require excanvas
 #= require foundation
 #= require turbolinks
 #= require turboboost

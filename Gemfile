@@ -42,6 +42,7 @@ gem 'slim-rails'
 gem 'foundation-rails'
 gem 'database_cleaner'
 gem 'sendgrid-ruby'
+gem 'chartjs-ror'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'

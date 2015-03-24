@@ -13,6 +13,11 @@ class Quizzes::Answer < ActiveRecord::Base
     end
   end
 
+  after_save :mark_graded, unless: -> { assessment.answers.where(grade: nil).any? }
+  def mark_graded
+    assessment.touch(:graded_at)
+  end
+
   # Markdown settings for @quiz.answer
   def answer
    if self[:answer].present?

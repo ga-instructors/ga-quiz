@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
 
+  def incomplete_quizzes
+    quizzes.joins("LEFT OUTER JOIN quizzes_assessments ON quizzes_assessments.quiz_id = quizzes_quizzes.id AND quizzes_assessments.user_id = '#{id}'").where('quizzes_assessments.finished_at IS NULL')
+  end
+
   def to_s
     name
   end

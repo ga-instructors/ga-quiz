@@ -6,6 +6,7 @@ class Quizzes::Assessment < ActiveRecord::Base
   accepts_nested_attributes_for :answers
 
   scope :finished, -> { where('quizzes_assessments.finished_at IS NOT NULL') }
+  scope :unfinished, -> { where(finished_at: nil) }
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
   validate do
@@ -28,6 +29,10 @@ class Quizzes::Assessment < ActiveRecord::Base
 
   def finish
     touch(:finished_at)
+  end
+
+  def readonly?
+    true if finished_at?
   end
 
 end

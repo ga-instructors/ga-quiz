@@ -8,11 +8,26 @@ br
     - else
       p Nice to finally meet you!
   .small-5.columns
-    - if current_user.quizzes.active.any?
-      .row.text-center
+    .row.text-center
+      - if current_user.assessments.incomplete.any?
+        h3 Wanna finish this?
+        - current_user.assessments.incomplete.limit(3).each do |assessment|
+          = link_to assessment.quiz.name, edit_quizzes_assessment_path(assessment), class: 'button large secondary radius'
+      - elsif current_user.incomplete_quizzes.active.any?
         h3 Here is the Quiz!
-        - current_user.quizzes.active.limit(3).each do |quiz|
+        - current_user.incomplete_quizzes.active.limit(3).each do |quiz|
           = link_to quiz, group_quiz_path(quiz.group, quiz), class: 'button large primary radius'
 .row
   .small-12.columns
     hr
+- if (graded_assessments = current_user.assessments.where('quizzes_assessments.graded_at > ?', @session.previous.created_at)).any?
+  .row
+    .small-3.columns
+      h3 Since then,
+    .small-9.columns
+      ul.no-bullet
+        - graded_assessments.each do |assessment|
+          li.clearfix style="line-height: 2em;"
+            i.fi-star style="font-size: 2em; float: left; color: yellow; text-shadow: 0px 1px 2px #000000;" &nbsp;
+            = link_to assessment.quiz.name, quizzes_assessment_path(assessment), class: 'button tiny'
+            |  &mdash;&nbsp;feedback&nbsp;is&nbsp;available
