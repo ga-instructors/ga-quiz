@@ -8,6 +8,8 @@
 
   = @quizzes_question.question
 
+  hr
+  h4 Answer:
   - if @quizzes_question.open_ended?
     = @quizzes_question.answer
   - elsif @quizzes_question.answer_option

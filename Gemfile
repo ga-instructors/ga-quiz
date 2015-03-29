@@ -63,6 +63,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'factory_girl_rails', require: false
   gem 'poltergeist'
+  gem 'capybara-screenshot'
+  gem 'guard-rspec'
 end
 
 group :production do

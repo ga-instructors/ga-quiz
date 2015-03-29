@@ -6,7 +6,8 @@
 - content_for :sublayout do
   .row
     .medium-4.columns#user_info
-      = image_tag gravatar_url(@user.email, size: 256, default: 'retro')
+      .gravatar = image_tag gravatar_url(@user.email, size: 256, default: 'retro')
+      br
       h1 = @user.name
       p.lead = @user.email
 

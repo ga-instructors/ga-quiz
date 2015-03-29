@@ -1,24 +1,22 @@
 .row
   .small-12.columns
     .right
-      = link_to 'Finished', group_quiz_path(@quiz.group, @quiz), class: 'button small'
       = link_to 'New Question', new_quiz_question_path(@quiz), class: 'button small secondary'
+      = link_to 'Finished', group_quiz_path(@quiz.group, @quiz), class: 'button small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;Question Details
 
-.row
-  strong.small-1.column  Ordinal
-  strong.small-2.columns Topic
-  strong.small-6.columns Question
-
 - @quizzes_questions.each do |question|
+  hr
   .row.question class=(question.open_ended ? 'open-ended' : 'multiple-choice')
-    .small-1.column Q#{question.ordinal}
-    .small-2.columns = link_to question.topic, quiz_question_path(@quiz, question)
+    h2.small-1.column #{question.ordinal}.
     .small-9.columns
       = question.question
-      .text-right
-        = link_to 'Remove', quiz_question_path(@quiz, question), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'button small warning'
-        = link_to 'Edit Question', edit_quiz_question_path(@quiz, question), class: 'button small'
-
+      strong Tags:&nbsp;
+      .label.info = question.topic
+      .right = link_to 'Edit Question', edit_quiz_question_path(@quiz, question), class: 'button secondary tiny'
+    .small-2.columns.text-center
+      strong Average
+      .progress-radial class="progress-#{((question.answers.average(:grade)||0) * 10).to_i}0" style="margin: 20px;"
+        .overlay = number_to_percentage (question.answers.average(:grade)||0) * 100, precision: 0

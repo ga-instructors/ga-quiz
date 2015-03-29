@@ -1,25 +1,28 @@
-h1 Listing users
+.row
+  h1 All Users
 
-table
-  thead
-    tr
-      th Name
-      th Email
-      th Password digest
-      th
-      th
-      th
-
-  tbody
-    - @users.each do |user|
+.row
+  table
+    thead
       tr
-        td = user.name
-        td = user.email
-        td = user.password_digest
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Name
+        th Email
+        th Group
+        th
+        th
 
-br
+    tbody
+      - @users.each do |user|
+        tr
+          td = link_to user.name, user
+          td = user.email
+          td
+            = user.groups.last.try(:name) || content_tag(:i, 'None')
+            - count = user.groups.count - 1
+            = ", and #{count} more" if count > 0
+          td = link_to 'Settings', edit_user_path(user)
+          td = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New User', new_user_path
+  br
+
+  = link_to 'New User', new_user_path

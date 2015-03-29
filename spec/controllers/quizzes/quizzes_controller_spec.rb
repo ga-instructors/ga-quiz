@@ -19,7 +19,6 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe Quizzes::QuizzesController, type: :controller do
-  before(:suite) { require 'db/seeds.rb' }
 
   before :all do
     @group, @user = create(:group), create(:user)

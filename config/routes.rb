@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :sessions
 
-  resources :users, except: [:new, :create] do
+  resources :users do
     resources :sessions
   end
 

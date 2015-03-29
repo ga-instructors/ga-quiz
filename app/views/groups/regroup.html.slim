@@ -16,17 +16,16 @@ br
 hr
 .row
   - @regroups.each_with_index do |group, index|
-    .small-6.columns
+    .small-4.columns
       - if params[:instructors]
         h3 #{group.shift.name}'s Group
       - else
         h3 GROUP #{index+1}
-      ul.regroup
+      ul.regroup.no-bullet
         - group.each do |student|
           - if student
-            li.student = student.name
-      hr
-    - if index % 2 == 1
+            li.student = render(student)
+    - if index % 3 == 2
       erb:
-        </div><div class="row">
+        </div><hr /><div class="row">
 .row

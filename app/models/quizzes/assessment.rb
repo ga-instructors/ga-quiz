@@ -5,7 +5,7 @@ class Quizzes::Assessment < ActiveRecord::Base
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers
 
-  scope :finished, -> { where('quizzes_assessments.finished_at IS NOT NULL') }
+  scope :finished, -> { where.not(finished_at: nil) }
   scope :unfinished, -> { where(finished_at: nil) }
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }

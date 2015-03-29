@@ -1,3 +1,17 @@
+.user {
+  img {
+    border-radius: 25%;
+    margin: 0 5px 2px 0;
+  }
+  .name {
+    display: inline-block;
+    white-space: nowrap;
+    max-width: calc(95% - 48px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 figure.chart {
   position: relative;
   background-color: #FAFAFA;

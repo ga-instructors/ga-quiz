@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Login Specification', type: :feature do
+RSpec.describe 'Login Specification', type: :feature do
 
   before do
     @user = create(:user)
