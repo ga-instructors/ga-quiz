@@ -43,8 +43,12 @@ class Quizzes::QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        if params[:commit] =~ /add/i
+          format.html { redirect_to edit_quiz_question_path(@question.quiz, @question) }
+        else
+          format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully created.' }
+          format.json { render :show, status: :created, location: @question }
+        end
       else
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -57,8 +61,12 @@ class Quizzes::QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @quizzes_question.update(quizzes_question_params)
-        format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quizzes_question }
+        if params[:commit] =~ /add/i
+          format.html { redirect_to edit_quiz_question_path(@question.quiz, @question) }
+        else
+          format.html { redirect_to quiz_questions_path(@question.quiz), notice: 'Question was successfully updated.' }
+          format.json { render :show, status: :ok, location: @quizzes_question }
+        end
       else
         format.html { render :edit }
         format.json { render json: @quizzes_question.errors, status: :unprocessable_entity }
