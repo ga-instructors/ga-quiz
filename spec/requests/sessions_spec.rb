@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-  describe "GET /sessions" do
+  describe "GET /sessions/new" do
     it "works! (now write some real specs)" do
-      get sessions_path
+      get new_session_path
       expect(response).to have_http_status(200)
     end
   end

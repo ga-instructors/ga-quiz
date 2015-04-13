@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "group_members/new", type: :view do
   before(:each) do
     assign(:group_member, GroupMember.new(
+      :group => create(:group),
       :name => "MyString",
       :email => "MyString",
       :role => "MyString"

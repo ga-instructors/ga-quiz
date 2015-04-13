@@ -14,8 +14,6 @@ RSpec.describe "quizzes/quizzes/new", type: :view do
 
     assert_select "form[action=?][method=?]", quizzes_quizzes_path, "post" do
 
-      assert_select "input#quizzes_quiz_group_id[name=?]", "quizzes_quiz[group_id]"
-
       assert_select "input#quizzes_quiz_name[name=?]", "quizzes_quiz[name]"
 
       assert_select "textarea#quizzes_quiz_introduction[name=?]", "quizzes_quiz[introduction]"

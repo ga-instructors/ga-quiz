@@ -34,10 +34,11 @@
     p
       = link_to @assessment.user
         = render @assessment.user
-    p
-      strong Finished:&nbsp;
-      br
-      = @assessment.finished_at.to_s(:long)
+    - if @assessment.finished_at?
+      p
+        strong Finished:&nbsp;
+        br
+        = @assessment.finished_at.to_s(:long)
 - if @assessment.student_comment?
   .row
     .small-12.columns

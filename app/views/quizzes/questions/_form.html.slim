@@ -53,6 +53,7 @@
     .small-2.columns
   = form.fields_for :options do |fields|
     .row.option class=(fields.object.new_record? ? 'new-record' : nil)
+      = fields.hidden_field :_destroy, class: 'destroy'
       .small-1.column &nbsp;
       .small-1.columns
         .right = form.label :answer_option_id, value: fields.object.id do

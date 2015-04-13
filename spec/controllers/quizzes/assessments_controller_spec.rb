@@ -20,6 +20,12 @@ require 'rails_helper'
 
 RSpec.describe Quizzes::AssessmentsController, type: :controller do
 
+  before :all do
+    @group, @user = create(:group), create(:user)
+    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @session = @user.sessions.create!(password: @user.password)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Quizzes::Assessment. As you add validations to Quizzes::Assessment, be sure to
   # adjust the attributes here as well.
@@ -34,7 +40,7 @@ RSpec.describe Quizzes::AssessmentsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # Quizzes::AssessmentsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { id: @session.id } }
 
   describe "GET #index" do
     it "assigns all quizzes_assessments as @quizzes_assessments" do

@@ -7,7 +7,7 @@
       = @quiz
       small &nbsp; &mdash;&nbsp;Edit Question Details
 
-= form_for @quizzes_question do |form|
+= form_for @quizzes_question, turboboost: true do |form|
   == render form
   .actions.row
     .small-2.columns &nbsp;

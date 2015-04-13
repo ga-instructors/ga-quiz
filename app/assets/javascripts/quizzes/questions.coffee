@@ -16,16 +16,16 @@ jQuery ->
     # Adding and Deleting Options
     $('.option input.option_label').on 'keydown', (event) ->
 
-      if event.keyCode == 13
-        event.preventDefault()
-        this_row = $(this).closest('.row')
-        last_row = this_row.parent().find('.row:visible').last()
-
       # this.last_value prevents the option from being deleted too early
       if event.keyCode == 8 && this.value == ''
-        deleted_row = $(this).closest('.row').hide()
-        console.log previous_row = deleted_row.prev()
-        previous_row.find('input.option_label').focus()
+        deleted_row = $(this).closest('.row')
+        previous_row = deleted_row.prevUntil('.field', '.row:visible')
+        if previous_row.length > 1
+          previous_row.find('input.option_label').focus()
+          deleted_row.find('.destroy').val(true)
+          deleted_row.slideUp(250)
+          event.preventDefault()
+        else
 
-
+          console.log('BLAH')
 

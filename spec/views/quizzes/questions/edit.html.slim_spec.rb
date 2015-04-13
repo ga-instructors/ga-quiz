@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/questions/edit", type: :view do
   before(:each) do
+    @quiz = create(:quiz)
     @quizzes_question = assign(:quizzes_question, Quizzes::Question.create!(
-      :quiz => nil,
+      :quiz => @quiz,
       :ordinal => 1,
       :question => "MyText",
       :open_ended => "",
@@ -11,6 +12,7 @@ RSpec.describe "quizzes/questions/edit", type: :view do
       :answer_option_id => 1,
       :answer_template => "MyText"
     ))
+    @quizzes_question.options.create!(label: 'Option A')
   end
 
   it "renders the edit quizzes_question form" do
@@ -24,7 +26,8 @@ RSpec.describe "quizzes/questions/edit", type: :view do
 
       assert_select "textarea#quizzes_question_question[name=?]", "quizzes_question[question]"
 
-      assert_select "input#quizzes_question_open_ended[name=?]", "quizzes_question[open_ended]"
+      assert_select "input#quizzes_question_open_ended_true[name=?]", "quizzes_question[open_ended]"
+      assert_select "input#quizzes_question_open_ended_false[name=?]", "quizzes_question[open_ended]"
 
       assert_select "textarea#quizzes_question_answer[name=?]", "quizzes_question[answer]"
 
