@@ -43,6 +43,7 @@ gem 'foundation-rails'
 gem 'database_cleaner'
 gem 'sendgrid-ruby'
 gem 'chartjs-ror'
+gem 'ansi'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'
@@ -65,6 +66,11 @@ group :development, :test do
   gem 'poltergeist'
   gem 'capybara-screenshot'
   gem 'guard-rspec'
+  gem 'guard-rails'
+  gem 'guard-bundler'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
+  gem 'terminal-notifier-guard', '~> 1.6.1'
 end
 
 group :production do

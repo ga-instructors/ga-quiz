@@ -20,7 +20,6 @@ require 'factory_girl_rails'
 # require only the support files necessary.
 
 Dir[Rails.root.join('spec/support/*.rb')].each { |f| require f }
-require './db/seeds.rb'
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

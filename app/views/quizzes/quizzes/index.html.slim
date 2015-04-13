@@ -18,8 +18,8 @@
         tr
           td = link_to quiz.group.name, quiz.group
           td = link_to quiz.to_s, quiz
-          td = quiz.start_at.to_s(:long)
-          td = quiz.end_at.to_s(:long)
+          td = quiz.start_at ? quiz.start_at.to_s(:long) : nil
+          td = quiz.end_at ? quiz.end_at.to_s(:long) : nil
           td = link_to 'Edit', edit_quiz_path(quiz)
           td = link_to 'Destroy', quiz, data: {:confirm => 'Are you sure?'}, :method => :delete
 
