@@ -18,7 +18,11 @@ class Quizzes::QuizzesController < ApplicationController
   # GET /quizzes/quizzes
   # GET /quizzes/quizzes.json
   def index
-    @quizzes_quizzes = Quizzes::Quiz.all
+    if @group
+      @quizzes = @quizzes_quizzes = @group.quizzes
+    else
+      @quizzes_quizzes = Quizzes::Quiz.all
+    end
   end
 
   # GET /quizzes/quizzes/1
