@@ -10,16 +10,10 @@
     p Students in this group can take quizzes that have been prepared for them, and see their progress through-out the course.
 
 .row
-  .medium-6.columns
-    h1 = @group.name
-  .medium-6.columns.text-right
-      ul.button-group.actions
-        li = link_to 'Quizzes', group_quizzes_path(@group), class: 'button tiny'
-        li = link_to 'Regroup', regroup_group_path(@group), class: 'button tiny'
-        li = link_to 'Edit Group', edit_group_path(@group), class: 'button tiny'
+  h1 = @group.name
   hr
 .row
-  .medium-4.columns
+  .medium-3.columns
     - if @group.instructors.any?
       div#instructor-list
         h3 Instructors
@@ -27,11 +21,15 @@
         ul.no-bullet
           - @group.instructors.each do |instructor|
             li = link_to render(instructor), group_user_path(@group, instructor)
-    br
+    hr
+
+    = link_to 'See All Quizzes', group_quizzes_path(@group), class: 'button small primary expand'
+    = link_to 'Edit Group', edit_group_path(@group), class: 'button warning tiny expand'
+    = link_to 'All Groups', groups_path, class: 'button tiny secondary expand'
 
   .medium-8.columns
-
     - if @group.students.any?
+      .right = link_to 'Re-Group', regroup_group_path(@group), class: 'button secondary tiny radius'
       div#student-list
         h3 Students
         hr
