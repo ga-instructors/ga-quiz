@@ -6,8 +6,9 @@
   .medium-5.columns.text-right
     ul.button-group
       - if group_role?(@group, :member, :owner, :instructor) || group_role?(Group.administrators, :member, :owner)
-        li = link_to 'Grading', quiz_assessments_path(@quizzes_quiz), class: 'button small primary'
+        li = link_to 'Grading', quiz_assessments_path(@quizzes_quiz), class: 'button small secondary'
         li = link_to 'Edit Quiz', edit_group_quiz_path(@quizzes_quiz.group, @quizzes_quiz), class: 'button small secondary'
+        li = link_to 'Delete', group_quiz_path(@quizzes_quiz.group, @quizzes_quiz), class: 'button small warning'
     .group
       strong Prepared for:&nbsp;
       = render @quizzes_quiz.group

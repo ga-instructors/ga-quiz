@@ -261,3 +261,8 @@ details summary {
   margin-top: 0.5em;
   cursor: pointer;
 }
+
+.button.warning {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAB1JREFUCB1j+P//vw8DFADZm2FsBhAHLombA1QPALqzG+VraLNIAAAAAElFTkSuQmCC');
+  &, &:hover { color: white; }
+}

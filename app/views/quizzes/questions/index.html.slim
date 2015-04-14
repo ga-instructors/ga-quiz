@@ -13,10 +13,15 @@
     h2.small-1.column #{question.ordinal}.
     .small-9.columns
       = question.question
-      strong Tags:&nbsp;
-      .label.info = question.topic
-      .right = link_to 'Edit Question', edit_quiz_question_path(@quiz, question), class: 'button secondary tiny'
     .small-2.columns.text-center
       strong Average
       .progress-radial class="progress-#{((question.answers.average(:grade)||0) * 10).to_i}0" style="margin: 20px;"
         .overlay = number_to_percentage (question.answers.average(:grade)||0) * 100, precision: 0
+  .row
+    .small-1.column &nbsp;
+    .small-3.columns
+      = link_to 'Edit Question', edit_quiz_question_path(@quiz, question), class: 'button secondary tiny'
+      = link_to 'Delete', quiz_question_path(@quiz, question), method: :delete, confirm: 'Are you sure you want to delete this question?', class: 'button warning tiny'
+    .small-6.columns.end
+      strong Tags:&nbsp;
+      .label.info = question.topic

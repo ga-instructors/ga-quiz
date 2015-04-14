@@ -2,7 +2,7 @@ class Quizzes::Question < ActiveRecord::Base
   default_scope -> { order(:ordinal) }
 
   belongs_to :quiz
-  has_many :answers
+  has_many :answers, dependent: :nullify
 
   validates :quiz, presence: true
 
@@ -26,7 +26,7 @@ class Quizzes::Question < ActiveRecord::Base
     belongs_to :question
   end
 
-  has_many :options
+  has_many :options, dependent: :destroy
   belongs_to :answer_option, class_name: 'Quizzes::Question::Option'
 
   accepts_nested_attributes_for :options, allow_destroy: true,
