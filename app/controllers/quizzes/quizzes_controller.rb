@@ -3,13 +3,13 @@ class Quizzes::QuizzesController < ApplicationController
   before_action :set_quizzes_quiz, only: [:show, :edit, :update, :destroy]
   helper_method :group_role? #TODO: Replace me with Pundit
 
-  before_action except: :show do
+  before_action except: [:show, :index] do
     forbidden unless \
       group_role?(@group, :member, :owner, :instructor) ||
       group_role?(Group.administrators, :member, :owner)
   end
 
-  before_action only: :show do
+  before_action only: [:show, :index] do
     forbidden unless \
       group_role?(@group, :member, :owner, :instructor, :student) ||
       group_role?(Group.administrators, :member, :owner)

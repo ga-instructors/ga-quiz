@@ -13,7 +13,7 @@
     tbody
       - @quizzes_quizzes.each do |quiz|
         tr
-          td = link_to quiz.to_s, quiz
+          td = link_to quiz.to_s, group_quiz_path(quiz.group, quiz)
           td = quiz.start_at ? quiz.start_at.to_s(:long) : nil
           td = quiz.end_at ? quiz.end_at.to_s(:long) : nil
 
