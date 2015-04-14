@@ -1,14 +1,14 @@
 .user {
+  white-space: nowrap;
   img {
-    border-radius: 25%;
+    border-radius: 5%;
     margin: 0 5px 2px 0;
   }
   .name {
     display: inline-block;
-    white-space: nowrap;
-    max-width: calc(95% - 48px);
     text-overflow: ellipsis;
     overflow: hidden;
+    max-width: 100%;
   }
 }
 

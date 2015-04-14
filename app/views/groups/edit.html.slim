@@ -8,13 +8,12 @@
         .row.panel
           = form.fields_for :group_members, members, class: 'small-10 columns' do |fields|
             .small-4.columns
-              = fields.check_box :_destroy
-              = fields.label :_destroy, draggable: true do
-                = render(fields.object.user)
+              .left style="margin-top: 0.5em; margin-right: 1em;"
+                = fields.check_box :_destroy
+              .left style="width: calc(100% - 2em);"
+                = fields.label :_destroy, draggable: true, style: 'text-align: left' do
+                  = render(fields.object.user)
       .small-2.columns &nbsp;
-    .row
-      .small-12.columns
-          hr
   .actions.row
     .small-4.columns &nbsp;
     .small-6.columns

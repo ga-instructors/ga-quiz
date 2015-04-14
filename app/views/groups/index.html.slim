@@ -9,8 +9,6 @@
         th Name
         th Start at
         th End at
-        th
-        th
 
     tbody
       - @groups.each do |group|
@@ -18,5 +16,3 @@
           td = link_to group.name, group
           td = group.start_at
           td = group.end_at
-          td = link_to 'Edit', edit_group_path(group)
-          td = link_to 'Destroy', group, data: {:confirm => 'Are you sure?'}, :method => :delete

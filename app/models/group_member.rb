@@ -18,7 +18,7 @@ class GroupMember < ActiveRecord::Base
           name: @name, email: @email,
           password: temporary_password, password_confirmation: temporary_password
         )
-        GroupMembersMailer.invitation(self, temporary_password).deliver!
+        GroupMembersMailer.invitation(self, temporary_password).deliver_now!
       end
     end
   end
