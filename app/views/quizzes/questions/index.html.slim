@@ -2,7 +2,6 @@
   .small-12.columns
     .right
       = link_to 'New Question', new_quiz_question_path(@quiz), class: 'button small secondary'
-      = link_to 'Finished', group_quiz_path(@quiz.group, @quiz), class: 'button small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;Question Details

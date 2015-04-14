@@ -1,8 +1,5 @@
 .row
   .small-12.columns
-    .right
-      = link_to 'Finished', group_quiz_path(@quiz.group, @quiz), class: 'button small'
-      = link_to 'New Question', new_quiz_question_path(@quiz), class: 'button secondary small'
     h1
       = @quiz
       small &nbsp; &mdash;&nbsp;New Question Details
@@ -13,4 +10,6 @@
     .small-2.columns &nbsp;
     .small-8.columns
       = form.submit class: 'button'
+      | &nbsp;&nbsp;
+      = link_to 'Cancel', quiz_questions_path(@quiz)
     .small-2.columns &nbsp;

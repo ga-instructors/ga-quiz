@@ -13,20 +13,21 @@
   .field.row
     .small-2.columns
       = form.label :email
-    .small-6.columns
+    .small-9.columns.end
       = form.email_field :email
-    .small-1.columns
-      = form.label :role
-    .small-3.columns
-      = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
   .field.row
     .small-2.columns
       = form.label :name
     .small-6.columns.end
       = form.email_field :name
+    .small-1.columns
+      = form.label :role
+    .small-2.columns.end
+      = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
 
   .actions.row
     .small-2.columns &nbsp;
     .small-10.columns
       = form.submit 'Add to Group', class: 'button primary'
+      | &nbsp;&nbsp;
       = link_to 'Cancel', edit_group_path(@group)
