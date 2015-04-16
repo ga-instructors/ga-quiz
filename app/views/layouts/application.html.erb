@@ -36,13 +36,13 @@
 					<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 				</ul>
 
+				<% active_group = (@group && @group.persisted? ? @group : current_user.groups.last) %>
 				<section class="top-bar-section">
 					<!-- Right Nav Section -->
 					<ul class="right" id="auth-section" class="expose-instructions">
 						<% if logged_in? %>
 							<% if current_user.groups.count > 1 %>
 								<li class="active has-dropdown">
-									<% active_group = (@group && @group.persisted? ? @group : current_user.groups.last) %>
 									<%= link_to active_group.name, active_group %>
 									<ul class="dropdown">
 										<% current_user.groups.reject { |group| group == active_group }.each do |group| %>
@@ -51,12 +51,12 @@
 									</ul>
 								</li>
 							<% else %>
-								<li class="active"><%= link_to current_user.groups.first.name, current_user.groups.first %></li>
+								<li class="active"><%= link_to current_user.groups.first.name, '#' %></li>
 							<% end %>
 							<li class="has-dropdown">
 								<%= link_to current_user.name, user_session_path(current_user, current_session) %>
 								<ul class="dropdown">
-									<li><%= link_to 'Profile', current_user %></li>
+									<li><%= link_to 'Profile', group_user_path(active_group, current_user) %></li>
 									<li><%= link_to 'Settings', edit_user_path(current_user) %></li>
 									<li><%= link_to 'Log Out', session_path(current_session), method: 'delete' %></li>
 								</ul>

@@ -32,7 +32,7 @@ class Quizzes::Assessment < ActiveRecord::Base
   end
 
   def readonly?
-    true if finished_at?
+    true if graded_at?
   end
 
 end

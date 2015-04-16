@@ -35,7 +35,7 @@
       = link_to group_user_path(@assessment.quiz.group, @assessment.user)
         = render @assessment.user
     .right
-      = link_to 'Continue...', root_path, class: 'button small'
+      = link_to 'Continue &#9654;'.html_safe, root_path, class: 'button small'
 - if @assessment.student_comment?
   .row
     .small-12.columns
@@ -63,6 +63,10 @@
           .panel.callout
             .right style="width: 80px; height: 50px;"
             = answer.reviewer_comment
+
+  hr
+  .row.text-right
+    = link_to 'Retake This Quiz', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nYour previous answers to this quiz will be deleted." }
 
   - unless @assessment.finished_at?
     = link_to 'Resume Assessment', edit_quizzes_assessment_path(@assessment), class: 'button secondary small'
