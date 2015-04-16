@@ -50,10 +50,10 @@ br
                   td = link_to quiz.to_s, quizzes_assessment_path(assessment.quiz, assessment)
                   td.average = number_to_percentage assessment.answers.average(:grade) * 100, precision: 0
                 - elsif assessment.finished_at?
-                  td = link_to quiz.to_s, quizzes_assessment_path(assessment.quiz, assessment)
+                  td = link_to quiz.to_s, quiz_assessment_path(assessment.quiz, assessment)
                   td.pending Finished
                 - else
-                  td = link_to quiz.to_s, edit_quizzes_assessment_path(assessment.quiz, assessment)
+                  td = link_to quiz.to_s, edit_quiz_assessment_path(assessment.quiz, assessment)
                   td.incomplete Incomplete
               - else
                 td = link_to quiz.to_s, group_quiz_path(quiz.group, quiz)
