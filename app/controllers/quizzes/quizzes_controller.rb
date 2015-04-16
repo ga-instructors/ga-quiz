@@ -99,6 +99,6 @@ class Quizzes::QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quizzes_quiz_params
-      params.require(:quizzes_quiz).permit(:group_id, :name, :start_at, :end_at, :introduction)
+      params.require(:quizzes_quiz).permit(:group_id, :name, :start_at, :end_at, :introduction, :ordinal)
     end
 end
