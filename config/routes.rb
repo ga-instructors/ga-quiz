@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :quizzes, module: :quizzes, as: 'quizzes_quiz'
   resources :quizzes, module: :quizzes do
-    resources :assessments
+    resources :assessments do
+      put :finish_all, on: :collection
+    end
     resources :questions
   end
   get '/quizzes', to: 'quizzes/quiz#index', as: 'quizzes_quizzes'

@@ -11,7 +11,7 @@ class Quizzes::Quiz < ActiveRecord::Base
   validates :group, presence: true
 
   default_scope -> { order(:ordinal) }
-  scope :active, -> { where('NOW() > quizzes_quizzes.start_at AND NOW() < quizzes_quizzes.end_at') }
+  scope :active, -> { where('(quizzes_quizzes.start_at IS NULL OR NOW() > quizzes_quizzes.start_at) AND (quizzes_quizzes.end_at IS NULL OR NOW() < quizzes_quizzes.end_at)') }
 
   def ordinal
     self[:ordinal] ||= group ? (group.quizzes.maximum(:ordinal) || 0) + 1 : nil

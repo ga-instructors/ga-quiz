@@ -11,12 +11,12 @@ br
     .row.text-center
       - if current_user.assessments.incomplete.any?
         h3 Wanna finish this?
-        - current_user.assessments.incomplete.limit(3).each do |assessment|
-          = link_to assessment.quiz.name, edit_quizzes_assessment_path(assessment), class: 'button large secondary radius'
+        - assessment = current_user.assessments.incomplete.first
+        = link_to assessment.quiz.name, edit_quizzes_assessment_path(assessment), class: 'button large secondary radius'
       - elsif current_user.incomplete_quizzes.active.any?
         h3 Here is the Quiz!
-        - current_user.incomplete_quizzes.active.limit(3).each do |quiz|
-          = link_to quiz, group_quiz_path(quiz.group, quiz), class: 'button large primary radius'
+        - quiz = current_user.incomplete_quizzes.active.first
+        = link_to quiz, group_quiz_path(quiz.group, quiz), class: 'button large primary radius'
 .row
   .small-12.columns
     hr
@@ -31,3 +31,31 @@ br
             i.fi-star style="font-size: 2em; float: left; color: yellow; text-shadow: 0px 1px 2px #000000;" &nbsp;
             = link_to assessment.quiz.name, quizzes_assessment_path(assessment), class: 'button tiny'
             |  &mdash;&nbsp;feedback&nbsp;is&nbsp;available
+.row
+  .small-12.columns
+    - current_user.groups.active.each do |group|
+      h1 = group.name
+      table width="100%"
+        thead
+          tr
+            th Name
+            th width=1 Score
+
+        tbody
+          - group.quizzes.each do |quiz|
+            - assessment = current_user.assessments.where(quiz: quiz).first
+            tr
+              - if assessment
+                - if assessment.graded_at?
+                  td = link_to quiz.to_s, quizzes_assessment_path(assessment.quiz, assessment)
+                  td.average = number_to_percentage assessment.answers.average(:grade) * 100, precision: 0
+                - elsif assessment.finished_at?
+                  td = link_to quiz.to_s, quizzes_assessment_path(assessment.quiz, assessment)
+                  td.pending Finished
+                - else
+                  td = link_to quiz.to_s, edit_quizzes_assessment_path(assessment.quiz, assessment)
+                  td.incomplete Incomplete
+              - else
+                td = link_to quiz.to_s, group_quiz_path(quiz.group, quiz)
+                td.incomplete Incomplete
+

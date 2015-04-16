@@ -185,7 +185,7 @@ input[type=range]:focus {
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 8.4px;
+  height: 20px;
   cursor: pointer;
   animate: 0.2s;
   background: #FFFFFF;
@@ -200,14 +200,14 @@ input[type=range]::-webkit-slider-thumb {
   background: #ffffff;
   cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -14px;
+  margin-top: -9px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #367ebd;
 }
 input[type=range]::-moz-range-track {
   width: 100%;
-  height: 8.4px;
+  height: 20px;
   cursor: pointer;
   animate: 0.2s;
   background: #FFFFFF;
@@ -224,7 +224,7 @@ input[type=range]::-moz-range-thumb {
 }
 input[type=range]::-ms-track {
   width: 100%;
-  height: 8.4px;
+  height: 20px;
   cursor: pointer;
   animate: 0.2s;
   background: transparent;
@@ -263,6 +263,6 @@ details summary {
 }
 
 .button.warning {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAB1JREFUCB1j+P//vw8DFADZm2FsBhAHLombA1QPALqzG+VraLNIAAAAAElFTkSuQmCC');
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEAC////r4dzieQA1QMA3TMN8QOaRNoAAAAASUVORK5CYII=');
   &, &:hover { color: white; }
 }

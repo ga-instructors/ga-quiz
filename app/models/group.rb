@@ -8,6 +8,8 @@ class Group < ActiveRecord::Base
   has_many :students, -> { where( group_members: { role: 'student' } ) }, through: :group_members, source: :user
   has_many :members, -> { where( group_members: { role: 'member' } ) }, through: :group_members, source: :user
 
+  scope :active, -> { where('(groups.start_at IS NULL OR NOW() > groups.start_at) AND (groups.end_at IS NULL OR NOW() < groups.end_at)') }
+
   def self.administrators
     Group.find(1)
   end

@@ -32,13 +32,10 @@
 
   .small-3.column
     p
-      = link_to @assessment.user
+      = link_to group_user_path(@assessment.quiz.group, @assessment.user)
         = render @assessment.user
-    - if @assessment.finished_at?
-      p
-        strong Finished:&nbsp;
-        br
-        = @assessment.finished_at.to_s(:long)
+    .right
+      = link_to 'Continue...', root_path, class: 'button small'
 - if @assessment.student_comment?
   .row
     .small-12.columns
@@ -66,7 +63,6 @@
           .panel.callout
             .right style="width: 80px; height: 50px;"
             = answer.reviewer_comment
-
 
   - unless @assessment.finished_at?
     = link_to 'Resume Assessment', edit_quizzes_assessment_path(@assessment), class: 'button secondary small'

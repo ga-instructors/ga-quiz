@@ -86,6 +86,9 @@ class Quizzes::AssessmentsController < ApplicationController
     end
   end
 
+  def finish_all
+  end
+
   # DELETE /quizzes/assessments/1
   # DELETE /quizzes/assessments/1.json
   def destroy

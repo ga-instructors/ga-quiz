@@ -26,8 +26,19 @@
 
 .row#assessments_index
   .small-12.columns
-    h1 #{@quiz} Assessment
+    table.right style="margin-left: auto; margin-right: auto;"
+      tr
+        th Absent
+        td = @quiz.group.students.count - @quiz.assessments.count
+        th = link_to_if @quiz.end_at.nil? || @quiz.end_at < Time.now, "Incomplete", finish_all_quiz_assessments_path(@quiz), data: { confirm: 'Do you want to mark all incomplete assesments as finished?' }
+        td = @quiz.assessments.incomplete.count
+      tr
+        th Students
+        td = @quiz.group.students.count
+        th Completed
+        td = @quiz.assessments.completed.count
 
+    h1 #{@quiz} Assessment
     .table-container
       table width="100%"
         thead
