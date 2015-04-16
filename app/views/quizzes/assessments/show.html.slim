@@ -64,9 +64,9 @@
             .right style="width: 80px; height: 50px;"
             = answer.reviewer_comment
 
-  hr
-  .row.text-right
-    = link_to 'Retake This Quiz', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nYour previous answers to this quiz will be deleted." }
+hr
+.row.text-right
+  = link_to 'Retake This Quiz', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nYour previous answers to this quiz will be deleted." }
 
-  - unless @assessment.finished_at?
-    = link_to 'Resume Assessment', edit_quizzes_assessment_path(@assessment), class: 'button secondary small'
+- unless @assessment.finished_at?
+  = link_to 'Resume Assessment', edit_quizzes_assessment_path(@assessment), class: 'button secondary small'
