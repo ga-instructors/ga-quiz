@@ -4,13 +4,13 @@ class Quizzes::AssessmentsController < ApplicationController
   before_action :set_quiz
   before_action :set_quizzes_assessment, only: [:show, :edit, :update, :destroy]
 
-  before_action only: %i[index destroy] do
+  before_action only: :index do
     forbidden unless \
       group_role?(@group, :member, :owner, :instructor) ||
       group_role?(Group.administrators, :member, :owner)
   end
 
-  before_action only: :show do
+  before_action only: [:show, :destroy] do
     forbidden unless \
       current_user == @assessment.user ||
       group_role?(@group, :member, :owner, :instructor) ||
