@@ -7,7 +7,15 @@ class GroupMember < ActiveRecord::Base
   validates :user, presence: true
 
   # For sending invitations
-  attr_accessor :name, :email
+  attr_accessor :name, :email, :invitation_blurb
+
+  after_initialize do
+    @invitation_blurb = "You have been invited to join #{group.name}."
+  end
+
+  def invitation_blurb=(new_invitation_blurb)
+    @invitation_blurb = new_invitation_blurb if new_invitation_blurb.present?
+  end
 
   before_validation on: :create do
     if user

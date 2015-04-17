@@ -19,11 +19,16 @@
     .small-2.columns
       = form.label :name
     .small-6.columns.end
-      = form.email_field :name
+      = form.text_field :name
     .small-1.columns
       = form.label :role
     .small-2.columns.end
       = form.select :role, GroupMember.distinct.pluck(:role).map { |role| [t(role),role] }
+  .field.row
+    .small-2.columns
+      = form.label :invitation_blurb, 'Invitation Blurb'
+    .small-9.columns.end
+      = form.text_area :invitation_blurb
 
   .actions.row
     .small-2.columns &nbsp;

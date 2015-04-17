@@ -4,8 +4,8 @@ table.row
       table.twelve.columns
         tr
           td
-            h1 #{@group.name}
-            p.lead You have been invited to join this group.
+            h1 = @group.name
+            p.lead = @group_member.invitation_blurb
           td.expander
 
 table.row.callout

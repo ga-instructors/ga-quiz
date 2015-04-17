@@ -5,7 +5,7 @@ class GroupMembersMailer < ApplicationMailer
     @group_member = group_member
     @user = @group_member.user
     @group = @group_member.group
-    mail to: @group_member.user.email, subject: 'GA-QUIZ'
+    mail to: @group_member.user.email, subject: "You have been invited to join #{@group.name}"
   end
 
 end
