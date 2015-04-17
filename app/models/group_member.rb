@@ -13,10 +13,6 @@ class GroupMember < ActiveRecord::Base
     @invitation_blurb = "You have been invited to join #{group.name}."
   end
 
-  def invitation_blurb=(new_invitation_blurb)
-    @invitation_blurb = new_invitation_blurb if new_invitation_blurb.present?
-  end
-
   before_validation on: :create do
     if user
     else
