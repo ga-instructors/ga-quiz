@@ -58,8 +58,15 @@ class Quizzes::AssessmentsController < ApplicationController
         format.html { redirect_to edit_quizzes_assessment_path(@quizzes_assessment), notice: 'Good Luck!' }
         format.json { render :show, status: :created, location: @quizzes_assessment }
       else
-        format.html { render :new }
+        current_assessment = current_user.assessments.find_by(quiz_id: @quizzes_assessment.quiz_id)
         format.json { render json: @quizzes_assessment.errors, status: :unprocessable_entity }
+        if current_assessment && current_assessment.finished_at?
+          format.html { redirect_to quiz_assessment_path(current_assessment.quiz, current_assessment) }
+        elsif current_assessment
+          format.html { redirect_to edit_quiz_assessment_path(current_assessment.quiz, current_assessment) }
+        else
+          format.html { render :new }
+        end
       end
     end
   end
