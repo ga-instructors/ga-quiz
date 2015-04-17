@@ -36,11 +36,11 @@
 					<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 				</ul>
 
-				<% active_group = (@group && @group.persisted? ? @group : current_user.groups.last) %>
 				<section class="top-bar-section">
 					<!-- Right Nav Section -->
 					<ul class="right" id="auth-section" class="expose-instructions">
 						<% if logged_in? %>
+							<% active_group = (@group && @group.persisted? ? @group : current_user.groups.last) %>
 							<% if current_user.groups.count > 1 %>
 								<li class="active has-dropdown">
 									<%= link_to active_group.name, active_group %>
