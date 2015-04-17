@@ -3,8 +3,8 @@ require './lib/roman_numerals'
 
 class Quizzes::Quiz < ActiveRecord::Base
   belongs_to :group
-  has_many :assessments
-  has_many :questions
+  has_many :assessments, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_many :answers, through: :assessments
 
   after_initialize :ordinal
