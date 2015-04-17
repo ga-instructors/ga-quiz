@@ -1,7 +1,8 @@
 class GroupMembersMailer < ApplicationMailer
 
-  def invitation(group_member, temporary_password)
+  def invitation(group_member, temporary_password, invitation_blurb)
     @temporary_password = temporary_password
+    @invitation_blurb = invitation_blurb
     @group_member = group_member
     @user = @group_member.user
     @group = @group_member.group

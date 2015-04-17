@@ -9,20 +9,21 @@ class GroupMember < ActiveRecord::Base
   # For sending invitations
   attr_accessor :name, :email, :invitation_blurb
 
-  after_initialize do
-    @invitation_blurb ||= "You have been invited to join #{group.name}."
-  end
-
   before_validation on: :create do
     if user
     else
       temporary_password = SecureRandom.hex(8)
+      if @invitation_blurb.present?
+        invitation_blurb = @invitation_blurb
+      else
+        invitation_blurb = "You have been invited to join #{group.name}."
+      end
       unless self.user = User.find_by(email: @email)
         self.user = User.create!(
           name: @name, email: @email,
           password: temporary_password, password_confirmation: temporary_password
         )
-        GroupMembersMailer.invitation(self, temporary_password).deliver_now!
+        GroupMembersMailer.invitation(self, temporary_password, invitation_blurb).deliver_now!
       end
     end
   end
