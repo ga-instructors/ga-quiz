@@ -47,7 +47,7 @@ br
             tr
               - if assessment
                 - if assessment.graded_at?
-                  td = link_to quiz.to_s, quizzes_assessment_path(assessment.quiz, assessment)
+                  td = link_to quiz.to_s, quiz_assessment_path(assessment.quiz, assessment)
                   td.average = number_to_percentage assessment.answers.average(:grade) * 100, precision: 0
                 - elsif assessment.finished_at?
                   td = link_to quiz.to_s, quiz_assessment_path(assessment.quiz, assessment)

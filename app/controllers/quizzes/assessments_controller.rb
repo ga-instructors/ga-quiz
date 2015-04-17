@@ -93,8 +93,9 @@ class Quizzes::AssessmentsController < ApplicationController
   # DELETE /quizzes/assessments/1.json
   def destroy
     @quizzes_assessment.destroy
+    @quiz = @quizzes_assessment.quiz
     respond_to do |format|
-      format.html { redirect_to quizzes_quiz_url(@quizzes_assessment.quiz), notice: 'Assessment was successfully destroyed.' }
+      format.html { redirect_to group_quiz_url(@quiz.group, @quiz), notice: 'Assessment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

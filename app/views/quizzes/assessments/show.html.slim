@@ -66,7 +66,10 @@
 
 hr
 .row.text-right
-  = link_to 'Retake This Quiz', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nYour previous answers to this quiz will be deleted." }
+  - if @assessment.graded_at?
+    span.muted Retake This Quiz
+  - else
+    = link_to 'Retake This Quiz', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nYour previous answers to this quiz will be deleted." }
   br
   br
 
