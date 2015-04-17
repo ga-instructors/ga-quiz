@@ -10,7 +10,7 @@ class GroupMember < ActiveRecord::Base
   attr_accessor :name, :email, :invitation_blurb
 
   after_initialize do
-    @invitation_blurb = "You have been invited to join #{group.name}."
+    @invitation_blurb ||= "You have been invited to join #{group.name}."
   end
 
   before_validation on: :create do
