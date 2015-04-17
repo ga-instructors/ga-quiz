@@ -44,6 +44,7 @@ gem 'database_cleaner'
 gem 'sendgrid-ruby'
 gem 'chartjs-ror'
 gem 'ansi'
+gem 'valid_email'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'
