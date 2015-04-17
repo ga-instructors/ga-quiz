@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     roles = roles.to_a
     current_user.memberships.where(group_id: group.try(:[],:id) || group, role: roles).any?
   end
+  helper_method :group_role?
 
   def forbidden
     render :forbidden, layout: 'application'

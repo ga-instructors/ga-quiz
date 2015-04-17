@@ -35,6 +35,9 @@
       = link_to group_user_path(@assessment.quiz.group, @assessment.user)
         = render @assessment.user
     .right
+      - if group_role?(@group, :member, :owner, :instructor) || group_role?(Group.administrators, :member, :owner)
+        = link_to 'Delete', quiz_assessment_path(@assessment.quiz, @assessment), method: :delete, data: { confirm: "Are you sure?\nStudent's previous answers to this quiz will be deleted." }
+        | &nbsp;&nbsp;&nbsp;
       = link_to 'Continue &#9654;'.html_safe, root_path, class: 'button small'
 - if @assessment.student_comment?
   .row
