@@ -31,8 +31,8 @@ class Quizzes::Assessment < ActiveRecord::Base
     touch(:finished_at)
   end
 
-  def readonly?
-    true if graded_at?
-  end
+  #def readonly?
+  #  true if graded_at?
+  #end
 
 end
