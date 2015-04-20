@@ -2,7 +2,7 @@ class Quizzes::Question < ActiveRecord::Base
   default_scope -> { order(:ordinal) }
 
   belongs_to :quiz
-  has_many :answers, dependent: :nullify
+  has_many :answers, dependent: :destroy
 
   validates :quiz, presence: true
 
