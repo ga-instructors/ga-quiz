@@ -66,10 +66,12 @@
 						<% end %>
 					</ul>
 
-					<!-- Left Nav Section -->
-					<ul class="left">
-						<li><a href="#" id="start-instructions">Instructions</a></li>
-					</ul>
+					<% if logged_in? %>
+						<!-- Left Nav Section -->
+						<ul class="left">
+							<li><a href="#" id="start-instructions">Instructions</a></li>
+						</ul>
+					<% end %>
 				</section>
 			</nav>
 		<% end %>

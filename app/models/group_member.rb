@@ -1,5 +1,5 @@
 class GroupMember < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, inverse_of: :memberships
   belongs_to :group
   default_scope -> { order(:role => :desc) }
 
