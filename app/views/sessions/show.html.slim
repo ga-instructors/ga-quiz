@@ -20,7 +20,7 @@ br
 .row
   .small-12.columns
     hr
-- if (graded_assessments = current_user.assessments.where('quizzes_assessments.graded_at > ?', @session.previous.created_at)).any?
+- if @session.previous.present? && (graded_assessments = current_user.assessments.where('quizzes_assessments.graded_at > ?', @session.previous.created_at)).any?
   .row
     .small-3.columns
       h3 Since then,
