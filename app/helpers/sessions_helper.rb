@@ -12,4 +12,9 @@ module SessionsHelper
     current_session.present?
   end
 
+  def group_role?(group, *roles)
+    roles = roles.to_a
+    current_user.memberships.where(group_id: group.try(:[],:id) || group, role: roles).any?
+  end
+
 end

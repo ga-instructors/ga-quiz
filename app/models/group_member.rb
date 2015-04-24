@@ -4,7 +4,7 @@ class GroupMember < ActiveRecord::Base
   default_scope -> { order(:role => :desc) }
 
   validates :group, presence: true
-  validates :user, presence: true
+  validates :user, presence: true, uniqueness: { scope: :group }
 
   # For sending invitations
   attr_accessor :name, :email, :invitation_blurb
