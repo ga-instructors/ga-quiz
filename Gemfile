@@ -45,6 +45,7 @@ gem 'sendgrid-ruby'
 gem 'chartjs-ror'
 gem 'ansi'
 gem 'valid_email'
+gem 'pundit'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'
