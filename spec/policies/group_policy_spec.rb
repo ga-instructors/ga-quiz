@@ -1,28 +1,32 @@
 require 'rails_helper'
+require 'pundit/rspec'
 
-describe GroupPolicy do
+RSpec.describe GroupPolicy do
 
   let(:user) { User.new }
 
   subject { described_class }
 
   permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows instructors to see their own groups"
+    it "allows administrators to see all of the groups"
+    it "hides groups from students who don't belong to them"
   end
 
   permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows instructors to see their own groups"
+    it "allows administrators to see all of the groups"
   end
 
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators to create new groups"
   end
 
   permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows instructors to update and add group members"
   end
 
   permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators to destroy groups"
   end
 end

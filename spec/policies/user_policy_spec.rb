@@ -1,28 +1,31 @@
 require 'rails_helper'
+require 'pundit/rspec'
 
-describe UserPolicy do
+RSpec.describe UserPolicy do
 
   let(:user) { User.new }
 
   subject { described_class }
 
   permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators access to all users"
   end
 
   permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows allows administrators to see all users"
+    it "allows instructors to see their own users"
   end
 
   permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators to create users"
   end
 
   permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators to update users"
+    it "allows users to update themselves"
   end
 
   permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows administrators to destroy users"
   end
 end

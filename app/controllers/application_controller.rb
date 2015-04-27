@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :require_login
 
+  rescue_from Pundit::NotAuthorizedError, with: :forbidden
+
   def require_login
     redirect_to new_session_path unless logged_in?
   end
