@@ -1,14 +1,18 @@
 .row
-  h1 Add to #{@group.name}
+  h1.small-offset-2.small-10
+    | &nbsp;&nbsp;
+    small Invite to 
+    = @group.name
 
 = form_for @group_member do |form|
   = form.hidden_field :group_id
   - if @group_member.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@group_member.errors.count, "error")} prohibited this group_member from being saved:"
-      ul
-        - @group_member.errors.full_messages.each do |message|
-          li = message
+    .row#error_explanation
+      .small-10.columns.small-offset-2
+        h2 = "#{pluralize(@group_member.errors.count, "error")} prohibited this group_member from being saved:"
+        ul
+          - @group_member.errors.full_messages.each do |message|
+            li = message
 
   .field.row
     .small-2.columns
