@@ -37,7 +37,7 @@
           - @group.students.each do |student|
             li = link_to render(student), group_user_path(@group, student)
     
-    - if @group.members.any?
+    - elsif @group.members.any?
       h3 Members
       ul.no-bullet
         - @group.members.each do |member|
