@@ -5,8 +5,15 @@ class Quizzes::Assessment < ActiveRecord::Base
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers
 
+  # Initiates Auto Grading Answers
+  after_save if: :finished_at? do
+    answers.each(&:save)
+  end
+
   scope :finished, -> { where.not(finished_at: nil) }
   scope :unfinished, -> { where(finished_at: nil) }
+  scope :completed,  -> { where('finished_at IS NOT NULL') }
+  scope :incomplete, -> { where('finished_at IS NULL') }
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
   validate do
@@ -17,9 +24,6 @@ class Quizzes::Assessment < ActiveRecord::Base
     end
   end
   validates :user, presence: true
-
-  scope :completed,  -> { where('finished_at IS NOT NULL') }
-  scope :incomplete, -> { where('finished_at IS NULL') }
 
   def questions
     quiz.questions.map do |question|
