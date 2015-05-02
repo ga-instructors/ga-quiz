@@ -21,6 +21,11 @@
         ul.no-bullet
           - @group.instructors.each do |instructor|
             li = link_to render(instructor), group_user_path(@group, instructor)
+    - if @group.students.any?
+      ul.no-bullet
+        - @group.members.each do |instructor|
+          li = link_to render(instructor), group_user_path(@group, instructor)
+
       hr
 
     = link_to 'See All Quizzes', group_quizzes_path(@group), class: 'button small primary expand'
