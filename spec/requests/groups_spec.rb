@@ -4,7 +4,6 @@ RSpec.describe "Groups", type: :request do
   before :all do
     @group, @user = create(:group), create(:user)
     @membership = @user.memberships << @group.group_members.new(role: 'student')
-    @session = @user.sessions.create!(password: @user.password)
   end
 
   describe "GET /groups" do

@@ -21,7 +21,13 @@
         ul.no-bullet
           - @group.instructors.each do |instructor|
             li = link_to render(instructor), group_user_path(@group, instructor)
-      hr
+    - if @group.students.any?
+      div#member-list
+        ul.no-bullet
+          - @group.members.each do |instructor|
+            li = link_to render(instructor), group_user_path(@group, instructor)
+
+        hr
 
     = link_to 'See All Quizzes', group_quizzes_path(@group), class: 'button small primary expand'
     = link_to 'Edit Group', edit_group_path(@group), class: 'button secondary tiny expand'

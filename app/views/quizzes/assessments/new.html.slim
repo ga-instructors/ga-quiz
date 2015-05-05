@@ -5,5 +5,3 @@
     h1.prominent Sorry,
     hr
     p You cannot start this quiz because #{@quizzes_assessment.errors.full_messages.to_sentence.gsub(/Quiz /,'it ')}.
-    - if current_assessment = current_user.assessments.where(finished_at: nil).find_by(quiz_id: @quizzes_assessment.quiz_id)
-      = link_to 'Resume Assessment', edit_quizzes_assessment_url(current_assessment), class: 'button primary'
