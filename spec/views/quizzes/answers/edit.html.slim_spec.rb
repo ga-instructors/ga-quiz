@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/answers/edit", type: :view do
   before(:each) do
+    @assessment = assign(:assessment, create(:quiz_assessment))
     @quizzes_answer = assign(:quizzes_answer, Quizzes::Answer.create!(
+      :assessment => @assessment,
       :grade => 1.5,
       :reviewer_comment => "MyText"
     ))
