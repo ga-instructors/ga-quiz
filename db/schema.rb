@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324031933) do
+ActiveRecord::Schema.define(version: 20150508032721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,35 @@ ActiveRecord::Schema.define(version: 20150324031933) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "groups_regroup_group_members", force: :cascade do |t|
+    t.integer  "regroup_group_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "groups_regroup_group_members", ["regroup_group_id"], name: "index_groups_regroup_group_members_on_regroup_group_id", using: :btree
+  add_index "groups_regroup_group_members", ["user_id"], name: "index_groups_regroup_group_members_on_user_id", using: :btree
+
+  create_table "groups_regroup_groups", force: :cascade do |t|
+    t.integer  "regroup_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groups_regroup_groups", ["regroup_id"], name: "index_groups_regroup_groups_on_regroup_id", using: :btree
+
+  create_table "groups_regroups", force: :cascade do |t|
+    t.integer  "group_id"
+    t.string   "name"
+    t.integer  "target_group_size"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "groups_regroups", ["group_id"], name: "index_groups_regroups_on_group_id", using: :btree
 
   create_table "quizzes_answers", force: :cascade do |t|
     t.integer  "user_id"
@@ -125,13 +154,13 @@ ActiveRecord::Schema.define(version: 20150324031933) do
   end
 
   add_foreign_key "group_members", "groups"
-  add_foreign_key "group_members", "users"
+  add_foreign_key "groups_regroup_group_members", "groups_regroup_groups", column: "regroup_group_id"
+  add_foreign_key "groups_regroup_group_members", "users"
+  add_foreign_key "groups_regroup_groups", "groups_regroups", column: "regroup_id"
+  add_foreign_key "groups_regroups", "groups"
   add_foreign_key "quizzes_answers", "quizzes_assessments", column: "assessment_id"
   add_foreign_key "quizzes_answers", "quizzes_questions", column: "question_id"
   add_foreign_key "quizzes_answers", "users"
   add_foreign_key "quizzes_assessments", "quizzes_quizzes", column: "quiz_id"
-  add_foreign_key "quizzes_assessments", "users"
   add_foreign_key "quizzes_question_options", "quizzes_questions", column: "question_id"
-  add_foreign_key "quizzes_questions", "quizzes_quizzes", column: "quiz_id"
-  add_foreign_key "sessions", "users"
 end

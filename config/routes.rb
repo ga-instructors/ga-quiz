@@ -1,6 +1,10 @@
 Rails.application.routes.default_url_options[:host] = "ga-quiz.herokuapp.com"
 Rails.application.routes.draw do
 
+  namespace :groups do
+    resources :regroups
+  end
+
   namespace :quizzes do
     resources :answers
   end
@@ -27,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :quizzes, module: :quizzes
+    resources :regroups, module: :groups
     get :regroup, on: :member
     resources :users, except: [:new, :create]
     resources :group_members, as: :member

@@ -1,0 +1,5 @@
+.row
+  = form_for @groups_regroup do |form|
+    == render form
+    .actions.text-center
+      = form.submit 'Save Regrouping', class: 'button primary'

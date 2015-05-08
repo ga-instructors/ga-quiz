@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Group:
+  = @groups_regroup.group
+p
+  strong Name:
+  = @groups_regroup.name
+p
+  strong Target group size:
+  = @groups_regroup.target_group_size
+
+= link_to 'Edit', edit_groups_regroup_path(@groups_regroup)
+'|
+= link_to 'Back', groups_regroups_path
