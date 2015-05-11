@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    return forbidden unless group_role?(@group, :instructor, :owner, :member) || group_role?(Group.administrators, :member, :owner)
     @users = User.all
     render layout: 'application'
   end
