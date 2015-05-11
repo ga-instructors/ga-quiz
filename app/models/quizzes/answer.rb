@@ -21,12 +21,12 @@ class Quizzes::Answer < ActiveRecord::Base
   # Markdown settings for @quiz.answer
   def answer
    if self[:answer].present?
-      Redcarpet::Markdown.new(MarkdownPygments, {
-        fenced_code_blocks: true,
-        tables: true,
-        no_intra_emphasis: true,
-        escape_html: true,
-      }).render(self[:answer]).html_safe
+     Redcarpet::Markdown.new(MarkdownPygments, {
+       fenced_code_blocks: true,
+       tables: true,
+       no_intra_emphasis: true,
+       escape_html: true
+     }).render(CGI::escapeHTML(self[:answer])).html_safe
    else
      "<i>No Answer</i>".html_safe
    end
