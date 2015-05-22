@@ -15,3 +15,28 @@
   - elsif @quizzes_question.answer_option
     = @quizzes_question.answer_option.label
 
+.row
+  br
+  h2 Responses
+  hr
+- @quizzes_question.answers.each do |answer|
+  .row
+    .large-8.medium-7.columns
+      details.question
+        summary
+          strong Question #{answer.question.ordinal}: #{answer.question.topic}
+        = render answer.question
+      = content_tag_for :div, answer, class: 'panel' do
+        = render answer
+    .large-4.medium-5.columns
+      br
+      strong Feedback:
+      = form_for answer, turboboost: true do |form|
+        .row
+          .small-12.columns = form.text_area :reviewer_comment, style: 'height: 200px;'
+        .row
+          .small-8.columns
+            = form.range_field :grade, min: 0, max: 1, step: 0.25, onchange: "$('#quizzes_answer_grade_label').val(''+this.value*100+'%');", style: 'width: 100%; margin: 1em 0;'
+          .small-4.columns
+            = form.submit "#{(answer.grade? ? answer.grade * 100 : '50').to_i}%", id: 'quizzes_answer_grade_label', class: 'button small', style: 'width: 100%;'
+
