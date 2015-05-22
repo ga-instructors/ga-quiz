@@ -5,6 +5,9 @@ class Quizzes::Answer < ActiveRecord::Base
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
 
   before_save :auto_grade, if: -> { assessment.finished_at? }
+  before_create :use_template
+  after_save :mark_graded, unless: -> { assessment.answers.where(grade: nil).any? }
+
   def auto_grade
     if question.open_ended?
       self.grade = 0 if self[:answer].blank?
@@ -13,9 +16,14 @@ class Quizzes::Answer < ActiveRecord::Base
     end
   end
 
-  after_save :mark_graded, unless: -> { assessment.answers.where(grade: nil).any? }
   def mark_graded
     assessment.touch(:graded_at)
+  end
+
+  def use_template
+    unless self[:answer].present?
+      self[:answer] = question.answer_template
+    end
   end
 
   # Markdown settings for @quiz.answer
