@@ -34,7 +34,7 @@ class Quizzes::Answer < ActiveRecord::Base
        tables: true,
        no_intra_emphasis: true,
        escape_html: true
-     }).render(CGI::escapeHTML(self[:answer])).html_safe
+     }).render(self[:answer]).html_safe
    else
      "<i>No Answer</i>".html_safe
    end
