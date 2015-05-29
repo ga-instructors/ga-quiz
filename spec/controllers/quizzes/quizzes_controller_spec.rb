@@ -20,7 +20,7 @@ require 'rails_helper'
 
 RSpec.describe Quizzes::QuizzesController, type: :controller do
 
-  before :all do
+  before :each do
     @group, @user = create(:group), create(:user)
     @membership = @user.memberships << @group.group_members.new(role: 'student')
     @session = @user.sessions.create!(password: @user.password)
@@ -60,7 +60,7 @@ RSpec.describe Quizzes::QuizzesController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new quizzes_quiz as @quizzes_quiz" do
-      get :new, {}, valid_session
+      get :new, { group_id: @group.id }, valid_session
       expect(assigns(:quizzes_quiz)).to be_a_new(Quizzes::Quiz)
     end
   end

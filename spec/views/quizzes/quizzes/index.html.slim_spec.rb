@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/quizzes/index", type: :view do
   before(:each) do
+    @current_session = assign(:current_session, Session.new(user: build(:user)))
     @group = assign(:group, create(:group))
     assign(:quizzes_quizzes, [
       Quizzes::Quiz.new(

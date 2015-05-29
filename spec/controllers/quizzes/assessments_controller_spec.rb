@@ -20,7 +20,7 @@ require 'rails_helper'
 
 RSpec.describe Quizzes::AssessmentsController, type: :controller do
 
-  before :all do
+  before :each do
     @group, @user = create(:group), create(:user)
     @membership = @user.memberships << @group.group_members.new(role: 'student')
     @session = @user.sessions.create!(password: @user.password)
