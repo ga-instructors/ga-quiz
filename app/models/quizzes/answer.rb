@@ -4,7 +4,6 @@ class Quizzes::Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
 
-  before_save :auto_grade, if: -> { assessment.finished_at? }
   before_create :use_template
   after_save :mark_graded, unless: -> { assessment.answers.where(grade: nil).any? }
 
