@@ -2,24 +2,26 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/quizzes/index", type: :view do
   before(:each) do
+    @group = assign(:group, create(:group))
     assign(:quizzes_quizzes, [
-      Quizzes::Quiz.create!(
-        :group_id => 1,
-        :name => "Name",
-        :introduction => "MyText"
+      Quizzes::Quiz.new(
+        :id => 1,
+        :group => @group,
+        :ordinal => 1,
+        :name => "quiz1"
       ),
-      Quizzes::Quiz.create!(
-        :group_id => 1,
-        :name => "Name",
-        :introduction => "MyText"
+      Quizzes::Quiz.new(
+        :id => 2,
+        :group => @group,
+        :ordinal => 2,
+        :name => "quiz2"
       )
     ])
   end
 
   it "renders a list of quizzes/quizzes" do
     render
-    assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "I: quiz1".to_s, :count => 1
+    assert_select "tr>td", :text => "II: quiz2".to_s, :count => 1
   end
 end

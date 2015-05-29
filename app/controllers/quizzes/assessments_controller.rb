@@ -78,7 +78,7 @@ class Quizzes::AssessmentsController < ApplicationController
       if @quizzes_assessment.update(quizzes_assessment_params)
         format.json { render :show, status: :ok, location: @quizzes_assessment }
         if params[:commit] =~ /finish/i
-          @quizzes_assessment.touch(:finished_at)
+          @quizzes_assessment.finish
           format.html { redirect_to @quizzes_assessment, notice: 'Assessment was successfully updated.' }
           format.js   { render text: "document.location.replace('#{quizzes_assessment_path(@quizzes_assessment)}')" }
         else

@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    return forbidden unless group_role?(@group, :instructor, :owner, :member) || group_role?(Group.administrators, :member, :owner)
     @users = User.all
     render layout: 'application'
   end
@@ -41,16 +42,20 @@ class UsersController < ApplicationController
       @performance = Hash[@assessment.average('quizzes_answers.grade').sort_by{|k,v|v.to_f}]
       @completed_assessments = @user.assessments.finished
       render "show-#{@group_member.role}"
+    else
+      return forbidden unless current_user == @user || group_role?(Group.administrators, :member, :owner)
     end
   end
 
   # GET /users/1/edit
   def edit
+    return forbidden unless current_user == @user || group_role?(Group.administrators, :member, :owner)
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    return forbidden unless current_user == @user || group_role?(Group.administrators, :member, :owner)
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -65,6 +70,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    return forbidden unless current_user == @user || group_role?(Group.administrators, :member, :owner)
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }

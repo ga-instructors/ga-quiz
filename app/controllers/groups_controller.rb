@@ -58,7 +58,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        @group.group_members.build(user: current_user, role: 'owner')
+        @group.group_members.create!(user: current_user, role: 'owner')
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else

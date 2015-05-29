@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :memberships, class_name: 'GroupMember', dependent: :destroy
-  has_many :groups, through: :memberships
+  has_many :groups, -> { order(:start_at) }, through: :memberships
   has_many :sessions, dependent: :destroy
   has_many :answers, class_name: 'Quizzes::Answer'
   has_many :assessments, class_name: 'Quizzes::Assessment'

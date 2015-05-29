@@ -7,6 +7,8 @@ class Quizzes::Assessment < ActiveRecord::Base
 
   scope :finished, -> { where.not(finished_at: nil) }
   scope :unfinished, -> { where(finished_at: nil) }
+  scope :completed,  -> { where('finished_at IS NOT NULL') }
+  scope :incomplete, -> { where('finished_at IS NULL') }
 
   validates :quiz_id, uniqueness: { scope: :user_id, message: 'has already been started' }
   validate do
@@ -18,9 +20,6 @@ class Quizzes::Assessment < ActiveRecord::Base
   end
   validates :user, presence: true
 
-  scope :completed,  -> { where('finished_at IS NOT NULL') }
-  scope :incomplete, -> { where('finished_at IS NULL') }
-
   def questions
     quiz.questions.map do |question|
       [question, answers.find_or_create_by(question_id: question.id)]
@@ -28,7 +27,9 @@ class Quizzes::Assessment < ActiveRecord::Base
   end
 
   def finish
-    touch(:finished_at)
+    answers.each(&:auto_grade)
+    self.finished_at = Time.now
+    save!
   end
 
   #def readonly?

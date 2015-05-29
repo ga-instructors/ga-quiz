@@ -9,6 +9,8 @@
 - content_for :user_navigation do
   li = link_to "Topical Chart", "#user_topical-chart"
   li = link_to "Completed Assessments", "#user_completed-assessments"
+  - if group_role?(Group.administrators, :member, :owner)
+    li = link_to "Reset Password", edit_user_path(@user)
 
 - if @performance
   div#user_topical-chart

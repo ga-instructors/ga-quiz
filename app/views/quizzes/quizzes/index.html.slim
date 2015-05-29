@@ -1,6 +1,7 @@
 .row
-  .right style="margin: 1em 0 0 0;"
-    = link_to 'New Quiz', @group ? new_group_quiz_path(@group) : new_quiz_path, class: 'button secondary small'
+  - if group_role?(@group, :instructor, :owner, :member) || group_role?(Group.administrators, :member, :owner)
+    .right style="margin: 1em 0 0 0;"
+      = link_to 'New Quiz', @group ? new_group_quiz_path(@group) : new_quiz_path, class: 'button secondary small'
   h1 Quizzes
 
   table width="100%"
