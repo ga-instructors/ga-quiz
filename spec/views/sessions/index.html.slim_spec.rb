@@ -2,20 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "sessions/index", type: :view do
   before(:each) do
+    @user = assign(:user, build(:user))
     assign(:sessions, [
-      Session.create!(
-        :user => nil,
+      Session.new(
+        :user => @user,
         :user_agent => "User Agent",
         :ip_address => "Ip Address",
         :latitude => 1.5,
-        :longitude => 1.5
+        :longitude => 2.5
       ),
-      Session.create!(
-        :user => nil,
+      Session.new(
+        :user => @user,
         :user_agent => "User Agent",
         :ip_address => "Ip Address",
-        :latitude => 1.5,
-        :longitude => 1.5
+        :latitude => 3.5,
+        :longitude => 4.5
       )
     ])
   end
@@ -25,7 +26,5 @@ RSpec.describe "sessions/index", type: :view do
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => "User Agent".to_s, :count => 2
     assert_select "tr>td", :text => "Ip Address".to_s, :count => 2
-    assert_select "tr>td", :text => 1.5.to_s, :count => 2
-    assert_select "tr>td", :text => 1.5.to_s, :count => 2
   end
 end

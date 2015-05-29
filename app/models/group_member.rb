@@ -9,7 +9,7 @@ class GroupMember < ActiveRecord::Base
   # For sending invitations
   attr_accessor :name, :email, :invitation_blurb
 
-  before_create do
+  before_validation on: :create do
     if user
     else
       temporary_password = SecureRandom.hex(8)

@@ -4,7 +4,7 @@ RSpec.describe Quizzes::QuestionsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/quizzes/questions").to route_to("quizzes/questions#index")
+      expect(:get => "/quizzes/1/questions").to route_to("quizzes/questions#index", :quiz_id => "1")
     end
 
     it "routes to #new" do

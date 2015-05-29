@@ -5,11 +5,6 @@ class Quizzes::Assessment < ActiveRecord::Base
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers
 
-  # Initiates Auto Grading Answers
-  after_save if: :finished_at? do
-    answers.each(&:save)
-  end
-
   scope :finished, -> { where.not(finished_at: nil) }
   scope :unfinished, -> { where(finished_at: nil) }
   scope :completed,  -> { where('finished_at IS NOT NULL') }
@@ -32,7 +27,9 @@ class Quizzes::Assessment < ActiveRecord::Base
   end
 
   def finish
-    touch(:finished_at)
+    answers.each(&:auto_grade)
+    self.finished_at = Time.now
+    save!
   end
 
   #def readonly?

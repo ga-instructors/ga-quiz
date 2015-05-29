@@ -20,6 +20,12 @@ require 'rails_helper'
 
 RSpec.describe Quizzes::QuestionsController, type: :controller do
 
+  before :all do
+    @group, @user = create(:group), create(:user)
+    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @session = @user.sessions.create!(password: @user.password)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Quizzes::Question. As you add validations to Quizzes::Question, be sure to
   # adjust the attributes here as well.
