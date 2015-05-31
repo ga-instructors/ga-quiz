@@ -5,7 +5,6 @@ RSpec.describe "Quizzes::Answers", type: :request do
   before :each do
     @group, @user = create(:group), create(:user)
     @membership = @user.memberships << @group.group_members.new(role: 'student')
-    @session = @user.sessions.create!(password: @user.password)
   end
 
   describe "GET /quizzes_answers" do

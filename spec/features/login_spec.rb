@@ -4,7 +4,9 @@ RSpec.describe 'Login Specification', type: :feature do
   include FeatureSpec::Screenshots
 
   before do
+    @group = create(:group)
     @user = create(:user)
+    @group_member = GroupMember.create(user: @user, group: @group, role: :student)
   end
 
   specify 'Users can log in and out', js: true do
@@ -15,7 +17,7 @@ RSpec.describe 'Login Specification', type: :feature do
     fill_in 'Password', with: @user.password
     expect(page).to take_screenshot_of('login-form')
     click_button 'Log In'
-    expect(page).to take_screenshot_of('login-form')
+    expect(page).to take_screenshot_of('login-form2')
     expect(page).to have_content('Hello')
 
     find('#auth-section').hover

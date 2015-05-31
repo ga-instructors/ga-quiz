@@ -9,6 +9,7 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /users" do
     it "works! (now write some real specs)" do
+      post sessions_path, session: { email: @user.email, password: @user.password }
       get users_path
       expect(response).to have_http_status(200)
     end
