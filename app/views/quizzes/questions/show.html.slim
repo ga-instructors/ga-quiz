@@ -22,14 +22,10 @@
 - @quizzes_question.answers.each do |answer|
   .row
     .large-8.medium-7.columns
-      details.question
-        summary
-          strong Question #{answer.question.ordinal}: #{answer.question.topic}
-        = render answer.question
+      strong #{answer.user.name}:
       = content_tag_for :div, answer, class: 'panel' do
         = render answer
     .large-4.medium-5.columns
-      br
       strong Feedback:
       = form_for answer, turboboost: true do |form|
         .row

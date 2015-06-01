@@ -9,6 +9,10 @@ class GroupMember < ActiveRecord::Base
   # For sending invitations
   attr_accessor :name, :email, :invitation_blurb
 
+  def role
+    self[:role].to_sym
+  end
+
   before_validation on: :create do
     if user
     else

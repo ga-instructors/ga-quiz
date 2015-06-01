@@ -14,7 +14,9 @@ module SessionsHelper
 
   def group_role?(group, *roles)
     roles = roles.to_a
-    current_user.memberships.where(group_id: group.try(:[],:id) || group, role: roles).any?
+    current_user.memberships.any? do |membership|
+      membership.group == group && roles.include?(membership.role)
+    end
   end
 
 end

@@ -31,7 +31,7 @@ RSpec.describe "quizzes/questions/edit", type: :view do
 
       assert_select "textarea#quizzes_question_answer[name=?]", "quizzes_question[answer]"
 
-      assert_select "input#quizzes_question_answer_option_id[name=?]", "quizzes_question[answer_option_id]"
+      assert_select "input[name=?]", "quizzes_question[answer_option_id]"
 
       assert_select "textarea#quizzes_question_answer_template[name=?]", "quizzes_question[answer_template]"
     end
