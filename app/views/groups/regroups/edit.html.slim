@@ -1,8 +1,8 @@
-h1 Editing groups_regroup
+.row
+  h1 Editing #{@groups_regroup.name}
 
-== render 'form'
-
-= link_to 'Show', @groups_regroup
-'|
-= link_to 'Back', groups_regroups_path
-
+= form_for @groups_regroup do |form|
+  == render form
+  .actions.text-center
+    = form.submit 'Save Regrouping', class: 'button primary'
+    = link_to 'Cancel', @groups_regroup

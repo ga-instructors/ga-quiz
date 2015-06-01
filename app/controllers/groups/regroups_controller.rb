@@ -53,6 +53,7 @@ class Groups::RegroupsController < ApplicationController
 
   # GET /groups/regroups/1/edit
   def edit
+    @new_regroup = Groups::Regroup.new(@groups_regroup.attributes)
   end
 
   # POST /groups/regroups
