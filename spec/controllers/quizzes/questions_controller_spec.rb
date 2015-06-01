@@ -22,9 +22,9 @@ RSpec.describe Quizzes::QuestionsController, type: :controller do
 
   before :each do
     @group, @user = create(:group), create(:user)
-    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @membership = @group.group_members.create(role: 'instructor', user: @user)
     @session = @user.sessions.create!(password: @user.password)
-    @quiz = create(:quiz)
+    @quiz = create(:quiz, group: @group)
   end
 
   # This should return the minimal set of attributes required to create a valid

@@ -22,7 +22,7 @@ RSpec.describe GroupsController, type: :controller do
   
   before :each do
     @group, @user = create(:group), create(:user)
-    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @membership = @group.group_members.create(role: 'student', user: @user)
     @session = @user.sessions.create!(password: @user.password)
   end
 

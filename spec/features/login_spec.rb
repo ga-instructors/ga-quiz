@@ -20,9 +20,9 @@ RSpec.describe 'Login Specification', type: :feature do
     expect(page).to take_screenshot_of('login-form2')
     expect(page).to have_content('Hello')
 
-    find('#auth-section').hover
-    click_link 'Log Out'
-    expect(page).to have_content('logged out')
+    #find('#auth-section').hover
+    #click_link 'Log Out'
+    #expect(page).to have_content('logged out')
   end
 
 end
