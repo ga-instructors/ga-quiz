@@ -20,6 +20,12 @@ require 'rails_helper'
 
 RSpec.describe Groups::RegroupsController, type: :controller do
 
+  before :each do
+    @group, @user = create(:group), create(:user)
+    @membership = @group.group_members.create(role: 'student', user: @user)
+    @session = @user.sessions.create!(password: @user.password)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Groups::Regroup. As you add validations to Groups::Regroup, be sure to
   # adjust the attributes here as well.
@@ -34,7 +40,7 @@ RSpec.describe Groups::RegroupsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # Groups::RegroupsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { id: @session.id } }
 
   describe "GET #index" do
     it "assigns all groups_regroups as @groups_regroups" do
@@ -54,7 +60,7 @@ RSpec.describe Groups::RegroupsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new groups_regroup as @groups_regroup" do
-      get :new, {}, valid_session
+      get :new, { group_id: create(:group).id }, valid_session
       expect(assigns(:groups_regroup)).to be_a_new(Groups::Regroup)
     end
   end

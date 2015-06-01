@@ -24,27 +24,31 @@ class Groups::RegroupsController < ApplicationController
 
   # GET /groups/regroups/new
   def new
-    @new_regroup = @group.regroups.new(groups_regroup_params)
-    case params[:preset]
-    when 'pair'
-      @groups_regroup = @group.regroups.new(target_group_size: @group.students.count / 2)
-      @groups_regroup.build
-    when 'standup'
-      @groups_regroup = @group.regroups.new(target_group_size: @group.instructors.count + @group.members.count)
-      @groups_regroup.build
-      @groups_regroup.regroup_groups.zip(@group.instructors + @group.members).each do |regroup, instructor|
-        regroup.name = "#{instructor.name.split.first}'s Group"
-      end
-    when 'instructor'
-      @groups_regroup = @group.regroups.new(target_group_size: @group.instructors.count)
-      @groups_regroup.build
-      @groups_regroup.regroup_groups.zip(@group.instructors).each do |regroup, instructor|
-        regroup.name = "#{instructor.name.split.first}'s Group"
+    if params[:groups_regroup]
+      case params[:preset]
+      when 'pair'
+        @groups_regroup = @group.regroups.new(target_group_size: @group.students.count / 2)
+        @groups_regroup.build
+      when 'standup'
+        @groups_regroup = @group.regroups.new(target_group_size: @group.instructors.count + @group.members.count)
+        @groups_regroup.build
+        @groups_regroup.regroup_groups.zip(@group.instructors + @group.members).each do |regroup, instructor|
+          regroup.name = "#{instructor.name.split.first}'s Group"
+        end
+      when 'instructor'
+        @groups_regroup = @group.regroups.new(target_group_size: @group.instructors.count)
+        @groups_regroup.build
+        @groups_regroup.regroup_groups.zip(@group.instructors).each do |regroup, instructor|
+          regroup.name = "#{instructor.name.split.first}'s Group"
+        end
+      else
+        @groups_regroup = @group.regroups.new(groups_regroup_params)
+        @groups_regroup.build
       end
     else
-      @groups_regroup = @group.regroups.new(groups_regroup_params)
-      @groups_regroup.build
+      @groups_regroup = @group.regroups.new
     end
+    @new_regroup = @groups_regroup
   end
 
   # GET /groups/regroups/1/edit
