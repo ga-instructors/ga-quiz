@@ -82,7 +82,7 @@
     .row
       .small-12.columns
         .alert-box.secondary.radius data-alert="" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"
-          = link_to quiz_assessment_path(@quiz, assessment_id) do
+          = link_to quiz_assessment_path(@quiz, assessment_id), title: comment do
             em #{name} &mdash;&nbsp;
             = truncate comment, length: 150
           a.close &times;
