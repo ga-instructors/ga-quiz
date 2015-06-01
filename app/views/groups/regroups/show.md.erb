@@ -1,0 +1,20 @@
+<% rows = @groups_regroup.regroup_groups.map{ |regroup| regroup.users.count }.max %>
+# <%= @groups_regroup.name %>
+### <%= @group.name %>
+
+|<% @groups_regroup.regroup_groups.each do |group| %> <%= group.name.ljust(24) %>|<% end %>
+|<% @groups_regroup.regroup_groups.each do |group| %><%= "-"*25 %>|<% end %>
+<% rows.times do |row| %>
+|<% @groups_regroup.regroup_groups.each do |group| %> <%= (group.users[row].try(:name)||"").ljust(24) %>|<% end %>
+<% end %>
+
+---
+
+<% @groups_regroup.regroup_groups.each do |group| %>
+#### <%= group.name %>
+
+<% group.users.each do |user| %>
+- <%= user.name %>
+<% end %>
+
+<% end %>

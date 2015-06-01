@@ -1,15 +1,19 @@
-p#notice = notice
+.row
+  .right
+    = link_to 'Edit', edit_group_regroup_path(@group, @groups_regroup), class: 'button tiny secondary'
+    = link_to 'Download', group_regroup_path(@group, @groups_regroup, :md), class: 'button tiny'
+  h1
+    = @group.name
+    | &nbsp;&mdash;&nbsp;
+    = @groups_regroup.name
 
-p
-  strong Group:
-  = @groups_regroup.group
-p
-  strong Name:
-  = @groups_regroup.name
-p
-  strong Target group size:
-  = @groups_regroup.target_group_size
+- @groups_regroup.regroup_groups.in_groups_of(4, false).each do |group_row|
+  .row
+    - group_row.each do |group|
+      .small-3.columns.end
+        br
+        h3 = group.name
+        ul.no-bullet
+          - group.users.each do |user|
+            li = render user
 
-= link_to 'Edit', edit_groups_regroup_path(@groups_regroup)
-'|
-= link_to 'Back', groups_regroups_path

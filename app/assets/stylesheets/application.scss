@@ -274,3 +274,7 @@ details summary {
 .title-area {
   z-index:  1
 }
+
+.breadcrumbs > * {
+  text-transform: none;
+}

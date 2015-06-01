@@ -78,7 +78,10 @@
 
 		<div class="row" style="margin-top: 1em">
 			<% if display_notice = notice %>
-				<div class="alert-box small-12 columns" data-alert ><%= display_notice %></div>
+				<div class="alert-box small-12 columns" data-alert>
+					<%= display_notice %>
+					<div class="close">&times;</div>
+				</div>
 			<% end %>
 		</div>
 

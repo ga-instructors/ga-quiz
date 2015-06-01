@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150508032721) do
   end
 
   add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "users"
   add_foreign_key "groups_regroup_group_members", "groups_regroup_groups", column: "regroup_group_id"
   add_foreign_key "groups_regroup_group_members", "users"
   add_foreign_key "groups_regroup_groups", "groups_regroups", column: "regroup_id"
@@ -162,5 +163,8 @@ ActiveRecord::Schema.define(version: 20150508032721) do
   add_foreign_key "quizzes_answers", "quizzes_questions", column: "question_id"
   add_foreign_key "quizzes_answers", "users"
   add_foreign_key "quizzes_assessments", "quizzes_quizzes", column: "quiz_id"
+  add_foreign_key "quizzes_assessments", "users"
   add_foreign_key "quizzes_question_options", "quizzes_questions", column: "question_id"
+  add_foreign_key "quizzes_questions", "quizzes_quizzes", column: "quiz_id"
+  add_foreign_key "sessions", "users"
 end

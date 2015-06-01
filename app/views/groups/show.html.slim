@@ -35,7 +35,8 @@
 
   .medium-8.columns
     - if @group.students.any?
-      .right = link_to 'Re-Group', regroup_group_path(@group), class: 'button secondary tiny radius'
+      .right = link_to 'OLD Re-Group', regroup_group_path(@group), class: 'button secondary tiny radius'
+      .right = link_to 'Re-Group', group_regroups_path(@group), class: 'button secondary tiny radius'
       div#student-list
         h3 Students
         hr

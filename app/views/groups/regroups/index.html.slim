@@ -1,25 +1,5 @@
-h1 Listing groups_regroups
-
-table
-  thead
-    tr
-      th Group
-      th Name
-      th Target group size
-      th
-      th
-      th
-
-  tbody
-    - @groups_regroups.each do |groups_regroup|
-      tr
-        td = groups_regroup.group
-        td = groups_regroup.name
-        td = groups_regroup.target_group_size
-        td = link_to 'Show', groups_regroup
-        td = link_to 'Edit', edit_groups_regroup_path(groups_regroup)
-        td = link_to 'Destroy', groups_regroup, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Regroup', new_groups_regroup_path
+- if @groups_regroups.any?
+  - @groups_regroups.each do |groups_regroup|
+    .row
+      .small-6.columns = link_to groups_regroup.name, group_regroup_path(@group, groups_regroup)
+      .small-6.columns = groups_regroup.target_group_size

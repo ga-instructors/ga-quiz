@@ -4,22 +4,28 @@
     p Here is the profile information for this user, including all their associations.
 
 - content_for :sublayout do
-  br
   = form_for @new_regroup, url: new_group_regroup_path(@group), method: :GET do |form|
     .row
-      .small-4.columns
-        = form.submit "Pair", class: 'button secondary small', title: "Pairs of two"
-        | &nbsp;
-        = form.submit "Standup", class: 'button secondary small', title: "Grouped by Instructor"
+      ul class="breadcrumbs"
+        li = link_to @group.name, @group
+        li = link_to "Re-Group", group_regroups_path(@group)
+        - if @groups_regroup && @groups_regroup.persisted?
+          li.current = link_to @groups_regroup.name, group_regroup_path(@group, @groups_regroup)
+    .row
       .small-4.columns
         .row
-          .small-6.columns.text-right
-            = label_tag :groups, "Groups:"
           .small-6.columns
             = form.number_field :target_group_size, required: true, autofocus: true
-      .small-4.columns.text-right
-        = link_to "Shuffle", "javascript:$('.regroup').each(function(i,e){$(e).find('.student').shuffle()});", class: 'button secondary small', title: "Shuffles students within their group"
+          .small-6.columns
+            = form.submit 'Groups', class: 'button tiny'
+      .small-6.columns.text-center
+        = form.button "Instructor", name: :preset, value: :instructor, class: 'button secondary tiny', title: "Grouped by Instructor"
+        = form.button "Standup", name: :preset, value: :standup, class: 'button secondary tiny', title: "Grouped by Instructor"
+        = form.button "Pair", name: :preset, value: :pair, class: 'button secondary tiny', title: "Pairs of two"
+      .small-2.columns.text-right
+        = link_to "Shuffle", "javascript:$('.regroup').each(function(i,e){$(e).find('.student').shuffle()});", class: 'button secondary tiny', title: "Shuffles students within their group"
     hr
+
   = yield
 
 = render template: 'layouts/application'
