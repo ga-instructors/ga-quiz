@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Quizzes::Quizzes", type: :request do
-  before :all do
+
+  before :each do
     @group, @user = create(:group), create(:user)
     @membership = @user.memberships << @group.group_members.new(role: 'student')
   end

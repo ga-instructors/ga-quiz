@@ -20,10 +20,11 @@ require 'rails_helper'
 
 RSpec.describe Quizzes::QuestionsController, type: :controller do
 
-  before :all do
+  before :each do
     @group, @user = create(:group), create(:user)
-    @membership = @user.memberships << @group.group_members.new(role: 'student')
+    @membership = @group.group_members.create(role: 'instructor', user: @user)
     @session = @user.sessions.create!(password: @user.password)
+    @quiz = create(:quiz, group: @group)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -40,12 +41,12 @@ RSpec.describe Quizzes::QuestionsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # Quizzes::QuestionsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { :id => @session.id } }
 
   describe "GET #index" do
     it "assigns all quizzes_questions as @quizzes_questions" do
       question = Quizzes::Question.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, { :quiz_id => @quiz.id }, valid_session
       expect(assigns(:quizzes_questions)).to eq([question])
     end
   end
@@ -60,7 +61,7 @@ RSpec.describe Quizzes::QuestionsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new quizzes_question as @quizzes_question" do
-      get :new, {}, valid_session
+      get :new, { :quiz_id => @quiz.id }, valid_session
       expect(assigns(:quizzes_question)).to be_a_new(Quizzes::Question)
     end
   end

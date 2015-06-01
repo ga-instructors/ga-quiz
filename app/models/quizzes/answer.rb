@@ -4,7 +4,7 @@ class Quizzes::Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :question_option, class_name: 'Quizzes::Question::Option'
 
-  before_create :use_template
+  before_create :use_template, :user
   after_save :mark_graded, unless: -> { assessment.answers.where(grade: nil).any? }
 
   def auto_grade
@@ -27,16 +27,16 @@ class Quizzes::Answer < ActiveRecord::Base
 
   # Markdown settings for @quiz.answer
   def answer
-   if self[:answer].present?
-     Redcarpet::Markdown.new(MarkdownPygments, {
-       fenced_code_blocks: true,
-       tables: true,
-       no_intra_emphasis: true,
-       escape_html: true
-     }).render(self[:answer]).html_safe
-   else
-     "<i>No Answer</i>".html_safe
-   end
+    if self[:answer].present?
+      Redcarpet::Markdown.new(MarkdownPygments, {
+        fenced_code_blocks: true,
+        tables: true,
+        no_intra_emphasis: true,
+        escape_html: true
+      }).render(self[:answer]).html_safe
+    else
+      "<i>No Answer</i>".html_safe
+    end
   end
 
   # Markdown settings for @quiz.question
@@ -47,6 +47,12 @@ class Quizzes::Answer < ActiveRecord::Base
         tables: true,
         no_intra_emphasis: true
       }).render(self[:reviewer_comment]).html_safe
+    end
+  end
+
+  def user
+    unless super
+      self.user = assessment.user
     end
   end
 

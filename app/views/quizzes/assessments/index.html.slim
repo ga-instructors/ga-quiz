@@ -72,3 +72,17 @@
                 td.standard-deviation
               - else
                 td.standard-deviation style="background-color: #{((@class_average - (@averages[assessment] || 0)).abs > @deviation ? '#EEEEEE' : '#AAAAAA')};"
+
+#assessments_student_comments
+  .row
+    .small-8.columns
+      br
+      h3 Student Comments:
+  - @quizzes_assessments.where("student_comment != ''").joins(:user).pluck(:id, :student_comment, 'users.id', 'users.name').each do |assessment_id, comment, user_id, name|
+    .row
+      .small-12.columns
+        .alert-box.secondary.radius data-alert="" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"
+          = link_to quiz_assessment_path(@quiz, assessment_id), title: comment do
+            em #{name} &mdash;&nbsp;
+            = truncate comment, length: 150
+          a.close &times;
