@@ -78,7 +78,7 @@ class Groups::RegroupsController < ApplicationController
   def update
     respond_to do |format|
       if @groups_regroup.update(groups_regroup_params)
-        format.html { redirect_to @groups_regroup, notice: 'Regroup was successfully updated.' }
+        format.html { redirect_to group_regroups_path(@groups_regroup.group, @groups_regroup), notice: 'Regroup was successfully updated.' }
         format.json { render :show, status: :ok, location: @groups_regroup }
       else
         format.html { render :edit }
@@ -92,7 +92,7 @@ class Groups::RegroupsController < ApplicationController
   def destroy
     @groups_regroup.destroy
     respond_to do |format|
-      format.html { redirect_to groups_regroups_url, notice: 'Regroup was successfully destroyed.' }
+      format.html { redirect_to group_regroups_url(@groups_regroup.group), notice: 'Regroup was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,6 +1,6 @@
 class Groups::Regroup < ActiveRecord::Base
   belongs_to :group
-  has_many :regroup_groups
+  has_many :regroup_groups, dependent: :destroy
   accepts_nested_attributes_for :regroup_groups
 
   def build

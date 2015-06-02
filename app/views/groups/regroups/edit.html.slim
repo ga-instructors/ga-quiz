@@ -3,6 +3,8 @@
 
 = form_for @groups_regroup do |form|
   == render form
-  .actions.text-center
-    = form.submit 'Save Regrouping', class: 'button primary'
-    = link_to 'Cancel', @groups_regroup
+  .actions.text-center.row
+    .small-10.columns
+      = form.submit 'Save Regrouping', class: 'button primary'
+      = link_to 'Cancel', @groups_regroup
+    .small-2.columns = link_to 'Delete', @groups_regroup, method: :DELETE, class: 'button warning'

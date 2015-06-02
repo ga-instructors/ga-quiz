@@ -17,7 +17,7 @@
             = group_form.text_field :name
             ul.no-bullet
               - group.users.each do |user|
-                = group_form.hidden_field :user_ids, multiple: true, value: user.id
+                = group_form.hidden_field :user_ids, value: user.id
                 li = render user
 hr
 .field.row
