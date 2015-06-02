@@ -1,5 +1,9 @@
 - if @groups_regroups.any?
   - @groups_regroups.each do |groups_regroup|
     .row
-      .small-6.columns = link_to groups_regroup.name, group_regroup_path(@group, groups_regroup)
-      .small-6.columns = groups_regroup.target_group_size
+      .small-offset-2.small-4.columns
+        p = link_to groups_regroup.name.present? ? groups_regroup.name : "No Name", group_regroup_path(@group, groups_regroup)
+      .small-2.columns
+        = groups_regroup.created_at.to_date.to_s(:long)
+      .small-3.columns.end
+        | #{groups_regroup.target_group_size} groups
