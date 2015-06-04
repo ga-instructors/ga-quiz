@@ -31,6 +31,12 @@
         = form.radio_button :open_ended, false, style: 'margin-bottom: 0; margin-right: 0.75em;'
         | Multiple Choice
 .field.row.open-ended
+  .small-2.column &nbsp;
+  .small-9.columns
+    = form.label :answer_format, 'Answer Format', style: 'text-align: left'
+    = form.select :answer_format, [["Plain Text (Monospace)", :text], ["Plain Text (Markdown)", nil], ["HTML", :html], ["CSS", :css], ["JavaScript", :javascript], ["Ruby", :ruby], ["SQL", :sql], ["CoffeeScript", :coffeescript], ["Bash/Shell", :bash], ["JSON", :json]]
+  .small-1.columns &nbsp;
+.field.row.open-ended
   .small-1.column &nbsp;
   .small-1.column
     .right = form.label :answer_template do

@@ -58,4 +58,8 @@ class Quizzes::Question < ActiveRecord::Base
     end
   end
 
+  def answer_format
+    self[:answer_format].to_sym
+  end
+
 end

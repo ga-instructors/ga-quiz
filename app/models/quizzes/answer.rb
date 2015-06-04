@@ -9,7 +9,7 @@ class Quizzes::Answer < ActiveRecord::Base
 
   def auto_grade
     if question.open_ended?
-      self.grade = 0 if self[:answer].blank?
+      self.grade = 0 if self[:answer].blank? || self[:answer] == question.answer_template
     elsif question_option.present?
       self.grade = question_option.grade
     end
@@ -27,13 +27,17 @@ class Quizzes::Answer < ActiveRecord::Base
 
   # Markdown settings for @quiz.answer
   def answer
-    if self[:answer].present?
-      Redcarpet::Markdown.new(MarkdownPygments, {
+    answer = self[:answer]
+    renderer = MarkdownPygments
+    answer = "```#{question.answer_format}\n#{answer}\n```" if question.answer_format
+    renderer = Redcarpet::Render::HTML.new if question.answer_format == :text
+    if answer.present?
+      Redcarpet::Markdown.new(renderer, {
         fenced_code_blocks: true,
         tables: true,
         no_intra_emphasis: true,
         escape_html: true
-      }).render(self[:answer]).html_safe
+      }).render(answer).html_safe
     else
       "<i>No Answer</i>".html_safe
     end

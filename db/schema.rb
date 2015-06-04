@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508032721) do
+ActiveRecord::Schema.define(version: 20150604035015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150508032721) do
     t.text     "answer_template"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "answer_format"
   end
 
   add_index "quizzes_questions", ["quiz_id"], name: "index_quizzes_questions_on_quiz_id", using: :btree
