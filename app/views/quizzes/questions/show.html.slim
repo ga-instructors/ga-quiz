@@ -22,7 +22,7 @@
 - @quizzes_question.answers.each do |answer|
   .row
     .large-8.medium-7.columns
-      strong #{answer.user.name}:
+      strong #{answer.user.try(:name) || "<em>Unknown</em>".html_safe}:
       = content_tag_for :div, answer, class: 'panel' do
         = render answer
     .large-4.medium-5.columns
