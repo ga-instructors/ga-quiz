@@ -278,3 +278,18 @@ details summary {
 .breadcrumbs > * {
   text-transform: none;
 }
+
+canvas {
+  width: 100% !important;
+  max-width: 1000px;
+  height: auto !important;
+}
+
+body > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+figure {
+  padding: 1em;
+}
