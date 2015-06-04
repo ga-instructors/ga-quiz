@@ -5,8 +5,8 @@
       - @groups_regroup.errors.full_messages.each do |message|
         li = message
 
-= form.hidden_field :target_group_size
 = form.hidden_field :group_id
+= form.hidden_field :target_group_size
 
 .field
   - form.object.regroup_groups.in_groups_of(4, false).each do |group_row|
@@ -17,7 +17,7 @@
             = group_form.text_field :name
             ul.no-bullet
               - group.users.each do |user|
-                = group_form.hidden_field :user_ids, value: user.id
+                = group_form.hidden_field :user_ids, value: user.id, multiple: true
                 li = render user
 hr
 .field.row

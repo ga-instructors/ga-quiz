@@ -76,9 +76,10 @@ class Groups::RegroupsController < ApplicationController
   # PATCH/PUT /groups/regroups/1
   # PATCH/PUT /groups/regroups/1.json
   def update
+    @group = @groups_regroup.group
     respond_to do |format|
       if @groups_regroup.update(groups_regroup_params)
-        format.html { redirect_to group_regroups_path(@groups_regroup.group, @groups_regroup), notice: 'Regroup was successfully updated.' }
+        format.html { redirect_to group_regroup_path(@group, @groups_regroup), notice: 'Regroup was successfully updated.' }
         format.json { render :show, status: :ok, location: @groups_regroup }
       else
         format.html { render :edit }
@@ -109,6 +110,6 @@ class Groups::RegroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def groups_regroup_params
-      params.require(:groups_regroup).permit(:group_id, :name, :target_group_size, regroup_groups_attributes: [ :name, user_ids: [] ])
+      params.require(:groups_regroup).permit(:group_id, :name, :target_group_size, regroup_groups_attributes: [ :id, :name, user_ids: [] ])
     end
 end
