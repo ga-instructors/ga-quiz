@@ -10,7 +10,7 @@ class GroupMember < ActiveRecord::Base
   attr_accessor :name, :email, :invitation_blurb
 
   def role
-    self[:role].to_sym
+    self[:role].try(:to_sym)
   end
 
   before_validation on: :create do
