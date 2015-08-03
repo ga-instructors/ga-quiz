@@ -14,3 +14,4 @@
 /spec/features/screenshots
 /db/*.dat
 /db/*.dump
+*.swp

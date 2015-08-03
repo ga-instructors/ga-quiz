@@ -45,6 +45,7 @@ gem 'sendgrid-ruby'
 gem 'chartjs-ror'
 gem 'ansi'
 gem 'valid_email'
+gem 'deep_cloneable'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-chartjs'
@@ -78,4 +79,3 @@ group :production do
   gem 'rails_12factor'
   gem 'puma'
 end
-
