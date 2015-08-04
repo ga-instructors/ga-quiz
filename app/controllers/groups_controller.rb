@@ -69,8 +69,8 @@ class GroupsController < ApplicationController
   def copy
     @group_copy = @group.deep_clone include: { quizzes: { questions: :options } }
     respond_to do |format|
-      @group_copy.group_members.create!(user: current_user, role: 'owner')
       if @group_copy.save
+        @group_copy.group_members.create!(user: current_user, role: 'owner')
         format.html { redirect_to edit_group_url(@group_copy), notice: 'Group was successfully copied.'}
         format.json { render :show, status: :created, location: @group_copy }
       else
