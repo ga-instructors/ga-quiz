@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :copy, :destroy]
 
   before_action except: :show do
     forbidden unless \
@@ -59,6 +59,21 @@ class GroupsController < ApplicationController
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /groups/1/copy
+  # GET /groups/1/copy.json
+  def copy
+    @group_copy = @group.deep_clone include: {:quizzes => :questions}
+    respond_to do |format|
+      if @group_copy.save
+        format.html { redirect_to edit_group_url(@group_copy), notice: 'Group was successfully copied.'}
+        format.json { render :show, status: :created, location: @group_copy }
+      else
+        format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end

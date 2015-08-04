@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :regroups, module: :groups
     resources :users, except: [:new, :create]
     resources :group_members, as: :member
+    post :copy, on: :member
   end
   resources :group_members
 

@@ -10,7 +10,7 @@ class GroupMember < ActiveRecord::Base
   attr_accessor :name, :email, :invitation_blurb
 
   def role
-    self[:role].to_sym
+    self[:role].try(:to_sym)
   end
 
   before_validation on: :create do
@@ -33,7 +33,7 @@ class GroupMember < ActiveRecord::Base
   end
 
   private
-  
+
   def sendgrid
     Rails.application.config.sendgrid_client
   end

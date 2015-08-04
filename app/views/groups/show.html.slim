@@ -54,6 +54,7 @@
 
     = link_to 'See All Quizzes', group_quizzes_path(@group), class: 'button small primary expand'
     = link_to 'Edit Group', edit_group_path(@group), class: 'button secondary tiny expand'
+    = link_to 'Copy Group', copy_group_path(@group), method: 'post', class: 'button secondary tiny expand', data: { confirm: 'Are you sure you want to copy this group?' }
     = link_to 'All Groups', groups_path, class: 'button tiny secondary expand'
 
   .medium-8.columns
@@ -65,10 +66,9 @@
         ul.no-bullet style="-webkit-column-count: 3"
           - @group.students.each do |student|
             li = link_to render(student), group_user_path(@group, student)
-    
+
     - elsif @group.members.any?
       h3 Members
       ul.no-bullet
         - @group.members.each do |member|
           li = link_to render(member), group_user_path(@group, member)
-

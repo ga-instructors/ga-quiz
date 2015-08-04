@@ -4,7 +4,7 @@
     .row
       .small-2.columns &nbsp;
       details.small-9.columns.end
-        summary Drop #{t(role.pluralize)}
+        summary Drop #{t(role.to_s.pluralize)}
         .row.panel
           = form.fields_for :group_members, members, class: 'small-10 columns' do |fields|
             .small-4.columns
@@ -22,4 +22,3 @@
       | &nbsp;&nbsp;&nbsp;
       = link_to 'Cancel', @group
     .small-2.columns &nbsp;
-
