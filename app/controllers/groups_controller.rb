@@ -67,7 +67,7 @@ class GroupsController < ApplicationController
   # GET /groups/1/copy
   # GET /groups/1/copy.json
   def copy
-    @group_copy = @group.deep_clone include: {:quizzes => :questions}
+    @group_copy = @group.deep_clone include: { quizzes: { questions: :options } }
     respond_to do |format|
       if @group_copy.save
         format.html { redirect_to edit_group_url(@group_copy), notice: 'Group was successfully copied.'}
