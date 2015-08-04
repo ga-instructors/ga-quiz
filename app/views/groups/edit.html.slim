@@ -15,10 +15,11 @@
                   = render(fields.object.user)
       .small-2.columns &nbsp;
   .actions.row
-    .small-4.columns &nbsp;
-    .small-6.columns
+    .small-2.columns &nbsp;
+    .small-9.columns
       = link_to 'Invite Users', new_group_member_path(@group), class: 'button secondary' if @group.persisted?
       = form.submit class: 'button'
       | &nbsp;&nbsp;&nbsp;
       = link_to 'Cancel', @group
+      .right style="line-height: 3rem;" = link_to 'Delete', group_path(@group), method: 'delete', class: 'tiny danger', data: { confirm: "Are you absolutely sure you want to delete this group and all of it's quizzes?" } if @group.persisted?
     .small-2.columns &nbsp;
