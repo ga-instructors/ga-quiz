@@ -43,7 +43,7 @@
       = check_box_tag 'quizzes_question[answer_template]', nil, form.object.answer_template.blank?
   .small-9.columns
     = form.label :answer_template, 'Answer Template', style: 'text-align: left'
-    = form.text_area :answer_template
+    = form.text_area :answer_template, style: form.object.answer_template.blank? ? 'display: none;' : ''
   .small-1.columns &nbsp;
 .field.row.open-ended
   .small-1.column &nbsp;

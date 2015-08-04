@@ -10,6 +10,12 @@ jQuery ->
       $('.multiple-choice').show()
     $('#quizzes_question_open_ended_true:checked, #quizzes_question_open_ended_false:checked').trigger('change')
 
+    form.on 'change', 'input#quizzes_question_answer_template', (event) ->
+      if this.checked
+        $('textarea#quizzes_question_answer_template').hide()
+      else
+        $('textarea#quizzes_question_answer_template').show()
+
     new_option_template = window.new_option_template = $('.option.new-record').clone()
     # quizzes_question[options_attributes][5]
 

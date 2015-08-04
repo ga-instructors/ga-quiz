@@ -59,7 +59,7 @@ class Quizzes::Question < ActiveRecord::Base
   end
 
   def answer_format
-    self[:answer_format].to_sym
+    self[:answer_format].try(:to_sym)
   end
 
 end
