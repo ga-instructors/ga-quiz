@@ -34,7 +34,7 @@
   .small-2.column &nbsp;
   .small-9.columns
     = form.label :answer_format, 'Answer Format', style: 'text-align: left'
-    = form.select :answer_format, [["Plain Text (Monospace)", :text], ["Plain Text (Markdown)", nil], ["HTML", :html], ["CSS", :css], ["JavaScript", :javascript], ["Ruby", :ruby], ["SQL", :sql], ["CoffeeScript", :coffeescript], ["Bash/Shell", :bash], ["JSON", :json]]
+    = form.select :answer_format, [["Plain Text (Monospace)", :text], ["Plain Text (Markdown)", ""], ["HTML", :html], ["CSS", :css], ["JavaScript", :javascript], ["Ruby", :ruby], ["SQL", :sql], ["CoffeeScript", :coffeescript], ["Bash/Shell", :bash], ["JSON", :json]], selected: form.object.answer_format || ""
   .small-1.columns &nbsp;
 .field.row.open-ended
   .small-1.column &nbsp;

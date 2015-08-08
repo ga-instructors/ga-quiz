@@ -21,7 +21,7 @@ class Quizzes::Question < ActiveRecord::Base
   end
 
   # --/ Multiple Choice \--
-  
+
   class Quizzes::Question::Option < ActiveRecord::Base
     belongs_to :question
   end
@@ -33,7 +33,7 @@ class Quizzes::Question < ActiveRecord::Base
     reject_if: proc { |attributes| attributes['label'].blank? }
 
   # --\ Multiple Choice /--
-  
+
   def answer_text
     if open_ended?
       if self[:answer].present?
