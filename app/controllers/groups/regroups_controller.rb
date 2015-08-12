@@ -5,7 +5,7 @@ class Groups::RegroupsController < ApplicationController
   # GET /groups/regroups
   # GET /groups/regroups.json
   def index
-    @groups_regroups = Groups::Regroup.all
+    @groups_regroups = @group.regroups
     @new_regroup = @group.regroups.new
   end
 
