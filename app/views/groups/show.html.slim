@@ -65,7 +65,7 @@
         hr
         ul.no-bullet style="-webkit-column-count: 3"
           - @group.students.each do |student|
-            li = link_to render(student), group_user_path(@group, student)
+            li = link_to render(student), group_user_path(@group, student), data: { no-turbolink: true }
 
     - elsif @group.members.any?
       h3 Members
