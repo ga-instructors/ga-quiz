@@ -36,6 +36,7 @@ class SessionsController < ApplicationController
         format.html { redirect_to @session }
         format.json { render :show, status: :created, location: @session }
       else
+        sleep 4
         format.html { render :new }
         format.json { render json: @session.errors, status: :unprocessable_entity }
       end
