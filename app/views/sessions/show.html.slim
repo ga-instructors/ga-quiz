@@ -43,7 +43,7 @@ br
             th width=1 Score
 
         tbody
-          - group.quizzes.each do |quiz|
+          - group.quizzes.active.each do |quiz|
             - assessment = current_user.assessments.where(quiz: quiz).first
             tr
               - if assessment
@@ -59,4 +59,3 @@ br
               - else
                 td = link_to quiz.to_s, group_quiz_path(quiz.group, quiz)
                 td.available Available
-
